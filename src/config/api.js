@@ -8,6 +8,7 @@ export const SPACES_ENDPOINT = '/spaces';
 // users endpoint is currently used in conjunction with spaces endpoint
 // e.g. `${SPACES_ENDPOINT}/${spaceId}/${USERS_ENDPOINT}`
 export const USERS_ENDPOINT = 'light-users';
+export const MODELS_ENDPOINT = 'https://api.sketchfab.com/v3/search';
 
 // request defaults
 const DEFAULT_REQUEST = {

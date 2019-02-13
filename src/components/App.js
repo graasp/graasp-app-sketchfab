@@ -18,6 +18,7 @@ export class App extends Component {
     dispatchGetAppInstance: PropTypes.func.isRequired,
     dispatchGetAppInstanceResources: PropTypes.func.isRequired,
     appInstanceId: PropTypes.string,
+    model: PropTypes.string,
     lang: PropTypes.string,
     mode: PropTypes.string,
   };
@@ -26,6 +27,7 @@ export class App extends Component {
     lang: DEFAULT_LANG,
     mode: DEFAULT_MODE,
     appInstanceId: null,
+    model: null,
   };
 
   constructor(props) {
@@ -67,7 +69,7 @@ export class App extends Component {
   };
 
   render() {
-    const { mode } = this.props;
+    const { mode, model } = this.props;
 
     switch (mode) {
       // show teacher view when in producer (educator) mode
@@ -82,15 +84,16 @@ export class App extends Component {
       case 'consumer':
       case 'learner':
       default:
-        return <StudentView />;
+        return <StudentView model={model} />;
     }
   }
 }
 
-const mapStateToProps = ({ context }) => ({
+const mapStateToProps = ({ context, appInstance }) => ({
   lang: context.lang,
   mode: context.mode,
   appInstanceId: context.appInstanceId,
+  model: appInstance ? appInstance.settings.model : null,
 });
 
 const mapDispatchToProps = {

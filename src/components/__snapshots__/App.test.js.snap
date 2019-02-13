@@ -52,6 +52,7 @@ ShallowWrapper {
     }
     lang="en"
     mode="student"
+    model={null}
     t={[MockFunction]}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -67,7 +68,9 @@ ShallowWrapper {
     "instance": null,
     "key": undefined,
     "nodeType": "function",
-    "props": Object {},
+    "props": Object {
+      "model": null,
+    },
     "ref": null,
     "rendered": null,
     "type": [Function],
@@ -77,7 +80,9 @@ ShallowWrapper {
       "instance": null,
       "key": undefined,
       "nodeType": "function",
-      "props": Object {},
+      "props": Object {
+        "model": null,
+      },
       "ref": null,
       "rendered": null,
       "type": [Function],

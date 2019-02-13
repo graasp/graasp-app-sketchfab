@@ -1,183 +1,114 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Alert, Container, Button, Table, ButtonGroup } from 'reactstrap';
-import Select from 'react-select';
+import { Container } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import Modal from '@material-ui/core/Modal';
+import Fab from '@material-ui/core/Fab';
+import { withStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
 import './TeacherView.css';
 import {
   patchAppInstanceResource,
   postAppInstanceResource,
   deleteAppInstanceResource,
+  patchAppInstance,
 } from '../../../actions';
 import { getUsers } from '../../../actions/users';
-import { addQueryParamsToUrl } from '../../../utils/url';
+import { getModels } from '../../../actions/models';
+import Results from './Results';
+import Viewer from '../../common/Viewer';
 
-/**
- * helper method to render the rows of the app instance resource table
- * @param appInstanceResources
- * @param dispatchPatchAppInstanceResource
- * @param dispatchDeleteAppInstanceResource
- * @returns {*}
- */
-const renderAppInstanceResources = (
-  appInstanceResources,
-  { dispatchPatchAppInstanceResource, dispatchDeleteAppInstanceResource }
-) => {
-  // if there are no resources, show an empty table
-  if (!appInstanceResources.length) {
-    return (
-      <tr>
-        <td colSpan={4}>No App Instance Resources</td>
-      </tr>
-    );
-  }
-  // map each app instance resource to a row in the table
-  return appInstanceResources.map(({ _id, appInstance, data }) => (
-    <tr key={_id}>
-      <th scope="row">{_id}</th>
-      <td>{appInstance}</td>
-      <td>{data.value}</td>
-      <td>
-        <ButtonGroup>
-          <Button
-            size="sm"
-            color="warning"
-            onClick={() =>
-              dispatchPatchAppInstanceResource({
-                id: _id,
-                data: { value: Math.random() },
-              })
-            }
-          >
-            Change
-          </Button>
-          <Button
-            size="sm"
-            color="danger"
-            onClick={() => dispatchDeleteAppInstanceResource(_id)}
-          >
-            Delete
-          </Button>
-        </ButtonGroup>
-      </td>
-    </tr>
-  ));
-};
-
-const generateRandomAppInstanceResource = ({
-  dispatchPostAppInstanceResource,
-}) => {
-  dispatchPostAppInstanceResource({
-    data: { value: Math.random() },
-  });
-};
+const styles = theme => ({
+  paper: {
+    position: 'absolute',
+    width: '50%',
+    height: '660px',
+    backgroundColor: 'transparent',
+    boxShadow: theme.shadows[5],
+    outline: 'none',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+  },
+});
 
 export class TeacherView extends Component {
   static propTypes = {
+    // todo: remove when instructions are added
+    // eslint-disable-next-line
     t: PropTypes.func.isRequired,
-    dispatchGetUsers: PropTypes.func.isRequired,
-    // inside the shape method you should put the shape
-    // that the resources your app uses will have
-    appInstanceResources: PropTypes.arrayOf(
-      PropTypes.shape({
-        // we need to specify number to avoid warnings with local server
-        _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        appInstanceId: PropTypes.string,
-        data: PropTypes.object,
-      })
-    ),
-    // this is the shape of the select options for students
-    studentOptions: PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string,
-        value: PropTypes.string,
-      })
-    ).isRequired,
+    dispatchGetModels: PropTypes.func.isRequired,
+    dispatchPatchAppInstance: PropTypes.func.isRequired,
   };
 
   state = {
-    selectedStudent: null,
+    open: false,
+    selected: null,
   };
 
   constructor(props) {
     super(props);
-    const { dispatchGetUsers } = this.props;
-    dispatchGetUsers();
+    const { dispatchGetModels } = this.props;
+    dispatchGetModels();
   }
 
-  handleChangeStudent = value => {
-    this.setState({
-      selectedStudent: value,
-    });
+  handleOpen = selected => {
+    this.setState({ open: true, selected });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false, selected: null });
+  };
+
+  selectModel = () => {
+    const { dispatchPatchAppInstance } = this.props;
+    const { selected } = this.state;
+    dispatchPatchAppInstance({ data: { model: selected } });
   };
 
   render() {
     // extract properties from the props object
-    const {
-      // this property allow us to do translations and is injected by i18next
-      t,
-      // these properties are injected by the redux mapStateToProps method
-      appInstanceResources,
-      studentOptions,
-    } = this.props;
-    const { selectedStudent } = this.state;
+    const { models, classes } = this.props;
+    const { open, selected } = this.state;
+
     return (
       <Container fluid className="App App-body TeacherView">
-        <Alert color="primary">
-          {t(
-            'This is the teacher view. Switch to the student view by clicking on the URL below.'
-          )}
-          <a href={addQueryParamsToUrl({ mode: 'student' })}>
-            <pre>
-              {`${window.location.host}/${addQueryParamsToUrl({
-                mode: 'student',
-              })}`}
-            </pre>
-          </a>
-        </Alert>
-        <h5>View the Students in the Sample Space</h5>
-        <Select
-          className="StudentSelect"
-          value={selectedStudent}
-          options={studentOptions}
-          onChange={this.handleChangeStudent}
-          isClearable
-        />
-        <hr />
-        <h5>
-          This table illustrates how an app can save resources on the server.
-        </h5>
-        <Table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>App Instance</th>
-              <th>Value</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {renderAppInstanceResources(appInstanceResources, this.props)}
-          </tbody>
-        </Table>
-        <Button
-          color="primary"
-          onClick={() => generateRandomAppInstanceResource(this.props)}
+        <Results models={models} preview={this.handleOpen} />
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={open}
+          onClose={this.handleClose}
         >
-          Save a Random App Instance Resource via the API
-        </Button>
+          <div className={classes.paper}>
+            <Viewer uid={selected} />
+            <Fab color="primary" aria-label="Add" className={classes.fab}>
+              <AddIcon onClick={this.selectModel} />
+            </Fab>
+          </div>
+        </Modal>
       </Container>
     );
   }
 }
 
+TeacherView.propTypes = {
+  models: PropTypes.arrayOf(PropTypes.shape({})),
+  classes: PropTypes.shape({}).isRequired,
+};
+
 TeacherView.defaultProps = {
-  appInstanceResources: [],
+  models: [],
 };
 
 // get the app instance resources that are saved in the redux store
-const mapStateToProps = ({ users, appInstanceResources }) => ({
+const mapStateToProps = ({ users, appInstanceResources, models }) => ({
   // we transform the list of students in the database
   // to the shape needed by the select component
   studentOptions: users.content.map(({ id, name }) => ({
@@ -185,6 +116,7 @@ const mapStateToProps = ({ users, appInstanceResources }) => ({
     label: name,
   })),
   appInstanceResources: appInstanceResources.content,
+  models: models.content.results,
 });
 
 // allow this component to dispatch a post
@@ -194,6 +126,8 @@ const mapDispatchToProps = {
   dispatchPostAppInstanceResource: postAppInstanceResource,
   dispatchPatchAppInstanceResource: patchAppInstanceResource,
   dispatchDeleteAppInstanceResource: deleteAppInstanceResource,
+  dispatchPatchAppInstance: patchAppInstance,
+  dispatchGetModels: getModels,
 };
 
 const ConnectedComponent = connect(
@@ -201,4 +135,4 @@ const ConnectedComponent = connect(
   mapDispatchToProps
 )(TeacherView);
 
-export default withTranslation()(ConnectedComponent);
+export default withTranslation()(withStyles(styles)(ConnectedComponent));
