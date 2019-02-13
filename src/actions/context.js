@@ -5,7 +5,7 @@ import {
   GET_CONTEXT_SUCCEEDED,
 } from '../types';
 import { flag } from './common';
-import { DEFAULT_API_HOST } from '../config/settings';
+import { DEFAULT_API_HOST, DEFAULT_MODE } from '../config/settings';
 
 // flags
 const flagGettingContext = flag(FLAG_GETTING_CONTEXT);
@@ -18,7 +18,7 @@ const getContext = () => dispatch => {
   dispatch(flagGettingContext(true));
   try {
     const {
-      mode = 'default',
+      mode = DEFAULT_MODE,
       lang = 'en',
       apiHost = DEFAULT_API_HOST,
       appInstanceId = null,

@@ -8,6 +8,7 @@ import './App.css';
 import { getAppInstanceResources, getContext } from '../actions';
 import { DEFAULT_LANG, DEFAULT_MODE } from '../config/settings';
 import { getAppInstance } from '../actions/appInstance';
+import Loader from './common/Loader';
 
 export class App extends Component {
   static propTypes = {
@@ -83,8 +84,10 @@ export class App extends Component {
       case 'student':
       case 'consumer':
       case 'learner':
-      default:
         return <StudentView model={model} />;
+
+      default:
+        return <Loader />;
     }
   }
 }
