@@ -3,7 +3,7 @@
   "appInstances": [
     {
       "_id": "6156e70ab253020033364411",
-      "settings": {},
+      "settings": null,
       "item": "2356e70ab2530200333634a2",
       "createdAt": "2019-01-01T00:00:00.000Z",
       "updatedAt": "2019-01-01T00:00:00.000Z"

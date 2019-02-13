@@ -89,12 +89,19 @@ export class App extends Component {
   }
 }
 
-const mapStateToProps = ({ context, appInstance }) => ({
-  lang: context.lang,
-  mode: context.mode,
-  appInstanceId: context.appInstanceId,
-  model: appInstance ? appInstance.settings.model : null,
-});
+const mapStateToProps = ({ context, appInstance }) => {
+  let model = null;
+  if (appInstance && appInstance.settings) {
+    ({ model } = appInstance.settings);
+  }
+
+  return {
+    lang: context.lang,
+    mode: context.mode,
+    appInstanceId: context.appInstanceId,
+    model,
+  };
+};
 
 const mapDispatchToProps = {
   dispatchGetContext: getContext,
