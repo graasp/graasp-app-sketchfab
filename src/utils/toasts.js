@@ -5,6 +5,13 @@ import {
   UNEXPECTED_ERROR_MESSAGE,
 } from '../constants/messages';
 
+const showToast = ({ type, message }) => {
+  toast(message, {
+    type,
+    toastId: message,
+  });
+};
+
 const showErrorToast = payload => {
   let message = UNEXPECTED_ERROR_MESSAGE;
   if (payload instanceof String) {
@@ -25,7 +32,4 @@ const showErrorToast = payload => {
   });
 };
 
-export {
-  // eslint-disable-next-line import/prefer-default-export
-  showErrorToast,
-};
+export { showErrorToast, showToast };

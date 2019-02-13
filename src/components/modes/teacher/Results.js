@@ -11,6 +11,12 @@ const styles = () => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
   },
+  clickable: {
+    '&:hover': {
+      cursor: 'pointer',
+      opacity: 0.75,
+    },
+  },
 });
 
 // eslint-disable-next-line
@@ -28,7 +34,12 @@ class Results extends Component {
       <div className={classes.root}>
         <GridList cellHeight={160} cols={3}>
           {models.map(({ uid, name, thumbnails: { images } = {} }) => (
-            <GridListTile key={uid} cols={1} onClick={() => preview(uid)}>
+            <GridListTile
+              key={uid}
+              cols={1}
+              onClick={() => preview(uid)}
+              className={classes.clickable}
+            >
               <img src={images[0].url} alt={name} />
             </GridListTile>
           ))}

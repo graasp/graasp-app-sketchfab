@@ -6,20 +6,24 @@ import Sketchfab from '@sketchfab/viewer-api/viewer-api';
 class Viewer extends Component {
   static propTypes = {
     uid: PropTypes.string,
+    autoStart: PropTypes.bool,
   };
 
   static defaultProps = {
     uid: null,
+    autoStart: true,
   };
 
   componentDidMount() {
-    const { uid } = this.props;
+    const { uid, autoStart } = this.props;
     const iframe = document.getElementById('api-frame');
     const client = new Sketchfab('1.4.2', iframe);
 
     client.init(uid, {
-      success: function onSuccess(api) {
-        api.start();
+      success: api => {
+        if (autoStart) {
+          api.start();
+        }
         api.addEventListener('viewerready', () => {
           console.log('viewer is ready');
         });
@@ -28,7 +32,7 @@ class Viewer extends Component {
           console.log('camera is moving')
         );
       },
-      error: function onError() {
+      error: () => {
         console.log('viewer error');
       },
     });

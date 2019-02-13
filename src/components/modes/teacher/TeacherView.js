@@ -6,23 +6,15 @@ import PropTypes from 'prop-types';
 import Modal from '@material-ui/core/Modal';
 import Fab from '@material-ui/core/Fab';
 import { withStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
 import './TeacherView.css';
-import {
-  patchAppInstanceResource,
-  postAppInstanceResource,
-  deleteAppInstanceResource,
-  patchAppInstance,
-} from '../../../actions';
-import { getUsers } from '../../../actions/users';
-import { getModels } from '../../../actions/models';
+import { patchAppInstance, getModels, selectModel } from '../../../actions';
 import Results from './Results';
 import Viewer from '../../common/Viewer';
 
 const styles = theme => ({
   paper: {
     position: 'absolute',
-    width: '50%',
+    width: '75%',
     height: '660px',
     backgroundColor: 'transparent',
     boxShadow: theme.shadows[5],
@@ -32,6 +24,7 @@ const styles = theme => ({
     transform: 'translate(-50%, -50%)',
   },
   fab: {
+    margin: theme.spacing.unit,
     position: 'absolute',
     bottom: 0,
     right: 0,
@@ -44,7 +37,7 @@ export class TeacherView extends Component {
     // eslint-disable-next-line
     t: PropTypes.func.isRequired,
     dispatchGetModels: PropTypes.func.isRequired,
-    dispatchPatchAppInstance: PropTypes.func.isRequired,
+    dispatchSelectModel: PropTypes.func.isRequired,
   };
 
   state = {
@@ -66,10 +59,11 @@ export class TeacherView extends Component {
     this.setState({ open: false, selected: null });
   };
 
-  selectModel = () => {
-    const { dispatchPatchAppInstance } = this.props;
+  selectModel = async () => {
+    const { dispatchSelectModel } = this.props;
     const { selected } = this.state;
-    dispatchPatchAppInstance({ data: { model: selected } });
+    await dispatchSelectModel({ data: { model: selected } });
+    this.handleClose();
   };
 
   render() {
@@ -87,9 +81,14 @@ export class TeacherView extends Component {
           onClose={this.handleClose}
         >
           <div className={classes.paper}>
-            <Viewer uid={selected} />
-            <Fab color="primary" aria-label="Add" className={classes.fab}>
-              <AddIcon onClick={this.selectModel} />
+            <Viewer uid={selected} autoStart={false} />
+            <Fab
+              variant="extended"
+              aria-label="Select"
+              className={classes.fab}
+              onClick={this.selectModel}
+            >
+              Select Model
             </Fab>
           </div>
         </Modal>
@@ -122,12 +121,9 @@ const mapStateToProps = ({ users, appInstanceResources, models }) => ({
 // allow this component to dispatch a post
 // request to create an app instance resource
 const mapDispatchToProps = {
-  dispatchGetUsers: getUsers,
-  dispatchPostAppInstanceResource: postAppInstanceResource,
-  dispatchPatchAppInstanceResource: patchAppInstanceResource,
-  dispatchDeleteAppInstanceResource: deleteAppInstanceResource,
   dispatchPatchAppInstance: patchAppInstance,
   dispatchGetModels: getModels,
+  dispatchSelectModel: selectModel,
 };
 
 const ConnectedComponent = connect(
