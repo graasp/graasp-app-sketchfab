@@ -33,6 +33,7 @@ class StudentView extends Component {
     if (window.frameElement) {
       // 600 is the height of the viewer and 48 the height of the header
       window.frameElement.style.height = '648px';
+      window.frameElement.style['max-height'] = 'none';
     }
   }
 

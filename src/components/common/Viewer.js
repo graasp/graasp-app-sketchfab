@@ -7,11 +7,13 @@ class Viewer extends Component {
   static propTypes = {
     uid: PropTypes.string,
     autoStart: PropTypes.bool,
+    height: PropTypes.string,
   };
 
   static defaultProps = {
     uid: null,
     autoStart: true,
+    height: '600px',
   };
 
   componentDidMount() {
@@ -39,10 +41,11 @@ class Viewer extends Component {
   }
 
   render() {
+    const { height } = this.props;
     return (
       <Iframe
         url=""
-        height="600px"
+        height={height}
         id="api-frame"
         allow="autoplay; fullscreen; vr"
         allowvr
