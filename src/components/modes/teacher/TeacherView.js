@@ -15,7 +15,7 @@ const styles = theme => ({
   paper: {
     position: 'absolute',
     width: '75%',
-    height: '660px',
+    height: '75%',
     backgroundColor: 'transparent',
     boxShadow: theme.shadows[5],
     outline: 'none',
@@ -27,7 +27,7 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     position: 'absolute',
     bottom: 0,
-    right: 0,
+    left: 0,
   },
 });
 
@@ -49,12 +49,6 @@ export class TeacherView extends Component {
     super(props);
     const { dispatchGetModels } = this.props;
     dispatchGetModels();
-  }
-
-  componentDidMount() {
-    if (window.frameElement) {
-      window.frameElement.style.height = '900px';
-    }
   }
 
   handleOpen = selected => {
@@ -87,7 +81,7 @@ export class TeacherView extends Component {
           onClose={this.handleClose}
         >
           <div className={classes.paper}>
-            <Viewer uid={selected} autoStart={false} />
+            <Viewer uid={selected} autoStart={false} height="100%" />
             <Fab
               variant="extended"
               aria-label="Select"
