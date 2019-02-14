@@ -51,6 +51,12 @@ export class TeacherView extends Component {
     dispatchGetModels();
   }
 
+  componentDidMount() {
+    if (window.frameElement) {
+      window.frameElement.style.height = '900px';
+    }
+  }
+
   handleOpen = selected => {
     this.setState({ open: true, selected });
   };
