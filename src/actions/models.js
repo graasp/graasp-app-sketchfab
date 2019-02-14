@@ -15,7 +15,6 @@ const getModels = async queryParams => async dispatch => {
     const queryString = Qs.stringify({
       ...queryParams,
       type: 'models',
-      q: 'education',
     });
     const url = `${MODELS_ENDPOINT}?${queryString}`;
 

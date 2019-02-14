@@ -10,6 +10,8 @@ import './TeacherView.css';
 import { patchAppInstance, getModels, selectModel } from '../../../actions';
 import Results from './Results';
 import Viewer from '../../common/Viewer';
+import SearchForm from './SearchForm';
+import { DEFAULT_QUERY } from '../../../config/settings';
 
 const styles = theme => ({
   paper: {
@@ -48,7 +50,7 @@ export class TeacherView extends Component {
   constructor(props) {
     super(props);
     const { dispatchGetModels } = this.props;
-    dispatchGetModels();
+    dispatchGetModels({ q: DEFAULT_QUERY });
   }
 
   handleOpen = selected => {
@@ -73,6 +75,7 @@ export class TeacherView extends Component {
 
     return (
       <Container fluid className="App App-body TeacherView">
+        <SearchForm />
         <Results models={models} preview={this.handleOpen} />
         <Modal
           aria-labelledby="simple-modal-title"
