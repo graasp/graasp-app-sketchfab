@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -7,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import Viewer from '../../common/Viewer';
 import Loader from '../../common/Loader';
 import ModelQrCode from '../../common/ModelQrCode';
+import ModelNotConfigured from '../../common/ModelNotConfigured';
 
 const styles = theme => ({
   root: {
@@ -18,6 +20,7 @@ const styles = theme => ({
 class StudentView extends Component {
   static propTypes = {
     model: PropTypes.string,
+    activity: PropTypes.bool.isRequired,
     classes: PropTypes.shape({}).isRequired,
   };
 
@@ -42,11 +45,14 @@ class StudentView extends Component {
   };
 
   render() {
-    const { classes, model } = this.props;
+    const { classes, model, activity } = this.props;
     const { value } = this.state;
 
-    if (!model) {
+    if (activity) {
       return <Loader />;
+    }
+    if (!model) {
+      return <ModelNotConfigured />;
     }
 
     return (
@@ -64,4 +70,10 @@ class StudentView extends Component {
   }
 }
 
-export default withStyles(styles)(StudentView);
+const mapStateToProps = ({ appInstance }) => ({
+  activity: appInstance.activity,
+});
+
+const ConnectedComponent = connect(mapStateToProps)(StudentView);
+
+export default withStyles(styles)(ConnectedComponent);

@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
 const styles = theme => ({
   progress: {
     margin: theme.spacing.unit * 2,
   },
-  loader: {
+  modelNotConfigured: {
     display: 'flex',
     position: 'fixed',
     width: '100%',
@@ -17,17 +18,18 @@ const styles = theme => ({
   },
 });
 
-const Loader = props => {
+const ModelNotConfigured = props => {
   const { classes } = props;
   return (
-    <div className={classes.loader}>
-      <CircularProgress className={classes.progress} />
+    <div className={classes.modelNotConfigured}>
+      <BrokenImageIcon fontSize="large" />
+      <Typography>This model has not been configured.</Typography>
     </div>
   );
 };
 
-Loader.propTypes = {
+ModelNotConfigured.propTypes = {
   classes: PropTypes.shape({}).isRequired,
 };
 
-export default withStyles(styles)(Loader);
+export default withStyles(styles)(ModelNotConfigured);

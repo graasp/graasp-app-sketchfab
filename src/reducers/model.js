@@ -17,7 +17,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case FLAG_SELECTING_MODEL:
       return {
         ...state,
-        activity: false,
+        activity: payload,
       };
 
     case SELECT_MODEL_SUCCEEDED:

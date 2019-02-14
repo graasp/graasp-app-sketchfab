@@ -94,8 +94,8 @@ export class App extends Component {
 
 const mapStateToProps = ({ context, appInstance }) => {
   let model = null;
-  if (appInstance && appInstance.settings) {
-    ({ model } = appInstance.settings);
+  if (appInstance.content && appInstance.content.settings) {
+    ({ model } = appInstance.content.settings);
   }
 
   return {
