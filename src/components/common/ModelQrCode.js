@@ -6,6 +6,11 @@ import { QRCode as QrCode } from 'react-qr-svg';
 const styles = theme => ({
   modelQrCode: {
     padding: theme.spacing.unit * 5,
+    display: 'flex',
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
