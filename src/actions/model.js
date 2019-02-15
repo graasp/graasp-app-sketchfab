@@ -3,19 +3,24 @@ import {
   SELECT_MODEL_SUCCEEDED,
   SELECT_MODEL_FAILED,
 } from '../types';
-import { flag } from './common';
+import { flag, getSettings } from './common';
 import { patchAppInstance } from './appInstance';
 
 const flagSelectingModel = flag(FLAG_SELECTING_MODEL);
 
-const selectModel = async data => async dispatch => {
+const selectModel = async data => async (dispatch, getState) => {
   dispatch(flagSelectingModel(true));
   try {
-    await dispatch(patchAppInstance(data));
-
     const {
       data: { model },
     } = data;
+
+    const currentSettings = getSettings(getState);
+    const newSettings = {
+      ...currentSettings,
+      model,
+    };
+    await dispatch(patchAppInstance({ data: newSettings }));
 
     dispatch({
       type: SELECT_MODEL_SUCCEEDED,

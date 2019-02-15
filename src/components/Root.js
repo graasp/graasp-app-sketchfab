@@ -14,6 +14,9 @@ const theme = createMuiTheme({
     primary: purple,
     secondary: pink,
     default: grey,
+    background: {
+      paper: '#fff',
+    },
   },
   status: {
     danger: 'orange',

@@ -41,4 +41,12 @@ const getApiContext = getState => {
   return { apiHost, appInstanceId, spaceId };
 };
 
-export { flag, isErrorResponse, getApiContext };
+const getSettings = getState => {
+  const { appInstance } = getState();
+  if (appInstance.content && appInstance.content.settings) {
+    return appInstance.content.settings;
+  }
+  return {};
+};
+
+export { flag, isErrorResponse, getApiContext, getSettings };

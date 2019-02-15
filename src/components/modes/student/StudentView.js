@@ -9,6 +9,7 @@ import Viewer from '../../common/Viewer';
 import Loader from '../../common/Loader';
 import ModelQrCode from '../../common/ModelQrCode';
 import ModelNotConfigured from '../../common/ModelNotConfigured';
+import NoContentAvailable from '../../common/NoContentAvailable';
 
 const styles = theme => ({
   root: {
@@ -21,6 +22,8 @@ class StudentView extends Component {
   static propTypes = {
     model: PropTypes.string,
     activity: PropTypes.bool.isRequired,
+    showQrCode: PropTypes.bool.isRequired,
+    showModel: PropTypes.bool.isRequired,
     classes: PropTypes.shape({}).isRequired,
   };
 
@@ -29,7 +32,7 @@ class StudentView extends Component {
   };
 
   state = {
-    value: 0,
+    activeTabIndex: 0,
   };
 
   componentDidMount() {
@@ -41,12 +44,24 @@ class StudentView extends Component {
   }
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({ activeTabIndex: value });
+  };
+
+  renderTabs = () => {
+    const { showQrCode, showModel } = this.props;
+    const tabs = [];
+    if (showModel) {
+      tabs.push(<Tab label="Model" key="model" />);
+    }
+    if (showQrCode) {
+      tabs.push(<Tab label="QR Code" key="qrCode" />);
+    }
+    return tabs;
   };
 
   render() {
-    const { classes, model, activity } = this.props;
-    const { value } = this.state;
+    const { classes, model, activity, showQrCode, showModel } = this.props;
+    const { activeTabIndex } = this.state;
 
     if (activity) {
       return <Loader />;
@@ -54,25 +69,49 @@ class StudentView extends Component {
     if (!model) {
       return <ModelNotConfigured />;
     }
+    if (!showModel && !showQrCode) {
+      return <NoContentAvailable />;
+    }
+
+    const panels = [];
+    if (showModel) {
+      panels.push(<Viewer uid={model} autoStart={false} key="model" />);
+    }
+    if (showQrCode) {
+      panels.push(<ModelQrCode uid={model} key="qrCode" />);
+    }
 
     return (
       <div className={classes.root}>
         <AppBar position="static" color="secondary">
-          <Tabs value={value} onChange={this.handleChange}>
-            <Tab label="Model" />
-            <Tab label="QR Code" />
+          <Tabs value={activeTabIndex} onChange={this.handleChange}>
+            {this.renderTabs()}
           </Tabs>
         </AppBar>
-        {value === 0 && <Viewer uid={model} autoStart={false} />}
-        {value === 1 && <ModelQrCode uid={model} />}
+        {panels[activeTabIndex]}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ appInstance }) => ({
-  activity: appInstance.activity,
-});
+const mapStateToProps = ({ appInstance }) => {
+  // only override defaults if they have actually been defined in the settings
+  let showQrCode = true;
+  let showModel = true;
+  if (appInstance.content && appInstance.content.settings) {
+    if (typeof appInstance.content.settings.showQrCode !== 'undefined') {
+      ({ showQrCode } = appInstance.content.settings);
+    }
+    if (typeof appInstance.content.settings.showModel !== 'undefined') {
+      ({ showModel } = appInstance.content.settings);
+    }
+  }
+  return {
+    showQrCode,
+    showModel,
+    activity: appInstance.activity,
+  };
+};
 
 const ConnectedComponent = connect(mapStateToProps)(StudentView);
 

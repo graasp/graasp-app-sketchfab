@@ -4,3 +4,4 @@ export * from './users';
 export * from './appInstance';
 export * from './models';
 export * from './model';
+export * from './settings';

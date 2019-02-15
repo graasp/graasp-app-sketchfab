@@ -12,13 +12,14 @@ import Results from './Results';
 import Viewer from '../../common/Viewer';
 import SearchForm from './SearchForm';
 import { DEFAULT_QUERY } from '../../../config/settings';
+import Settings from '../../common/Settings';
 
 const styles = theme => ({
   paper: {
     position: 'absolute',
     width: '75%',
     height: '75%',
-    backgroundColor: 'transparent',
+    backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     outline: 'none',
     top: '50%',
@@ -78,8 +79,8 @@ export class TeacherView extends Component {
         <SearchForm />
         <Results models={models} preview={this.handleOpen} />
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
+          aria-labelledby="Preview Model"
+          aria-describedby="Preview a Sketchfab model to use in your application."
           open={open}
           onClose={this.handleClose}
         >
@@ -95,6 +96,7 @@ export class TeacherView extends Component {
             </Fab>
           </div>
         </Modal>
+        <Settings />
       </Container>
     );
   }
