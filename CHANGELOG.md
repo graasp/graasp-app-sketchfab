@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+
+# 0.5.0 (2019-05-02)
+
+### Bug Fixes
+
+- center qr code on the screen ([91c09a4](https://github.com/graasp/graasp-app-sketchfab/commit/91c09a4)), closes [#14](https://github.com/graasp/graasp-app-sketchfab/issues/14)
+- do not register service worker ([bc909e8](https://github.com/graasp/graasp-app-sketchfab/commit/bc909e8)), closes [#18](https://github.com/graasp/graasp-app-sketchfab/issues/18)
+- fix toast messages ([aeb6b15](https://github.com/graasp/graasp-app-sketchfab/commit/aeb6b15)), closes [#19](https://github.com/graasp/graasp-app-sketchfab/issues/19)
+- handle the default app instance settings value of null ([ed0045f](https://github.com/graasp/graasp-app-sketchfab/commit/ed0045f)), closes [#7](https://github.com/graasp/graasp-app-sketchfab/issues/7)
+- only resize iframe in student mode ([ae989a5](https://github.com/graasp/graasp-app-sketchfab/commit/ae989a5)), closes [#8](https://github.com/graasp/graasp-app-sketchfab/issues/8)
+- prevent preview to be hidden when in teacher view ([38615ef](https://github.com/graasp/graasp-app-sketchfab/commit/38615ef)), closes [#10](https://github.com/graasp/graasp-app-sketchfab/issues/10)
+- show full viewer in student view ([1a4e639](https://github.com/graasp/graasp-app-sketchfab/commit/1a4e639)), closes [#11](https://github.com/graasp/graasp-app-sketchfab/issues/11)
+- show preview in the middle of the viewport while in teacher view ([7451b28](https://github.com/graasp/graasp-app-sketchfab/commit/7451b28)), closes [#10](https://github.com/graasp/graasp-app-sketchfab/issues/10)
+- update bootstrap to patch vulnerability in tooltips ([bda8cb3](https://github.com/graasp/graasp-app-sketchfab/commit/bda8cb3))
+
+### Features
+
+- allow teacher to search for models ([eaa3aed](https://github.com/graasp/graasp-app-sketchfab/commit/eaa3aed)), closes [#12](https://github.com/graasp/graasp-app-sketchfab/issues/12)
+- allow teachers to configure what tabs are visible to student ([a9cab58](https://github.com/graasp/graasp-app-sketchfab/commit/a9cab58)), closes [#13](https://github.com/graasp/graasp-app-sketchfab/issues/13)
+- allow teachers to select a model for students to use ([19d2834](https://github.com/graasp/graasp-app-sketchfab/commit/19d2834)), closes [#5](https://github.com/graasp/graasp-app-sketchfab/issues/5)
+- improve selection process ([718c585](https://github.com/graasp/graasp-app-sketchfab/commit/718c585)), closes [#9](https://github.com/graasp/graasp-app-sketchfab/issues/9)
+- show message to student when no model has been selected ([457f2e7](https://github.com/graasp/graasp-app-sketchfab/commit/457f2e7)), closes [#15](https://github.com/graasp/graasp-app-sketchfab/issues/15)
+- show qr code to link from app to sketchfab viewer app ([30de5b7](https://github.com/graasp/graasp-app-sketchfab/commit/30de5b7)), closes [#4](https://github.com/graasp/graasp-app-sketchfab/issues/4)
+
 <a name="0.4.2"></a>
 
 ## [0.4.2](https://github.com/graasp/graasp-app-starter-react/compare/v0.4.1...v0.4.2) (2019-02-08)
