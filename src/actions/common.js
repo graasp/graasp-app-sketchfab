@@ -28,17 +28,28 @@ const isErrorResponse = async response => {
 
 const getApiContext = getState => {
   const { context } = getState();
-  const { apiHost, appInstanceId, spaceId } = context;
-  if (!apiHost) {
-    throw Error(MISSING_API_HOST_MESSAGE);
+  const {
+    apiHost,
+    appInstanceId,
+    spaceId,
+    userId,
+    offline,
+    subSpaceId,
+  } = context;
+
+  // these bits of context are needed when running online
+  if (!offline) {
+    if (!apiHost) {
+      throw Error(MISSING_API_HOST_MESSAGE);
+    }
+    if (!appInstanceId) {
+      throw Error(MISSING_APP_INSTANCE_ID_MESSAGE);
+    }
+    if (!spaceId) {
+      throw Error(MISSING_SPACE_ID_MESSAGE);
+    }
   }
-  if (!appInstanceId) {
-    throw Error(MISSING_APP_INSTANCE_ID_MESSAGE);
-  }
-  if (!spaceId) {
-    throw Error(MISSING_SPACE_ID_MESSAGE);
-  }
-  return { apiHost, appInstanceId, spaceId };
+  return { apiHost, appInstanceId, spaceId, userId, offline, subSpaceId };
 };
 
 const getSettings = getState => {

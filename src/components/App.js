@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import TeacherView from './modes/teacher/TeacherView';
 import StudentView from './modes/student/StudentView';
 import './App.css';
-import { getAppInstanceResources, getContext } from '../actions';
+import { getContext } from '../actions';
 import { DEFAULT_LANG, DEFAULT_MODE } from '../config/settings';
 import { getAppInstance } from '../actions/appInstance';
 import Loader from './common/Loader';
@@ -17,8 +17,6 @@ export class App extends Component {
     }).isRequired,
     dispatchGetContext: PropTypes.func.isRequired,
     dispatchGetAppInstance: PropTypes.func.isRequired,
-    dispatchGetAppInstanceResources: PropTypes.func.isRequired,
-    appInstanceId: PropTypes.string,
     model: PropTypes.string,
     lang: PropTypes.string,
     mode: PropTypes.string,
@@ -27,7 +25,6 @@ export class App extends Component {
   static defaultProps = {
     lang: DEFAULT_LANG,
     mode: DEFAULT_MODE,
-    appInstanceId: null,
     model: null,
   };
 
@@ -40,27 +37,16 @@ export class App extends Component {
   }
 
   async componentDidMount() {
-    const { lang, appInstanceId, dispatchGetAppInstanceResources } = this.props;
+    const { lang } = this.props;
     // set the language on first load
     this.handleChangeLang(lang);
-    // only fetch app instance resources if app instance id is available
-    if (appInstanceId) {
-      await dispatchGetAppInstanceResources(appInstanceId);
-    }
   }
 
-  async componentDidUpdate({
-    lang: prevLang,
-    appInstanceId: prevAppInstanceId,
-  }) {
-    const { lang, appInstanceId, dispatchGetAppInstanceResources } = this.props;
+  async componentDidUpdate({ lang: prevLang }) {
+    const { lang } = this.props;
     // handle a change of language
     if (lang !== prevLang) {
       this.handleChangeLang(lang);
-    }
-    // handle receiving the app instance id
-    if (appInstanceId !== prevAppInstanceId) {
-      await dispatchGetAppInstanceResources();
     }
   }
 
@@ -101,6 +87,7 @@ const mapStateToProps = ({ context, appInstance }) => {
   return {
     lang: context.lang,
     mode: context.mode,
+    userId: context.userId,
     appInstanceId: context.appInstanceId,
     model,
   };
@@ -109,7 +96,6 @@ const mapStateToProps = ({ context, appInstance }) => {
 const mapDispatchToProps = {
   dispatchGetContext: getContext,
   dispatchGetAppInstance: getAppInstance,
-  dispatchGetAppInstanceResources: getAppInstanceResources,
 };
 
 const ConnectedApp = connect(
