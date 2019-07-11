@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1"></a>
+
+## [0.5.1](https://github.com/graasp/graasp-app-sketchfab/compare/v0.5.0...v0.5.1) (2019-07-11)
+
+### Bug Fixes
+
+- remove call to get app instance resources ([7a4d72b](https://github.com/graasp/graasp-app-sketchfab/commit/7a4d72b)), closes [#20](https://github.com/graasp/graasp-app-sketchfab/issues/20)
+
 <a name="0.5.0"></a>
 
 # 0.5.0 (2019-05-02)
