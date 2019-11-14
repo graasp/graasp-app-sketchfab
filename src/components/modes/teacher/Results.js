@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridList from '@material-ui/core/GridList';
-import { connect } from 'react-redux';
 import Loader from '../../common/Loader';
 
 const styles = () => ({
@@ -24,7 +25,10 @@ const styles = () => ({
 // eslint-disable-next-line
 class Results extends Component {
   static propTypes = {
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({
+      root: PropTypes.string.isRequired,
+      clickable: PropTypes.string.isRequired,
+    }).isRequired,
     models: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     preview: PropTypes.func.isRequired,
     activity: PropTypes.bool,
@@ -44,16 +48,20 @@ class Results extends Component {
     return (
       <div className={classes.root}>
         <GridList cellHeight={160} cols={3}>
-          {models.map(({ uid, name, thumbnails: { images } = {} }) => (
-            <GridListTile
-              key={uid}
-              cols={1}
-              onClick={() => preview(uid)}
-              className={classes.clickable}
-            >
-              <img src={images[0].url} alt={name} />
-            </GridListTile>
-          ))}
+          {models.map(({ uid, name, thumbnails: { images = [] } = {} }) => {
+            const imagesBySize = _.sortBy(images, 'size');
+            const image = imagesBySize[images.length - 1].url;
+            return (
+              <GridListTile
+                key={uid}
+                cols={1}
+                onClick={() => preview(uid)}
+                className={classes.clickable}
+              >
+                <img src={image} alt={name} />
+              </GridListTile>
+            );
+          })}
         </GridList>
       </div>
     );
