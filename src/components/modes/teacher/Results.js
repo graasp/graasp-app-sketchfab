@@ -3,22 +3,18 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridList from '@material-ui/core/GridList';
+import { Grid } from '@material-ui/core';
 import Loader from '../../common/Loader';
+import Result from './Result';
 
-const styles = () => ({
+const styles = theme => ({
   root: {
-    flexGrow: 1,
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
     overflow: 'hidden',
+    padding: theme.spacing(2),
+    marginBottom: 100,
   },
-  clickable: {
-    '&:hover': {
-      cursor: 'pointer',
-      opacity: 0.75,
-    },
+  grid: {
+    flexGrow: 1,
   },
 });
 
@@ -27,7 +23,10 @@ class Results extends Component {
   static propTypes = {
     classes: PropTypes.shape({
       root: PropTypes.string.isRequired,
-      clickable: PropTypes.string.isRequired,
+      ellipsis: PropTypes.string.isRequired,
+      media: PropTypes.string.isRequired,
+      card: PropTypes.string.isRequired,
+      grid: PropTypes.string.isRequired,
     }).isRequired,
     models: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     preview: PropTypes.func.isRequired,
@@ -47,22 +46,29 @@ class Results extends Component {
 
     return (
       <div className={classes.root}>
-        <GridList cellHeight={160} cols={3}>
-          {models.map(({ uid, name, thumbnails: { images = [] } = {} }) => {
+        <Grid className={classes.grid} spacing={2} container>
+          {models.map(props => {
+            const {
+              uid,
+              name,
+              description,
+              thumbnails: { images = [] } = {},
+            } = props;
             const imagesBySize = _.sortBy(images, 'size');
             const image = imagesBySize[images.length - 1].url;
             return (
-              <GridListTile
-                key={uid}
-                cols={1}
-                onClick={() => preview(uid)}
-                className={classes.clickable}
-              >
-                <img src={image} alt={name} />
-              </GridListTile>
+              <Grid item xs={4} sm={4} md={3} lg={2} key={uid}>
+                <Result
+                  uid={uid}
+                  name={name}
+                  description={description}
+                  image={image}
+                  preview={preview}
+                />
+              </Grid>
             );
           })}
-        </GridList>
+        </Grid>
       </div>
     );
   }

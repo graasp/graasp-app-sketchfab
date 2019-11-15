@@ -29,7 +29,9 @@ const NoContentAvailable = props => {
 };
 
 NoContentAvailable.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({
+    noContentAvailable: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(NoContentAvailable);

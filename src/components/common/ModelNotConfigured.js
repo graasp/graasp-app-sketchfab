@@ -29,7 +29,9 @@ const ModelNotConfigured = props => {
 };
 
 ModelNotConfigured.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({
+    modelNotConfigured: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(ModelNotConfigured);

@@ -1,15 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Modal from '@material-ui/core/Modal';
+import {
+  Divider,
+  Modal,
+  Fab,
+  Typography,
+  Switch,
+  FormGroup,
+  FormControlLabel,
+} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Fab from '@material-ui/core/Fab';
-import Typography from '@material-ui/core/Typography';
-import Switch from '@material-ui/core/Switch';
 import { withTranslation } from 'react-i18next';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { toggleShowQrCode, toggleShowModel } from '../../actions';
 
 const styles = theme => ({
@@ -41,7 +44,10 @@ class Settings extends Component {
     t: PropTypes.func.isRequired,
     dispatchToggleShowQrCode: PropTypes.func.isRequired,
     dispatchToggleShowModel: PropTypes.func.isRequired,
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({
+      settingsFab: PropTypes.string.isRequired,
+      settingsModal: PropTypes.string.isRequired,
+    }).isRequired,
     showQrCode: PropTypes.bool.isRequired,
     showModel: PropTypes.bool.isRequired,
   };
@@ -102,6 +108,7 @@ class Settings extends Component {
             <Typography align="center" variant="h4">
               {t('Settings')}
             </Typography>
+            <Divider />
             <FormGroup row>
               <FormControlLabel control={qrSwitch} label={t('Show QR Code')} />
             </FormGroup>

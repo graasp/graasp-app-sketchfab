@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQrcode, faVrCardboard } from '@fortawesome/free-solid-svg-icons';
 import Viewer from '../../common/Viewer';
 import Loader from '../../common/Loader';
 import ModelQrCode from '../../common/ModelQrCode';
@@ -24,7 +26,9 @@ class StudentView extends Component {
     activity: PropTypes.bool.isRequired,
     showQrCode: PropTypes.bool.isRequired,
     showModel: PropTypes.bool.isRequired,
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({
+      root: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -51,10 +55,14 @@ class StudentView extends Component {
     const { showQrCode, showModel } = this.props;
     const tabs = [];
     if (showModel) {
-      tabs.push(<Tab label="Model" key="model" />);
+      tabs.push(
+        <Tab icon={<FontAwesomeIcon icon={faVrCardboard} />} key="model" />
+      );
     }
     if (showQrCode) {
-      tabs.push(<Tab label="QR Code" key="qrCode" />);
+      tabs.push(
+        <Tab icon={<FontAwesomeIcon icon={faQrcode} />} key="qrCode" />
+      );
     }
     return tabs;
   };
@@ -83,8 +91,8 @@ class StudentView extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="secondary">
-          <Tabs value={activeTabIndex} onChange={this.handleChange}>
+        <AppBar position="static" color="primary">
+          <Tabs value={activeTabIndex} onChange={this.handleChange} centered>
             {this.renderTabs()}
           </Tabs>
         </AppBar>

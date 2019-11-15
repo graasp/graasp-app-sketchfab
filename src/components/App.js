@@ -13,7 +13,8 @@ import Loader from './common/Loader';
 export class App extends Component {
   static propTypes = {
     i18n: PropTypes.shape({
-      defaultNS: PropTypes.string,
+      defaultNS: PropTypes.string.isRequired,
+      changeLanguage: PropTypes.func.isRequired,
     }).isRequired,
     dispatchGetContext: PropTypes.func.isRequired,
     dispatchGetAppInstance: PropTypes.func.isRequired,
@@ -36,13 +37,13 @@ export class App extends Component {
     props.dispatchGetAppInstance();
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { lang } = this.props;
     // set the language on first load
     this.handleChangeLang(lang);
   }
 
-  async componentDidUpdate({ lang: prevLang }) {
+  componentDidUpdate({ lang: prevLang }) {
     const { lang } = this.props;
     // handle a change of language
     if (lang !== prevLang) {
@@ -98,9 +99,6 @@ const mapDispatchToProps = {
   dispatchGetAppInstance: getAppInstance,
 };
 
-const ConnectedApp = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default withTranslation()(ConnectedApp);

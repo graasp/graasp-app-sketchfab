@@ -2,7 +2,6 @@ import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
-import purple from '@material-ui/core/colors/purple';
 import pink from '@material-ui/core/colors/pink';
 import grey from '@material-ui/core/colors/grey';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +10,9 @@ import App from './App';
 
 const theme = createMuiTheme({
   palette: {
-    primary: purple,
+    primary: {
+      main: '#5050d2',
+    },
     secondary: pink,
     default: grey,
     background: {

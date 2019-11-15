@@ -45,7 +45,9 @@ class Viewer extends Component {
     return (
       <Iframe
         url=""
+        frameBorder={0}
         height={height}
+        width="100%"
         id="api-frame"
         allow="autoplay; fullscreen; vr"
         allowvr

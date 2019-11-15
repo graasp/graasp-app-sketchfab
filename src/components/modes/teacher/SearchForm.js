@@ -4,10 +4,17 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
+import { InputBase, AppBar, Toolbar, Typography } from '@material-ui/core';
 import { getModels } from '../../../actions';
 
 const styles = theme => ({
+  title: {
+    flexGrow: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -15,16 +22,15 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing.unit * 2,
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit * 3,
+      marginLeft: theme.spacing(1),
       width: 'auto',
     },
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
+    width: theme.spacing(7),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -32,12 +38,32 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 200,
+      '&:focus': {
+        width: 300,
+      },
+    },
+  },
 });
 
 class SearchForm extends Component {
   static propTypes = {
     dispatchGetModels: PropTypes.func.isRequired,
-    classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+      searchIcon: PropTypes.string.isRequired,
+      inputRoot: PropTypes.string.isRequired,
+      inputInput: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   handleSearch = event => {
@@ -50,19 +76,26 @@ class SearchForm extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon />
-        </div>
-        <InputBase
-          placeholder="Search for models…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          onKeyPress={this.handleSearch}
-        />
-      </div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography className={classes.title} variant="h6" noWrap>
+            Sketchfab
+          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search for models…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              onKeyPress={this.handleSearch}
+            />
+          </div>
+        </Toolbar>
+      </AppBar>
     );
   }
 }
@@ -71,9 +104,6 @@ const mapDispatchToProps = {
   dispatchGetModels: getModels,
 };
 
-const ConnectedComponent = connect(
-  null,
-  mapDispatchToProps
-)(SearchForm);
+const ConnectedComponent = connect(null, mapDispatchToProps)(SearchForm);
 
 export default withStyles(styles)(ConnectedComponent);

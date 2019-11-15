@@ -27,7 +27,10 @@ const Loader = props => {
 };
 
 Loader.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({
+    loader: PropTypes.string.isRequired,
+    progress: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(Loader);

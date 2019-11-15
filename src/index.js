@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import Root from './components/Root';
 import configureStore from './store/configureStore';
-import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
 const root = document.getElementById('root');

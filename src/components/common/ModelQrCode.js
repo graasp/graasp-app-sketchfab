@@ -7,8 +7,6 @@ const styles = theme => ({
   modelQrCode: {
     padding: theme.spacing.unit * 5,
     display: 'flex',
-    height: '100%',
-    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -28,7 +26,9 @@ const ModelQrCode = ({ uid, classes }) => (
 
 ModelQrCode.propTypes = {
   uid: PropTypes.string.isRequired,
-  classes: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({
+    modelQrCode: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(ModelQrCode);

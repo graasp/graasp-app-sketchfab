@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Modal from '@material-ui/core/Modal';
 import Fab from '@material-ui/core/Fab';
 import { withStyles } from '@material-ui/core/styles';
-import './TeacherView.css';
+import { Tooltip, Modal } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 import { patchAppInstance, getModels, selectModel } from '../../../actions';
 import Results from './Results';
 import Viewer from '../../common/Viewer';
@@ -29,8 +28,9 @@ const styles = theme => ({
   fab: {
     margin: theme.spacing.unit,
     position: 'absolute',
-    bottom: 0,
-    left: 0,
+    top: '50%',
+    right: '0',
+    transform: 'translate(0, -50%)',
   },
 });
 
@@ -41,6 +41,15 @@ export class TeacherView extends Component {
     t: PropTypes.func.isRequired,
     dispatchGetModels: PropTypes.func.isRequired,
     dispatchSelectModel: PropTypes.func.isRequired,
+    classes: PropTypes.shape({
+      paper: PropTypes.string.isRequired,
+      fab: PropTypes.string.isRequired,
+    }).isRequired,
+    models: PropTypes.arrayOf(PropTypes.shape({})),
+  };
+
+  static defaultProps = {
+    models: [],
   };
 
   state = {
@@ -75,7 +84,7 @@ export class TeacherView extends Component {
     const { open, selected } = this.state;
 
     return (
-      <Container fluid className="App App-body TeacherView">
+      <>
         <SearchForm />
         <Results models={models} preview={this.handleOpen} />
         <Modal
@@ -86,30 +95,23 @@ export class TeacherView extends Component {
         >
           <div className={classes.paper}>
             <Viewer uid={selected} autoStart={false} height="100%" />
-            <Fab
-              variant="extended"
-              aria-label="Select"
-              className={classes.fab}
-              onClick={this.selectModel}
-            >
-              Select Model
-            </Fab>
+            <Tooltip title="Select Model">
+              <Fab
+                aria-label="Select"
+                className={classes.fab}
+                onClick={this.selectModel}
+                color="primary"
+              >
+                <Add />
+              </Fab>
+            </Tooltip>
           </div>
         </Modal>
         <Settings />
-      </Container>
+      </>
     );
   }
 }
-
-TeacherView.propTypes = {
-  models: PropTypes.arrayOf(PropTypes.shape({})),
-  classes: PropTypes.shape({}).isRequired,
-};
-
-TeacherView.defaultProps = {
-  models: [],
-};
 
 // get the app instance resources that are saved in the redux store
 const mapStateToProps = ({ models }) => ({
