@@ -25,6 +25,7 @@
     "qs": "6.9.1",
     "react": "16.11.0",
     "react-dom": "16.11.0",
+    "react-ga": "2.7.0",
     "react-i18next": "10.0.0",
     "react-iframe": "1.8.0",
     "react-qr-svg": "2.2.1",
