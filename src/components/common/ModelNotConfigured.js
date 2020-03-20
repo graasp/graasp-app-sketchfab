@@ -4,10 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
-const styles = theme => ({
-  progress: {
-    margin: theme.spacing.unit * 2,
-  },
+const styles = () => ({
   modelNotConfigured: {
     display: 'flex',
     position: 'fixed',
