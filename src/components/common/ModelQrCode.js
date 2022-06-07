@@ -1,11 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 import { QRCode as QrCode } from 'react-qr-svg';
 
-const styles = theme => ({
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = (theme) => ({
   modelQrCode: {
-    padding: theme.spacing.unit * 5,
+    padding: theme.spacing(5),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

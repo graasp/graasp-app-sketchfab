@@ -1,7 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
 const styles = () => ({
@@ -15,7 +16,7 @@ const styles = () => ({
   },
 });
 
-const ModelNotConfigured = props => {
+const ModelNotConfigured = (props) => {
   const { classes } = props;
   return (
     <div className={classes.modelNotConfigured}>

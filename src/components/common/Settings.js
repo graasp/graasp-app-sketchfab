@@ -1,24 +1,26 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Loader } from '@graasp/ui';
+
 import {
   Divider,
-  Modal,
   Fab,
-  Typography,
-  Switch,
-  FormGroup,
   FormControlLabel,
+  FormGroup,
+  Modal,
+  Switch,
+  Typography,
 } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { withTranslation } from 'react-i18next';
-import { toggleShowQrCode, toggleShowModel } from '../../actions';
 
-const styles = theme => ({
+import { useSettings } from '../../config/hooks';
+
+const useStyles = makeStyles((theme) => ({
   settingsFab: {
-    right: theme.spacing.unit * 4,
-    bottom: theme.spacing.unit * 4,
+    right: theme.spacing(4),
+    bottom: theme.spacing(4),
     position: 'fixed',
   },
   settingsModal: {
@@ -31,123 +33,82 @@ const styles = theme => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
   },
-});
+}));
 
-class Settings extends Component {
-  state = {
-    openModal: false,
-  };
+const Settings = () => {
+  const { t } = useTranslation();
+  const classes = useStyles();
+  const [openModal, setOpenModal] = useState(false);
+  const { showQrCode, showModel, saveShowQrCode, saveShowModel, isLoading } =
+    useSettings();
 
-  static propTypes = {
-    t: PropTypes.func.isRequired,
-    dispatchToggleShowQrCode: PropTypes.func.isRequired,
-    dispatchToggleShowModel: PropTypes.func.isRequired,
-    classes: PropTypes.shape({
-      settingsFab: PropTypes.string.isRequired,
-      settingsModal: PropTypes.string.isRequired,
-    }).isRequired,
-    showQrCode: PropTypes.bool.isRequired,
-    showModel: PropTypes.bool.isRequired,
-  };
-
-  handleCloseModal = () => {
-    this.setState({ openModal: false });
-  };
-
-  handleToggleModal = () => {
-    const { openModal } = this.state;
-    this.setState({ openModal: !openModal });
-  };
-
-  handleToggleShowQrCode = () => {
-    const { showQrCode, dispatchToggleShowQrCode } = this.props;
-    dispatchToggleShowQrCode(!showQrCode);
-  };
-
-  handleToggleShowModel = () => {
-    const { showModel, dispatchToggleShowModel } = this.props;
-    dispatchToggleShowModel(!showModel);
-  };
-
-  render() {
-    const { t, classes, showQrCode, showModel } = this.props;
-    const { openModal } = this.state;
-    const qrSwitch = (
-      <Switch
-        onChange={this.handleToggleShowQrCode}
-        checked={showQrCode}
-        id="showQrCode"
-      />
-    );
-    const modelSwitch = (
-      <Switch
-        onChange={this.handleToggleShowModel}
-        checked={showModel}
-        id="showModel"
-      />
-    );
-    return (
-      <Fragment>
-        <Fab
-          color="primary"
-          aria-label="Settings"
-          onClick={this.handleToggleModal}
-          className={classes.settingsFab}
-        >
-          <SettingsIcon />
-        </Fab>
-        <Modal
-          aria-labelledby="Settings Model"
-          aria-describedby="Configure your application."
-          open={openModal}
-          onClose={this.handleCloseModal}
-        >
-          <div className={classes.settingsModal}>
-            <Typography align="center" variant="h4">
-              {t('Settings')}
-            </Typography>
-            <Divider />
-            <FormGroup row>
-              <FormControlLabel control={qrSwitch} label={t('Show QR Code')} />
-            </FormGroup>
-            <FormGroup row>
-              <FormControlLabel control={modelSwitch} label={t('Show Model')} />
-            </FormGroup>
-          </div>
-        </Modal>
-      </Fragment>
-    );
+  if (isLoading) {
+    return <Loader />;
   }
-}
 
-const mapStateToProps = ({ appInstance }) => {
-  // only override defaults if they have actually been defined in the settings
-  let showQrCode = true;
-  let showModel = true;
-  if (appInstance.content && appInstance.content.settings) {
-    if (typeof appInstance.content.settings.showQrCode !== 'undefined') {
-      ({ showQrCode } = appInstance.content.settings);
-    }
-    if (typeof appInstance.content.settings.showModel !== 'undefined') {
-      ({ showModel } = appInstance.content.settings);
-    }
-  }
-  return {
-    showQrCode,
-    showModel,
+  const handleCloseModal = () => {
+    setOpenModal(false);
   };
+
+  const handleToggleModal = () => {
+    setOpenModal(!openModal);
+  };
+
+  const handleToggleShowQrCode = (e) => {
+    saveShowQrCode(e.target.checked);
+  };
+
+  const handleToggleShowModel = (e) => {
+    saveShowModel(e.target.checked);
+  };
+
+  const qrSwitch = (
+    <Switch
+      onChange={handleToggleShowQrCode}
+      checked={showQrCode}
+      id="showQrCode"
+    />
+  );
+  const modelSwitch = (
+    <Switch
+      onChange={handleToggleShowModel}
+      checked={showModel}
+      id="showModel"
+    />
+  );
+  return (
+    <>
+      <Fab
+        color="primary"
+        aria-label="Settings"
+        onClick={handleToggleModal}
+        className={classes.settingsFab}
+      >
+        <SettingsIcon />
+      </Fab>
+      <Modal
+        aria-labelledby="Settings Model"
+        aria-describedby="Configure your application."
+        open={openModal}
+        onClose={handleCloseModal}
+      >
+        <div className={classes.settingsModal}>
+          <Typography align="center" variant="h4">
+            {t('Settings')}
+          </Typography>
+          <Divider />
+          <FormGroup row>
+            <FormControlLabel control={qrSwitch} label={t('Show QR Code')} />
+          </FormGroup>
+          <FormGroup row>
+            <FormControlLabel control={modelSwitch} label={t('Show Model')} />
+          </FormGroup>
+        </div>
+      </Modal>
+    </>
+  );
 };
 
-const mapDispatchToProps = {
-  dispatchToggleShowQrCode: toggleShowQrCode,
-  dispatchToggleShowModel: toggleShowModel,
-};
-
-const ConnectedComponent = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Settings);
-const StyledComponent = withStyles(styles)(ConnectedComponent);
-export default withTranslation()(StyledComponent);
+export default Settings;

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Iframe from 'react-iframe';
 import Sketchfab from '@sketchfab/viewer-api/viewer-api';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import Iframe from 'react-iframe';
 
 class Viewer extends Component {
   static propTypes = {
@@ -22,14 +22,14 @@ class Viewer extends Component {
     const client = new Sketchfab('1.4.2', iframe);
 
     client.init(uid, {
-      success: api => {
+      success: (api) => {
         if (autoStart) {
           api.start();
         }
         api.addEventListener('viewerready', () => {
           console.log('viewer is ready');
         });
-        api.addEventListener('click', obj => console.log(obj));
+        api.addEventListener('click', (obj) => console.log(obj));
         api.addEventListener('camerastart', () =>
           console.log('camera is moving')
         );
