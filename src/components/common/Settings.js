@@ -16,6 +16,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import { useSettings } from '../../config/hooks';
+import {
+  SETTINGS_BUTTON_CY,
+  SHOW_MODEL_SWITCH_CY,
+  SHOW_QR_CODE_SWITCH_CY,
+} from '../../config/selectors';
 
 const useStyles = makeStyles((theme) => ({
   settingsFab: {
@@ -66,6 +71,7 @@ const Settings = () => {
 
   const qrSwitch = (
     <Switch
+      data-cy={SHOW_QR_CODE_SWITCH_CY}
       onChange={handleToggleShowQrCode}
       checked={showQrCode}
       id="showQrCode"
@@ -73,6 +79,7 @@ const Settings = () => {
   );
   const modelSwitch = (
     <Switch
+      data-cy={SHOW_MODEL_SWITCH_CY}
       onChange={handleToggleShowModel}
       checked={showModel}
       id="showModel"
@@ -85,6 +92,7 @@ const Settings = () => {
         aria-label="Settings"
         onClick={handleToggleModal}
         className={classes.settingsFab}
+        data-cy={SETTINGS_BUTTON_CY}
       >
         <SettingsIcon />
       </Fab>

@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Add } from '@material-ui/icons';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import { RESULT_CARD_CY } from '../../../config/selectors';
+
 const useStyles = makeStyles((theme) => ({
   expand: {
     transform: 'rotate(0deg)',
@@ -48,7 +50,10 @@ function Result({ name, uid, description, image, preview, isSelected }) {
   };
 
   return (
-    <Card className={clsx(classes.card, { [classes.isSelected]: isSelected })}>
+    <Card
+      className={clsx(classes.card, { [classes.isSelected]: isSelected })}
+      data-cy={RESULT_CARD_CY}
+    >
       <Tooltip title={name}>
         <CardActionArea onClick={() => preview(uid)}>
           <CardMedia className={classes.media} image={image} title={name} />

@@ -39,6 +39,8 @@
   },
   "scripts": {
     "start": "env-cmd -f .env.local react-scripts start",
+    "start:test": "env-cmd -f ./.env.test react-scripts -r @cypress/instrument-cra start",
+    "start:ci": "react-scripts -r @cypress/instrument-cra start",
     "build": "run-s build:react build:bundle",
     "build:react": "react-scripts build",
     "build:bundle": "webpack --config webpack.config.js --mode=production",
@@ -49,8 +51,8 @@
     "hooks:uninstall": "husky uninstall",
     "hooks:install": "husky install",
     "lint": "eslint .",
-    "prettier:check": "prettier --check 'src/**/*.js'",
-    "prettier:write": "prettier --write 'src/**/*.js'",
+    "prettier:check": "prettier --check '{src,cypress}/**/*.js'",
+    "prettier:write": "prettier --write '{src,cypress}/**/*.js'",
     "test": "react-scripts test",
     "test:once": "cross-env CI=true env-cmd ./.env.test react-scripts test --env=jsdom",
     "test:coverage": "cross-env CI=true env-cmd ./.env.test react-scripts test --env=jsdom --coverage",
@@ -58,7 +60,9 @@
     "report": "cat ./coverage/lcov.info | env-cmd ./.env.test codacy-coverage",
     "eject": "react-scripts eject",
     "release": "git add CHANGELOG.md && standard-version -a",
-    "pre-commit": "yarn prettier:check && yarn lint"
+    "pre-commit": "yarn prettier:check && yarn lint",
+    "cypress:open": "env-cmd -f ./.env.test cypress open",
+    "cypress:run": "env-cmd -f ./.env.test cypress run --headless --browser chrome --spec \"cypress/**/*.cy.js\""
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.18.2",
@@ -66,8 +70,11 @@
     "@babel/preset-react": "7.17.12",
     "@commitlint/cli": "17.0.2",
     "@commitlint/config-conventional": "17.0.2",
+    "@cypress/code-coverage": "3.10.0",
+    "@cypress/instrument-cra": "1.4.0",
     "@trivago/prettier-plugin-sort-imports": "3.2.0",
     "cross-env": "7.0.3",
+    "cypress": "10.0.3",
     "env-cmd": "10.1.0",
     "eslint": "8.17.0",
     "eslint-config-prettier": "8.5.0",

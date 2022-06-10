@@ -20,3 +20,19 @@ export const MODELS_ENDPOINT = 'https://api.sketchfab.com/v3/search';
 
 export const DEFAULT_SHOW_QR_CODE = true;
 export const DEFAULT_SHOW_MODEL = true;
+
+// todo: use from graasp constants
+export const PERMISSION_LEVELS = {
+  WRITE: 'write',
+  READ: 'read',
+  ADMIN: 'admin',
+};
+export const DEFAULT_PERMISSION = PERMISSION_LEVELS.READ;
+
+export const CONTEXTS = {
+  BUILDER: 'builder',
+  PLAYER: 'player',
+  ANALYZER: 'analyzer',
+};
+
+export const SKETCHFAB_VERSION = '1.4.2';

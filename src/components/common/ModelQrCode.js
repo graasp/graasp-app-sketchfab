@@ -4,6 +4,8 @@ import { QRCode as QrCode } from 'react-qr-svg';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import { QR_CODE_CY } from '../../config/selectors';
+
 const styles = (theme) => ({
   modelQrCode: {
     padding: theme.spacing(5),
@@ -14,7 +16,7 @@ const styles = (theme) => ({
 });
 
 const ModelQrCode = ({ uid, classes }) => (
-  <div className={classes.modelQrCode}>
+  <div className={classes.modelQrCode} data-cy={QR_CODE_CY}>
     <QrCode
       bgColor="#FFFFFF"
       fgColor="#000000"

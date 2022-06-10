@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Add } from '@material-ui/icons';
 
 import { useModels, useSettings } from '../../../config/hooks';
+import { SELECT_BUTTON_CY } from '../../../config/selectors';
 import Settings from '../../common/Settings';
 import Viewer from '../../common/Viewer';
 import Results from './Results';
@@ -69,6 +70,7 @@ const BuilderView = () => {
           <Viewer uid={selected} autoStart={false} height="100%" />
           <Tooltip title="Select Model">
             <Fab
+              data-cy={SELECT_BUTTON_CY}
               aria-label="Select"
               className={classes.fab}
               onClick={onSelectModel}

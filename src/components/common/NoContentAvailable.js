@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import WarningIcon from '@material-ui/icons/Warning';
 
+import { NO_CONTENT_CY } from '../../config/selectors';
+
 const styles = (theme) => ({
   progress: {
     margin: theme.spacing(2),
@@ -22,7 +24,7 @@ const styles = (theme) => ({
 const NoContentAvailable = (props) => {
   const { classes } = props;
   return (
-    <div className={classes.noContentAvailable}>
+    <div className={classes.noContentAvailable} data-cy={NO_CONTENT_CY}>
       <WarningIcon fontSize="large" />
       <Typography>This app has been configured to show no content.</Typography>
     </div>

@@ -10,6 +10,7 @@ import Tabs from '@material-ui/core/Tabs';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useSettings } from '../../../config/hooks';
+import { QR_CODE_TAB_CY } from '../../../config/selectors';
 import ModelNotConfigured from '../../common/ModelNotConfigured';
 import ModelQrCode from '../../common/ModelQrCode';
 import NoContentAvailable from '../../common/NoContentAvailable';
@@ -57,7 +58,11 @@ const PlayerView = () => {
     }
     if (showQrCode) {
       tabs.push(
-        <Tab icon={<FontAwesomeIcon icon={faQrcode} />} key="qrCode" />
+        <Tab
+          data-cy={QR_CODE_TAB_CY}
+          icon={<FontAwesomeIcon icon={faQrcode} />}
+          key="qrCode"
+        />
       );
     }
     return tabs;

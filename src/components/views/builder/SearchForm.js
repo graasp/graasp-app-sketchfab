@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { alpha } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
 
+import { SEARCH_INPUT_CY } from '../../../config/selectors';
+
 const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
@@ -79,6 +81,7 @@ const SearchForm = ({ search, setSearch }) => {
             <SearchIcon />
           </div>
           <InputBase
+            data-cy={SEARCH_INPUT_CY}
             defaultValue={search}
             placeholder="Search for models…"
             classes={{

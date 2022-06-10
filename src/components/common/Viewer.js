@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Iframe from 'react-iframe';
 
+import { VIEWER_ID } from '../../config/selectors';
+import { SKETCHFAB_VERSION } from '../../config/settings';
+
 class Viewer extends Component {
   static propTypes = {
     uid: PropTypes.string,
@@ -18,8 +21,8 @@ class Viewer extends Component {
 
   componentDidMount() {
     const { uid, autoStart } = this.props;
-    const iframe = document.getElementById('api-frame');
-    const client = new Sketchfab('1.4.2', iframe);
+    const iframe = document.getElementById(VIEWER_ID);
+    const client = new Sketchfab(SKETCHFAB_VERSION, iframe);
 
     client.init(uid, {
       success: (api) => {
@@ -48,7 +51,7 @@ class Viewer extends Component {
         frameBorder={0}
         height={height}
         width="100%"
-        id="api-frame"
+        id={VIEWER_ID}
         allow="autoplay; fullscreen; vr"
         allowvr
         allowfullscreen
