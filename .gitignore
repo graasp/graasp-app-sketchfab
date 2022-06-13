@@ -22,8 +22,9 @@ yarn-error.log*
 # exclude webstorm and idea files
 .idea
 
-# exclude cypress
-cypress
+# exclude cypress video and screenshots
+cypress/videos
+cypress/screenshots
 
 # exclude environment variables
 .env*
