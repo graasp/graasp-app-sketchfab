@@ -1,6 +1,6 @@
 import { faQrcode, faVrCardboard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Loader } from '@graasp/ui';
 
@@ -32,14 +32,6 @@ const PlayerView = () => {
     model,
     isLoading: isSettingsLoading,
   } = useSettings();
-
-  useEffect(() => {
-    if (window.frameElement) {
-      // 600 is the height of the viewer and 48 the height of the header
-      window.frameElement.style.height = '648px';
-      window.frameElement.style['max-height'] = 'none';
-    }
-  }, []);
 
   if (isSettingsLoading) {
     return <Loader />;
