@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify';
+
 import {
-  FAILED_TO_FETCH_MESSAGE_RAW,
   FAILED_TO_FETCH_MESSAGE_PRETTY,
+  FAILED_TO_FETCH_MESSAGE_RAW,
   UNEXPECTED_ERROR_MESSAGE,
 } from '../constants/messages';
 
@@ -12,7 +13,7 @@ const showToast = ({ type, message }) => {
   });
 };
 
-const showErrorToast = payload => {
+const showErrorToast = (payload) => {
   let message = UNEXPECTED_ERROR_MESSAGE;
   if (payload instanceof String || typeof payload === 'string') {
     message = payload;

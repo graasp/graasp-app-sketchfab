@@ -1,8 +1,11 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
+
+import { MODEL_NOT_CONFIGURED_CY } from '../../config/selectors';
 
 const styles = () => ({
   modelNotConfigured: {
@@ -15,10 +18,13 @@ const styles = () => ({
   },
 });
 
-const ModelNotConfigured = props => {
+const ModelNotConfigured = (props) => {
   const { classes } = props;
   return (
-    <div className={classes.modelNotConfigured}>
+    <div
+      className={classes.modelNotConfigured}
+      data-cy={MODEL_NOT_CONFIGURED_CY}
+    >
       <BrokenImageIcon fontSize="large" />
       <Typography>This model has not been configured.</Typography>
     </div>

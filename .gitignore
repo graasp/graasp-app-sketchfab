@@ -22,8 +22,9 @@ yarn-error.log*
 # exclude webstorm and idea files
 .idea
 
-# exclude cypress
-cypress
+# exclude cypress video and screenshots
+cypress/videos
+cypress/screenshots
 
 # exclude environment variables
 .env*
@@ -40,3 +41,11 @@ cypress
 
 # exclude local database
 db.json
+
+# yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
