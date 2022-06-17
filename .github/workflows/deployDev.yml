@@ -50,7 +50,7 @@ jobs:
         id: build-image
         run: |
           yarn install
-          REACT_APP_GRAASP_DOMAIN REACT_APP_GRAASP_APP_ID REACT_APP_ENABLE_MOCK_API yarn build
+          REACT_APP_GRAASP_APP_ID REACT_APP_ENABLE_MOCK_API yarn build
       - name: Configure AWS Credentials
         id: configure-aws
         uses: aws-actions/configure-aws-credentials@v1
