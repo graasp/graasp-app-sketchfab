@@ -13,7 +13,7 @@ jobs:
     name: Graasp App Sketchfab
     # Replace 'main' with the hash of a commit, so it points to an specific version of the reusable workflow that is used
     # Reference reusable workflow file. Using the commit SHA is the safest for stability and security
-    uses: graasp/graasp-deploy/.github/workflows/cdeployment-s3-apps.yml@3d7f758afdded7990378d28fbc35d76be495894b
+    uses: graasp/graasp-deploy/.github/workflows/cdeployment-s3-apps.yml@1be543fd0554b30aa7443f24b9d2fb981a4f0a7f
     # Replace input build-folder or version if needed.
     with:
       build-folder: 'build'
@@ -27,4 +27,4 @@ jobs:
       aws-s3-bucket-name: ${{ secrets.AWS_S3_BUCKET_NAME_APPS_PROD }}
       app-id: ${{ secrets.APP_ID }}
       graasp-domain: ${{ secrets.PROD_GRAASP_DOMAIN }}
-      cloudfront-distribution: ${{ secrets.CLOUDFRONT_DISTRIBUTION_APPS_PROD }}
+      cloudfront-distribution-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_APPS_PROD }}
