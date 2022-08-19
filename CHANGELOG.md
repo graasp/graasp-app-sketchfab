@@ -1,6 +1,22 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [0.6.0](https://github.com/graasp/graasp-app-sketchfab/compare/v0.5.1...v0.6.0) (2022-08-19)
+
+
+### Features
+
+* add google analytics tracker ([12e7dfb](https://github.com/graasp/graasp-app-sketchfab/commit/12e7dfb105b7b590486ea36ffc8f191abd2f0626))
+* update design ([b1c8d5f](https://github.com/graasp/graasp-app-sketchfab/commit/b1c8d5f9b2ff1e81c9d6d97a326c3e4638392c3c))
+
+
+### Bug Fixes
+
+* fix page title ([ac6bf53](https://github.com/graasp/graasp-app-sketchfab/commit/ac6bf53d42e2b48f349d60e9b27cf5ae46274a88))
+* make minimum height 600px ([1a3ad16](https://github.com/graasp/graasp-app-sketchfab/commit/1a3ad168583579e749a92461bd83d623ed218d20))
+* remove unnecessary styling ([39c23d7](https://github.com/graasp/graasp-app-sketchfab/commit/39c23d72b536e2d2b183dce9f38a048737378302))
+* use best-quality thumbnail ([ea87cf5](https://github.com/graasp/graasp-app-sketchfab/commit/ea87cf5b754331ba2589cd383d68316af62e5b51)), closes [#1](https://github.com/graasp/graasp-app-sketchfab/issues/1)
 
 <a name="0.5.1"></a>
 
