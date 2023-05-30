@@ -7,7 +7,6 @@ Cypress.Commands.add('setUpApi', ({ database = {}, appContext } = {}) => {
       appData: [],
       appActions: [],
       appSettings: [],
-      items: [],
       members: Object.values(MEMBERS),
       ...database,
     };
