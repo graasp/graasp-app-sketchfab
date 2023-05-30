@@ -1,3 +1,6 @@
+import PropTypes from 'prop-types';
+import React from 'react';
+
 import { Add } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { CardActionArea, Tooltip } from '@mui/material';
@@ -9,8 +12,6 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
-import React from 'react';
 
 import { RESULT_CARD_CY } from '../../../config/selectors';
 

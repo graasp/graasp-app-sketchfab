@@ -1,8 +1,9 @@
+import { useState } from 'react';
+
 import { Add } from '@mui/icons-material';
 import { Modal, Tooltip } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
 
 import { useModels, useSettings } from '../../../config/hooks';
 import { SELECT_BUTTON_CY } from '../../../config/selectors';

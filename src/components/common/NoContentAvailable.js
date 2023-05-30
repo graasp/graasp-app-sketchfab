@@ -1,7 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 import WarningIcon from '@mui/icons-material/Warning';
 import { Box, styled } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'react-i18next';
 
 import { NO_CONTENT_CY } from '../../config/selectors';
 

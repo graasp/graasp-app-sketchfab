@@ -1,8 +1,9 @@
-import { Grid } from '@mui/material';
 import { List } from 'immutable';
 import PropTypes from 'prop-types';
 
 import { Loader } from '@graasp/ui';
+
+import { Grid } from '@mui/material';
 
 import Result from './Result';
 

@@ -1,10 +1,11 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { withContext, withToken } from '@graasp/apps-query-client';
 import { Loader, theme } from '@graasp/ui';
+
+import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import i18nConfig from '../config/i18n';
 import {

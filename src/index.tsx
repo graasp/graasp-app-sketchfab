@@ -4,19 +4,15 @@ import { mockApi } from '@graasp/apps-query-client';
 
 import Root from './components/Root';
 import { ENABLE_MOCK_API, MODELS_ENDPOINT } from './config/settings';
-import { MOCK_CONTEXT, MOCK_DB } from './data/db';
+import { MOCK_CONTEXT } from './data/db';
 import './index.css';
 
 // setup mocked api for cypress or standalone app
 if (ENABLE_MOCK_API) {
   mockApi({
-    externalUrls: [
-      (req) => {
-        return req.url.startsWith(MODELS_ENDPOINT);
-      },
-    ],
+    externalUrls: [MODELS_ENDPOINT],
     appContext: window.Cypress ? window.appContext : MOCK_CONTEXT,
-    database: window.Cypress ? window.database : MOCK_DB,
+    database: window.Cypress ? window.database : undefined,
   });
 }
 

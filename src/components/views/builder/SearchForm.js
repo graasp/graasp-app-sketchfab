@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
+
 import SearchIcon from '@mui/icons-material/Search';
 import { AppBar, InputBase, Toolbar, Typography, alpha } from '@mui/material';
-import PropTypes from 'prop-types';
 
 import { SEARCH_INPUT_CY } from '../../../config/selectors';
 
@@ -47,9 +48,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: '12ch',
+      width: '20ch',
       '&:focus': {
-        width: '20ch',
+        width: '30ch',
       },
     },
   },

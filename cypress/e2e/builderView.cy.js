@@ -43,10 +43,7 @@ describe('Builder View', () => {
     cy.wait(1000);
     cy.get(dataCyWrapper(RESULT_CARD_CY))
       .first()
-      .should('exist')
-      .then(($el) => {
-        expect($el.attr('class')).to.include('isSelected');
-      });
+      .should('have.css', 'color', 'rgb(255, 255, 255)');
   });
 
   it('settings', () => {

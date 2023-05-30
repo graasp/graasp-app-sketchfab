@@ -1,7 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 import BrokenImageIcon from '@mui/icons-material/BrokenImage';
 import { styled } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'react-i18next';
 
 import { MODEL_NOT_CONFIGURED_CY } from '../../config/selectors';
 

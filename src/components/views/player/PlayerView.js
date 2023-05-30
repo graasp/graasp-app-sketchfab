@@ -1,11 +1,12 @@
 import { faQrcode, faVrCardboard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AppBar from '@mui/material/AppBar';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import React, { useState } from 'react';
 
 import { Loader } from '@graasp/ui';
+
+import AppBar from '@mui/material/AppBar';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 
 import { useSettings } from '../../../config/hooks';
 import { QR_CODE_TAB_CY } from '../../../config/selectors';

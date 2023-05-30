@@ -1,3 +1,8 @@
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Loader } from '@graasp/ui';
+
 import SettingsIcon from '@mui/icons-material/Settings';
 import {
   Dialog,
@@ -9,10 +14,6 @@ import {
   Switch,
   styled,
 } from '@mui/material';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
-import { Loader } from '@graasp/ui';
 
 import { useSettings } from '../../config/hooks';
 import {

@@ -1,6 +1,7 @@
-import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { QRCode as QrCode } from 'react-qr-svg';
+
+import { styled } from '@mui/material/styles';
 
 import { QR_CODE_CY } from '../../config/selectors';
 

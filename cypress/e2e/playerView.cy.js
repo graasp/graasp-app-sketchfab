@@ -1,3 +1,5 @@
+import { Context, PermissionLevel } from '@graasp/sdk';
+
 import {
   MODEL_NOT_CONFIGURED_CY,
   NO_CONTENT_CY,
@@ -10,13 +12,16 @@ import { APP_SETTINGS, MODEL_SETTING } from '../fixtures/appSettings';
 
 describe('Player View', () => {
   it('no model', () => {
-    cy.setUpApi();
+    cy.setUpApi({
+      appContext: { permission: PermissionLevel.Read, context: Context.Player },
+    });
     cy.visit('/');
     cy.get(dataCyWrapper(MODEL_NOT_CONFIGURED_CY)).should('be.visible');
   });
 
   it('show nothing', () => {
     cy.setUpApi({
+      appContext: { permission: PermissionLevel.Read, context: Context.Player },
       database: {
         appSettings: [MODEL_SETTING, ...APP_SETTINGS],
       },
@@ -27,6 +32,7 @@ describe('Player View', () => {
 
   it('show qr code only', () => {
     cy.setUpApi({
+      appContext: { permission: PermissionLevel.Read, context: Context.Player },
       database: {
         appSettings: [MODEL_SETTING, ...[APP_SETTINGS[0]]],
       },
@@ -37,6 +43,7 @@ describe('Player View', () => {
 
   it('show model code only', () => {
     cy.setUpApi({
+      appContext: { permission: PermissionLevel.Read, context: Context.Player },
       database: {
         appSettings: [MODEL_SETTING, ...[APP_SETTINGS[1]]],
       },
@@ -45,8 +52,9 @@ describe('Player View', () => {
     cy.get(`#${VIEWER_ID}`).should('be.visible');
   });
 
-  it.only('default: show model and qr code', () => {
+  it('default: show model and qr code', () => {
     cy.setUpApi({
+      appContext: { permission: PermissionLevel.Read, context: Context.Player },
       database: {
         appSettings: [MODEL_SETTING],
       },
