@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-
-import { Modal, Tooltip } from '@material-ui/core';
-import Fab from '@material-ui/core/Fab';
-import { makeStyles } from '@material-ui/core/styles';
-import { Add } from '@material-ui/icons';
+import { Add } from '@mui/icons-material';
+import { Modal, Tooltip } from '@mui/material';
+import Fab from '@mui/material/Fab';
+import { styled } from '@mui/material/styles';
+import { useState } from 'react';
 
 import { useModels, useSettings } from '../../../config/hooks';
 import { SELECT_BUTTON_CY } from '../../../config/selectors';
@@ -12,29 +11,27 @@ import Viewer from '../../common/Viewer';
 import Results from './Results';
 import SearchForm from './SearchForm';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: '75%',
-    height: '75%',
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    outline: 'none',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-  fab: {
-    margin: theme.spacing(1),
-    position: 'absolute',
-    top: '50%',
-    right: '0',
-    transform: 'translate(0, -50%)',
-  },
+const Wrapper = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  width: '75%',
+  height: '75%',
+  backgroundColor: theme.palette.background.paper,
+  boxShadow: theme.shadows[5],
+  outline: 'none',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+}));
+
+const StyledFab = styled(Fab)(({ theme }) => ({
+  margin: theme.spacing(1),
+  position: 'absolute',
+  top: '50%',
+  right: '0',
+  transform: 'translate(0, -50%)',
 }));
 
 const BuilderView = () => {
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -66,20 +63,19 @@ const BuilderView = () => {
         open={open}
         onClose={handleClose}
       >
-        <div className={classes.paper}>
+        <Wrapper>
           <Viewer uid={selected} autoStart={false} height="100%" />
           <Tooltip title="Select Model">
-            <Fab
+            <StyledFab
               data-cy={SELECT_BUTTON_CY}
               aria-label="Select"
-              className={classes.fab}
               onClick={onSelectModel}
               color="primary"
             >
               <Add />
-            </Fab>
+            </StyledFab>
           </Tooltip>
-        </div>
+        </Wrapper>
       </Modal>
       <Settings />
     </>

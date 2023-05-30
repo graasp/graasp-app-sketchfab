@@ -1,5 +1,3 @@
-export const DEFAULT_LANG = 'en';
-
 export const DEFAULT_QUERY = 'education';
 
 export const APP_SETTING_NAMES = {

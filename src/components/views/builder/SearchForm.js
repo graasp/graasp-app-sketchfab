@@ -1,63 +1,61 @@
+import styled from '@emotion/styled';
+import SearchIcon from '@mui/icons-material/Search';
+import { AppBar, InputBase, Toolbar, Typography, alpha } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
-
-import { AppBar, InputBase, Toolbar, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { alpha } from '@material-ui/core/styles/colorManipulator';
-import SearchIcon from '@material-ui/icons/Search';
 
 import { SEARCH_INPUT_CY } from '../../../config/selectors';
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+const StyledTitle = styled(Typography)(({ theme }) => ({
+  flexGrow: 1,
+  display: 'none',
+  [theme.breakpoints.up('sm')]: {
+    display: 'block',
   },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
+}));
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  searchIcon: {
-    width: theme.spacing(7),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
   },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 7),
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: 200,
+      width: '12ch',
       '&:focus': {
-        width: 300,
+        width: '20ch',
       },
     },
   },
 }));
 
 const SearchForm = ({ search, setSearch }) => {
-  const classes = useStyles();
-
   const onKeyUp = (e) => {
     // Clear the timeout if it has already been set.
     // This will prevent the previous task from executing
@@ -73,24 +71,22 @@ const SearchForm = ({ search, setSearch }) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography className={classes.title} variant="h6" noWrap>
+        <StyledTitle variant="h6" noWrap>
           Sketchfab
-        </Typography>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
+        </StyledTitle>
+
+        <Search>
+          <SearchIconWrapper>
             <SearchIcon />
-          </div>
-          <InputBase
+          </SearchIconWrapper>
+          <StyledInputBase
             data-cy={SEARCH_INPUT_CY}
             defaultValue={search}
             placeholder="Search for models…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
             onKeyUp={onKeyUp}
+            inputProps={{ 'aria-label': 'search' }}
           />
-        </div>
+        </Search>
       </Toolbar>
     </AppBar>
   );
