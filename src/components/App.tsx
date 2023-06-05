@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useLocalContext } from '@graasp/apps-query-client';
-import { Context, DEFAULT_LANG } from '@graasp/sdk';
+import { Context, DEFAULT_LANG, PermissionLevel } from '@graasp/sdk';
 
 import i18n from '../config/i18n';
 import BuilderView from './views/builder/BuilderView';
@@ -13,16 +13,23 @@ export const App = () => {
   useEffect(() => {
     // handle a change of language
     const lang = context?.lang ?? DEFAULT_LANG;
-    if (i18n.lang !== lang) {
+    if (i18n.language !== lang) {
       i18n.changeLanguage(lang);
     }
   }, [context]);
 
   const renderContent = () => {
-    switch (context?.context) {
-      case Context.Builder:
-        return <BuilderView />;
-      case Context.Player:
+    switch (context?.permission) {
+      case PermissionLevel.Admin:
+        switch (context?.context) {
+          case Context.Builder:
+            return <BuilderView />;
+          case Context.Player:
+          default:
+            return <PlayerView />;
+        }
+      case PermissionLevel.Write:
+      case PermissionLevel.Read:
       default:
         return <PlayerView />;
     }
