@@ -1,7 +1,9 @@
+import { AppSetting } from '@graasp/sdk';
+
 import { APP_SETTING_NAMES } from '../../src/config/settings';
 import { SKETCHFAB_MODEL_ID } from './model';
 
-export const APP_SETTINGS = [
+export const APP_SETTINGS: Partial<AppSetting>[] = [
   {
     id: 'showModel-id',
     name: APP_SETTING_NAMES.SHOW_MODEL,

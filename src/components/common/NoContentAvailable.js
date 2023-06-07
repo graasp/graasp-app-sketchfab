@@ -1,40 +1,30 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import WarningIcon from '@material-ui/icons/Warning';
+import WarningIcon from '@mui/icons-material/Warning';
+import { Box, styled } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 import { NO_CONTENT_CY } from '../../config/selectors';
 
-const styles = (theme) => ({
-  progress: {
-    margin: theme.spacing(2),
-  },
-  noContentAvailable: {
-    display: 'flex',
-    position: 'fixed',
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+const Wrapper = styled(Box)({
+  display: 'flex',
+  position: 'fixed',
+  width: '100%',
+  height: '100%',
+  justifyContent: 'center',
+  alignItems: 'center',
 });
 
-const NoContentAvailable = (props) => {
-  const { classes } = props;
+const NoContentAvailable = () => {
+  const { t } = useTranslation();
   return (
-    <div className={classes.noContentAvailable} data-cy={NO_CONTENT_CY}>
+    <Wrapper data-cy={NO_CONTENT_CY}>
       <WarningIcon fontSize="large" />
-      <Typography>This app has been configured to show no content.</Typography>
-    </div>
+      <Typography>
+        {t('This app has been configured to show no content.')}
+      </Typography>
+    </Wrapper>
   );
 };
 
-NoContentAvailable.propTypes = {
-  classes: PropTypes.shape({
-    noContentAvailable: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
-export default withStyles(styles)(NoContentAvailable);
+export default NoContentAvailable;

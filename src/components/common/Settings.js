@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Loader } from '@graasp/ui';
 
+import SettingsIcon from '@mui/icons-material/Settings';
 import {
-  Divider,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Fab,
   FormControlLabel,
   FormGroup,
-  Modal,
   Switch,
-  Typography,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import SettingsIcon from '@material-ui/icons/Settings';
+  styled,
+} from '@mui/material';
 
 import { useSettings } from '../../config/hooks';
 import {
@@ -22,29 +22,14 @@ import {
   SHOW_QR_CODE_SWITCH_CY,
 } from '../../config/selectors';
 
-const useStyles = makeStyles((theme) => ({
-  settingsFab: {
-    right: theme.spacing(4),
-    bottom: theme.spacing(4),
-    position: 'fixed',
-  },
-  settingsModal: {
-    position: 'absolute',
-    width: '50%',
-    height: '50%',
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    outline: 'none',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    padding: theme.spacing(2),
-  },
+const StyledFab = styled(Fab)(({ theme }) => ({
+  right: theme.spacing(4),
+  bottom: theme.spacing(4),
+  position: 'fixed',
 }));
 
 const Settings = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const [openModal, setOpenModal] = useState(false);
   const { showQrCode, showModel, saveShowQrCode, saveShowModel, isLoading } =
     useSettings();
@@ -87,34 +72,34 @@ const Settings = () => {
   );
   return (
     <>
-      <Fab
+      <StyledFab
         color="primary"
         aria-label="Settings"
         onClick={handleToggleModal}
-        className={classes.settingsFab}
         data-cy={SETTINGS_BUTTON_CY}
       >
         <SettingsIcon />
-      </Fab>
-      <Modal
+      </StyledFab>
+      <Dialog
         aria-labelledby="Settings Model"
         aria-describedby="Configure your application."
         open={openModal}
         onClose={handleCloseModal}
       >
-        <div className={classes.settingsModal}>
-          <Typography align="center" variant="h4">
-            {t('Settings')}
-          </Typography>
-          <Divider />
+        <DialogTitle>
+          {/* <Typography align="center" variant="h4"> */}
+          {t('Settings')}
+          {/* </Typography> */}
+        </DialogTitle>
+        <DialogContent>
           <FormGroup row>
             <FormControlLabel control={qrSwitch} label={t('Show QR Code')} />
           </FormGroup>
           <FormGroup row>
             <FormControlLabel control={modelSwitch} label={t('Show Model')} />
           </FormGroup>
-        </div>
-      </Modal>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

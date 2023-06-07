@@ -1,48 +1,38 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { CardActionArea, Tooltip } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { Add } from '@material-ui/icons';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Add } from '@mui/icons-material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { CardActionArea, Tooltip } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 
 import { RESULT_CARD_CY } from '../../../config/selectors';
 
-const useStyles = makeStyles((theme) => ({
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  media: {
-    height: 140,
-  },
-  ellipsis: {
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-  },
-  isSelected: {
-    background: theme.palette.primary.main,
-    color: theme.palette.common.white,
-  },
+const StyledCard = styled(Card)(({ theme, isSelected }) =>
+  isSelected
+    ? {
+        background: theme.palette.primary.main,
+        color: theme.palette.common.white,
+      }
+    : {}
+);
+
+const ExpandButton = styled(IconButton)(({ theme, expanded }) => ({
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+  transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
 }));
 
 function Result({ name, uid, description, image, preview, isSelected }) {
-  const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -50,19 +40,12 @@ function Result({ name, uid, description, image, preview, isSelected }) {
   };
 
   return (
-    <Card
-      className={clsx(classes.card, { [classes.isSelected]: isSelected })}
-      data-cy={RESULT_CARD_CY}
-    >
+    <StyledCard data-cy={RESULT_CARD_CY} isSelected={isSelected}>
       <Tooltip title={name}>
         <CardActionArea onClick={() => preview(uid)}>
-          <CardMedia className={classes.media} image={image} title={name} />
+          <CardMedia sx={{ height: 140 }} image={image} title={name} />
           <CardContent>
-            <Typography
-              variant="h6"
-              component="h2"
-              className={classes.ellipsis}
-            >
+            <Typography variant="h6" component="h2" noWrap>
               {name}
             </Typography>
           </CardContent>
@@ -74,16 +57,14 @@ function Result({ name, uid, description, image, preview, isSelected }) {
             <Add />
           </IconButton>
         </Tooltip>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
+        <ExpandButton
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
+          expanded
         >
           <ExpandMoreIcon />
-        </IconButton>
+        </ExpandButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
@@ -92,7 +73,7 @@ function Result({ name, uid, description, image, preview, isSelected }) {
           </Typography>
         </CardContent>
       </Collapse>
-    </Card>
+    </StyledCard>
   );
 }
 

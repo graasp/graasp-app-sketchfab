@@ -1,8 +1,9 @@
-import { List } from 'immutable';
 import qs from 'qs';
 import { useEffect, useState } from 'react';
 
-import { MUTATION_KEYS, hooks, useMutation, useQuery } from './queryClient';
+import { convertJs } from '@graasp/sdk';
+
+import { hooks, mutations, useQuery } from './queryClient';
 import {
   APP_SETTING_NAMES,
   DEFAULT_QUERY,
@@ -19,12 +20,8 @@ export const useSettings = () => {
 
   const { data: settings, isLoading } = hooks.useAppSettings();
 
-  const { mutate: postAppSetting } = useMutation(
-    MUTATION_KEYS.POST_APP_SETTING
-  );
-  const { mutate: patchAppSetting } = useMutation(
-    MUTATION_KEYS.PATCH_APP_SETTING
-  );
+  const { mutate: postAppSetting } = mutations.usePostAppSetting();
+  const { mutate: patchAppSetting } = mutations.usePatchAppSetting();
 
   const saveModel = (appSetting) => {
     if (!modelSetting) {
@@ -81,7 +78,6 @@ export const useSettings = () => {
         setModelSetting(newModel);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings]);
 
   return {
@@ -115,6 +111,6 @@ export const useModels = (queryParams = {}) =>
       );
       // cannot use axios https://github.com/miragejs/miragejs/issues/1006
       const response = await fetch(`${MODELS_ENDPOINT}${queryString}`);
-      return List((await response.json()).results);
+      return convertJs((await response.json()).results);
     },
   });
