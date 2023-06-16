@@ -3663,18 +3663,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:4.29.13":
-  version: 4.29.13
-  resolution: "@tanstack/react-query-devtools@npm:4.29.13"
+"@tanstack/react-query-devtools@npm:4.29.14":
+  version: 4.29.14
+  resolution: "@tanstack/react-query-devtools@npm:4.29.14"
   dependencies:
     "@tanstack/match-sorter-utils": ^8.7.0
     superjson: ^1.10.0
     use-sync-external-store: ^1.2.0
   peerDependencies:
-    "@tanstack/react-query": 4.29.13
+    "@tanstack/react-query": 4.29.14
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 13ab17fdbefb08b45eec8e1f1753e6458423cbfa134665597ab28dd63b6286987d91d2a4dee82e5aac72a7ef087716e4e8dbbe1969d98cf8788dcfb117ea4c46
+  checksum: db28afbbd3f8fb0e5082c2a8f637da670e9cb7f203bed5a39461899d71b0e11fd8c0c6943d3c9b548c6b0f8f41e584d7742cecf5eef6ae03e7f60a451d188647
   languageName: node
   linkType: hard
 
@@ -9504,7 +9504,7 @@ __metadata:
     "@mui/material": 5.13.3
     "@sketchfab/viewer-api": 1.12.1
     "@tanstack/react-query": 4.29.13
-    "@tanstack/react-query-devtools": 4.29.13
+    "@tanstack/react-query-devtools": 4.29.14
     "@trivago/prettier-plugin-sort-imports": 4.1.1
     "@types/react": 18.2.12
     "@types/react-dom": 18.2.5
