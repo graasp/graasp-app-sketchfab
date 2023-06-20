@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/graasp/graasp-app-sketchfab/compare/v0.6.1...v1.0.0) (2023-06-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* apply changes to use typeorm ([#33](https://github.com/graasp/graasp-app-sketchfab/issues/33))
+
+### Features
+
+* apply changes to use typeorm ([#33](https://github.com/graasp/graasp-app-sketchfab/issues/33)) ([aa1e40e](https://github.com/graasp/graasp-app-sketchfab/commit/aa1e40e65b5334fffbdcb2043dac6f57c5ee0649))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @emotion/react to v11.11.1 ([b91103e](https://github.com/graasp/graasp-app-sketchfab/commit/b91103ec94c9858991b28363188d94b83c159257))
+* **deps:** update dependency @tanstack/react-query to v4.29.13 ([524768b](https://github.com/graasp/graasp-app-sketchfab/commit/524768b5daaf8b2401e72719f5c3e29db49738d1))
+* **deps:** update dependency @tanstack/react-query to v4.29.14 ([fd666de](https://github.com/graasp/graasp-app-sketchfab/commit/fd666de8e5b10b6c3f6ba097b695afb9ca6bc6aa))
+* **deps:** update dependency i18next to v22.5.1 ([61a9863](https://github.com/graasp/graasp-app-sketchfab/commit/61a9863c74c783d8c4f7cb95f21ce340a92e3c76))
+* **deps:** update dependency i18next to v23 ([#55](https://github.com/graasp/graasp-app-sketchfab/issues/55)) ([f3b5120](https://github.com/graasp/graasp-app-sketchfab/commit/f3b51206ef67a163455a28944440fbf08989c7f7))
+* **deps:** update dependency react-i18next to v13 ([#56](https://github.com/graasp/graasp-app-sketchfab/issues/56)) ([6c4bfdd](https://github.com/graasp/graasp-app-sketchfab/commit/6c4bfdd76f1e15a7a3fe1879b293d0471e274c86))
+* **deps:** update dependency react-router-dom to v6.13.0 ([#43](https://github.com/graasp/graasp-app-sketchfab/issues/43)) ([6c3be5f](https://github.com/graasp/graasp-app-sketchfab/commit/6c3be5f155819bfe68ebdc670423e6340e83aa41))
+* **deps:** update mui (non-major) ([c8dbef9](https://github.com/graasp/graasp-app-sketchfab/commit/c8dbef9b7c8ec1cd7e26efc91a681e2d20f8f405))
+* remove update-staging workflow and update deps ([#46](https://github.com/graasp/graasp-app-sketchfab/issues/46)) ([8bfee21](https://github.com/graasp/graasp-app-sketchfab/commit/8bfee217c61babf4ff43eab6382521bd132f8ba6))
+* update package.json ([6e0b0ec](https://github.com/graasp/graasp-app-sketchfab/commit/6e0b0ecbc720bd4ae813c53d40fe8556dc74834d))
+* update workflow sha ref ([c14277b](https://github.com/graasp/graasp-app-sketchfab/commit/c14277bc680d3e8e694ee80689e4334b260aab61))
+
 ### [0.6.1](https://github.com/graasp/graasp-app-sketchfab/compare/v0.6.0...v0.6.1) (2022-08-19)
 
 ## [0.6.0](https://github.com/graasp/graasp-app-sketchfab/compare/v0.5.1...v0.6.0) (2022-08-19)
