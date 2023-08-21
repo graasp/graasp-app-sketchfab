@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.1](https://github.com/graasp/graasp-app-sketchfab/compare/v1.0.0...v1.0.1) (2023-08-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/sdk to v1.1.1 ([#68](https://github.com/graasp/graasp-app-sketchfab/issues/68)) ([43d7fe5](https://github.com/graasp/graasp-app-sketchfab/commit/43d7fe5dc66685f13bad2c31aa31bf383bec3b8d))
+* **deps:** update dependency @graasp/ui to v3.0.0 ([#66](https://github.com/graasp/graasp-app-sketchfab/issues/66)) ([949e74e](https://github.com/graasp/graasp-app-sketchfab/commit/949e74e751d6f884385f32ace8ad6a9e3204625e))
+
 ## [1.0.0](https://github.com/graasp/graasp-app-sketchfab/compare/v0.6.1...v1.0.0) (2023-06-20)
 
 
