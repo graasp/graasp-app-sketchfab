@@ -1,7 +1,5 @@
 {
-  "translations": {
-    "Show QR Code":"Show QR Code",
-    "Show Model":"Show Model",
-    "Settings":"Settings"
-  }
+  "Show QR Code": "Show QR Code",
+  "Show Model": "Show Model",
+  "Settings": "Settings"
 }

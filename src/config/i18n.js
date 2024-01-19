@@ -12,8 +12,6 @@ i18n.use(initReactI18next).init({
   fallbackLng: 'en',
   // debug only when not in production
   debug: process.env.NODE_ENV !== 'production',
-  ns: ['translations'],
-  defaultNS: 'translations',
   keySeparator: false,
   interpolation: {
     escapeValue: false,
