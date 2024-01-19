@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { AppBar, InputBase, Toolbar, Typography, alpha } from '@mui/material';
@@ -57,6 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchForm = ({ search, setSearch }) => {
+  const { t } = useTranslation();
   const onKeyUp = (e) => {
     // Clear the timeout if it has already been set.
     // This will prevent the previous task from executing
@@ -83,7 +85,7 @@ const SearchForm = ({ search, setSearch }) => {
           <StyledInputBase
             data-cy={SEARCH_INPUT_CY}
             defaultValue={search}
-            placeholder="Search for models…"
+            placeholder={t('Search for models…')}
             onKeyUp={onKeyUp}
             inputProps={{ 'aria-label': 'search' }}
           />
