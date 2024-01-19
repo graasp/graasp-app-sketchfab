@@ -1,3 +1,5 @@
+import { Context, PermissionLevel } from '@graasp/sdk';
+
 import {
   RESULT_CARD_CY,
   SEARCH_INPUT_CY,
@@ -7,7 +9,6 @@ import {
   SHOW_QR_CODE_SWITCH_CY,
   dataCyWrapper,
 } from '../../src/config/selectors';
-import { CONTEXTS, PERMISSION_LEVELS } from '../../src/config/settings';
 import { APP_SETTINGS } from '../fixtures/appSettings';
 
 describe('Builder View', () => {
@@ -17,8 +18,8 @@ describe('Builder View', () => {
         appSettings: APP_SETTINGS,
       },
       appContext: {
-        permission: PERMISSION_LEVELS.ADMIN,
-        context: CONTEXTS.BUILDER,
+        permission: PermissionLevel.Admin,
+        context: Context.Builder,
       },
     });
     cy.visit('/');
