@@ -9,7 +9,6 @@ import './index.css';
 
 // setup mocked api for cypress or standalone app
 if (ENABLE_MOCK_API) {
-  console.log(window.appContext, MOCK_CONTEXT);
   mockApi(
     {
       externalUrls: [MODELS_ENDPOINT],
