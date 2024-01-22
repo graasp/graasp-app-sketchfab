@@ -1,8 +1,6 @@
 import qs from 'qs';
 import { useEffect, useState } from 'react';
 
-import { convertJs } from '@graasp/sdk';
-
 import { hooks, mutations, useQuery } from './queryClient';
 import {
   APP_SETTING_NAMES,
@@ -111,6 +109,6 @@ export const useModels = (queryParams = {}) =>
       );
       // cannot use axios https://github.com/miragejs/miragejs/issues/1006
       const response = await fetch(`${MODELS_ENDPOINT}${queryString}`);
-      return convertJs((await response.json()).results);
+      return (await response.json()).results;
     },
   });

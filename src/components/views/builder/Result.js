@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Add } from '@mui/icons-material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -33,6 +34,7 @@ const ExpandButton = styled(IconButton)(({ theme, expanded }) => ({
 }));
 
 function Result({ name, uid, description, image, preview, isSelected }) {
+  const { t } = useTranslation();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -52,7 +54,7 @@ function Result({ name, uid, description, image, preview, isSelected }) {
         </CardActionArea>
       </Tooltip>
       <CardActions disableSpacing>
-        <Tooltip title="Preview">
+        <Tooltip title={t('Preview')}>
           <IconButton aria-label="select" onClick={() => preview(uid)}>
             <Add />
           </IconButton>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Add } from '@mui/icons-material';
 import { Modal, Tooltip } from '@mui/material';
@@ -33,6 +34,7 @@ const StyledFab = styled(Fab)(({ theme }) => ({
 }));
 
 const BuilderView = () => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -66,7 +68,7 @@ const BuilderView = () => {
       >
         <Wrapper>
           <Viewer uid={selected} autoStart={false} height="100%" />
-          <Tooltip title="Select Model">
+          <Tooltip title={t('Select Model')}>
             <StyledFab
               data-cy={SELECT_BUTTON_CY}
               aria-label="Select"

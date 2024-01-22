@@ -15,7 +15,7 @@ jobs:
           package-name: graasp-app-sketchfab
           changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"docs","section":"Documentation","hidden":false},{"type":"test","section":"Tests","hidden":false}]'
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: main
 
@@ -44,7 +44,7 @@ jobs:
           repository: graasp/graasp-deploy
           event-type: update-staging-version
           client-payload: ${{steps.set-tag.outputs.json}}
-          
+
       - name: Auto Tag
         uses: graasp/graasp-deploy/.github/actions/auto-tag-after-release@v1
         with:

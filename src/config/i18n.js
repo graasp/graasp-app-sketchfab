@@ -5,15 +5,9 @@ import en from '../langs/en';
 import fr from '../langs/fr';
 
 i18n.use(initReactI18next).init({
-  resources: {
-    en,
-    fr,
-  },
   fallbackLng: 'en',
   // debug only when not in production
   debug: process.env.NODE_ENV !== 'production',
-  ns: ['translations'],
-  defaultNS: 'translations',
   keySeparator: false,
   interpolation: {
     escapeValue: false,
@@ -21,5 +15,8 @@ i18n.use(initReactI18next).init({
   },
   useSuspense: true,
 });
+
+i18n.addResourceBundle('en', 'translation', en);
+i18n.addResourceBundle('fr', 'translation', fr);
 
 export default i18n;
