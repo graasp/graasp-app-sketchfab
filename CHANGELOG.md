@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/graasp/graasp-app-sketchfab/compare/v1.0.1...v1.1.0) (2024-01-22)
+
+
+### Features
+
+* upgrade dependencies, remove immutable, set license, gitlocalize ([#83](https://github.com/graasp/graasp-app-sketchfab/issues/83)) ([8cc9d36](https://github.com/graasp/graasp-app-sketchfab/commit/8cc9d36edee2c19eb7d8e9bb728ff4d3cb4142f7))
+
 ## [1.0.1](https://github.com/graasp/graasp-app-sketchfab/compare/v1.0.0...v1.0.1) (2023-08-14)
 
 
