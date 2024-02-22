@@ -11,6 +11,7 @@ class Viewer extends Component {
     uid: PropTypes.string,
     autoStart: PropTypes.bool,
     height: PropTypes.string,
+    saveAction: PropTypes.func,
   };
 
   static defaultProps = {
@@ -20,7 +21,7 @@ class Viewer extends Component {
   };
 
   componentDidMount() {
-    const { uid, autoStart } = this.props;
+    const { uid, autoStart, saveAction } = this.props;
     const iframe = document.getElementById(VIEWER_ID);
     const client = new Sketchfab(SKETCHFAB_VERSION, iframe);
 
@@ -31,6 +32,7 @@ class Viewer extends Component {
         }
         api.addEventListener('viewerready', () => {
           console.log('viewer is ready');
+          saveAction?.();
         });
         api.addEventListener('click', (obj) => console.log(obj));
         api.addEventListener('camerastart', () =>

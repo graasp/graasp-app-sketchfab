@@ -9,7 +9,9 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
 import { useSettings } from '../../../config/hooks';
+import { mutations } from '../../../config/queryClient';
 import { QR_CODE_TAB_CY } from '../../../config/selectors';
+import { Triggers } from '../../../config/triggers';
 import ModelNotConfigured from '../../common/ModelNotConfigured';
 import ModelQrCode from '../../common/ModelQrCode';
 import NoContentAvailable from '../../common/NoContentAvailable';
@@ -23,6 +25,7 @@ const PlayerView = () => {
     model,
     isLoading: isSettingsLoading,
   } = useSettings();
+  const { mutate } = mutations.usePostAppAction();
 
   if (isSettingsLoading) {
     return <Loader />;
@@ -50,7 +53,9 @@ const PlayerView = () => {
     }
     return tabs;
   };
-
+  const saveAction = () => {
+    mutate({ type: Triggers.VIEW_MODEL });
+  };
   if (!model) {
     return <ModelNotConfigured />;
   }
@@ -60,7 +65,14 @@ const PlayerView = () => {
 
   const panels = [];
   if (showModel) {
-    panels.push(<Viewer uid={model} autoStart={false} key="model" />);
+    panels.push(
+      <Viewer
+        uid={model}
+        autoStart={false}
+        key="model"
+        saveAction={saveAction}
+      />
+    );
   }
   if (showQrCode) {
     panels.push(<ModelQrCode uid={model} key="qrCode" />);
