@@ -54,7 +54,7 @@ const PlayerView = () => {
     return tabs;
   };
   const saveAction = () => {
-    mutate({ type: Triggers.VIEW_MODEL });
+    mutate({ type: Triggers.VIEW_MODEL, data: {} });
   };
   if (!model) {
     return <ModelNotConfigured />;
