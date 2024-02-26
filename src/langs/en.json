@@ -4,5 +4,10 @@
   "Settings": "Settings",
   "Search for models…": "Search for models…",
   "Preview": "Preview",
-  "Select Model": "Select Model"
+  "Select Model": "Select Model",
+  "Number of actions over time": "Number of actions over time",
+  "Intervals": "Intervals",
+  "week": "Week",
+  "day": "Day",
+  "Month": "Month"
 }
