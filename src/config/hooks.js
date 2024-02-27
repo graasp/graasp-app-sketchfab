@@ -8,6 +8,7 @@ import {
   DEFAULT_SHOW_MODEL,
   DEFAULT_SHOW_QR_CODE,
   MODELS_ENDPOINT,
+  MODEL_ENDPOINT,
 } from './settings';
 
 export const useSettings = () => {
@@ -112,3 +113,14 @@ export const useModels = (queryParams = {}) =>
       return (await response.json()).results;
     },
   });
+
+export const useModel = (uid) => {
+  return useQuery({
+    queryKey: ['model', uid],
+    queryFn: async () => {
+      const response = await fetch(`${MODEL_ENDPOINT}${uid}`);
+      const data = await response.json();
+      return data;
+    },
+  });
+};
