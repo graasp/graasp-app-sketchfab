@@ -2,8 +2,8 @@ import { useTranslation } from 'react-i18next';
 
 import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 
-import { Interval } from '../../types/chart';
-import { intervals } from '../../utils/chart';
+import { Interval } from '../../../types/chart';
+import { intervals } from '../../../utils/chart';
 
 interface Props {
   interval: Interval;
@@ -23,7 +23,7 @@ const SelectInterval = ({ interval, setInterval }: Props): JSX.Element => {
     }
   };
   return (
-    <Grid ml={2} xs={8} item>
+    <Grid ml={2} xs={8} item margin="0 auto">
       <FormControl sx={{ m: 1, width: '100%' }}>
         <InputLabel id="viewLabel">{t('Intervals')}</InputLabel>
         <Select

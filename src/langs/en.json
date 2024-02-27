@@ -9,5 +9,11 @@
   "Intervals": "Intervals",
   "week": "Week",
   "day": "Day",
-  "Month": "Month"
+  "Month": "Month",
+  "AVERAGE_COUNT": "Average count",
+  "Model Views over Time": "Model Views over Time",
+  "Top Members View Model": "Top Members View Model",
+  "Top ten": "Top ten",
+  "Top five": "Top five",
+  "Top 25": "Top 25"
 }
