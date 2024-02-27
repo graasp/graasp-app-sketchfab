@@ -6,19 +6,19 @@ import { Alert, Box, Grid, Skeleton } from '@mui/material';
 import { hooks } from '../../../config/queryClient';
 import { CONTAINER_HEIGHT } from '../../../constants/style';
 import {
-  getTopViewsPerMember,
-  groupByDate,
+  getMembersWithMostViews,
+  groupActionByTimeInterval,
   intervals,
   topMembersRangeOptions,
 } from '../../../utils/chart';
+import MostFrequentUsersChart from './MostFrequentUsersChart';
+import SelectDisplayedUsersLimit from './SelectDisplayedUsersLimit';
 import SelectInterval from './SelectInterval';
-import SelectTopMembersRange from './SelectTopMembersRange';
-import TopMembersChart from './TopMembersChart';
 import ViewsOverTimeChart from './ViewsOverTimeChart';
 
 const AnalyticView = (): JSX.Element => {
   const [interval, setInterval] = useState(intervals[0]);
-  const [selectedMemberLimit, setSelectedMemberLimit] = useState(
+  const [displayedUsersLimit, setDisplayedUsersLimit] = useState(
     topMembersRangeOptions[0]
   );
 
@@ -26,15 +26,17 @@ const AnalyticView = (): JSX.Element => {
   const { data, isLoading } = hooks.useAppActions();
 
   const actionsGroupedByInterval = useMemo(
-    () => groupByDate(data || [], interval.groupBy),
+    () => groupActionByTimeInterval(data || [], interval.groupBy),
     [data, interval.groupBy]
   );
 
-  const topActionsByMembers = useMemo(
-    () => getTopViewsPerMember(data || [], Number(selectedMemberLimit.value)),
-    [data, selectedMemberLimit.value]
+  const topFrequentUsers = useMemo(
+    () =>
+      getMembersWithMostViews(data || [], Number(displayedUsersLimit.value)),
+    [data, displayedUsersLimit.value]
   );
 
+  console.log(data)
   if (data) {
     return (
       <Grid container>
@@ -43,11 +45,11 @@ const AnalyticView = (): JSX.Element => {
           <ViewsOverTimeChart data={actionsGroupedByInterval} />
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-          <SelectTopMembersRange
-            selectedMemberLimit={selectedMemberLimit}
-            setSelectedMemberLimit={setSelectedMemberLimit}
+          <SelectDisplayedUsersLimit
+            displayedUsersLimit={displayedUsersLimit}
+            setDisplayedUsersLimit={setDisplayedUsersLimit}
           />
-          <TopMembersChart data={topActionsByMembers} />
+          <MostFrequentUsersChart data={topFrequentUsers} />
         </Grid>
       </Grid>
     );

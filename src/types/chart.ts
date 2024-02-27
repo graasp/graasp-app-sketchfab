@@ -7,7 +7,7 @@ export type Interval = {
 export type IntervalValue = 'week' | 'day' | 'month';
 export type IntervalGroupBy = 'YYYY-ww' | 'YYYY-MM-DD' | 'YYYY-MM';
 
-export interface MemberLimit {
+export interface UserLimitOption {
   value: string;
   label: string;
 }

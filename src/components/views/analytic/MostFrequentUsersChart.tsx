@@ -20,10 +20,10 @@ interface Props {
   data: ChartRecord[];
 }
 
-const TopMembersChart = ({ data }: Props): JSX.Element => {
+const MostFrequentUsersChart = ({ data }: Props): JSX.Element => {
   const { t } = useTranslation();
   return (
-    <ChartContainer title={t('Top Members View Model')}>
+    <ChartContainer title={t('Top Frequent Users')}>
       <BarChart data={data}>
         <CartesianGrid strokeDasharray="2" />
         <XAxis dataKey="memberName" tick={{ fontSize: 14 }} />
@@ -36,4 +36,4 @@ const TopMembersChart = ({ data }: Props): JSX.Element => {
   );
 };
 
-export default TopMembersChart;
+export default MostFrequentUsersChart;

@@ -20,36 +20,39 @@ export const intervals: Interval[] = [
 export const topMembersRangeOptions = [
   {
     value: '5',
-    label: 'Top five',
+    label: 'Five',
   },
   {
     value: '10',
-    label: 'Top ten',
+    label: 'Ten',
   },
   {
     value: '25',
-    label: 'Top 25',
+    label: '25',
   },
 ];
 
 // Helper function to group by date format
-export const groupByDate = (data: AppAction[], dateFormat: IntervalGroupBy) => {
-  const groupedByActions = groupBy(data, (item) =>
+export const groupActionByTimeInterval = (
+  data: AppAction[],
+  dateFormat: IntervalGroupBy
+) => {
+  const actionsGroupedByDate = groupBy(data, (item) =>
     moment(item.createdAt).format(dateFormat)
   );
-  const groupedArr = Object.keys(groupedByActions);
-  const averageCount = (data.length / groupedArr.length).toFixed(2);
+  const dateIntervals = Object.keys(actionsGroupedByDate);
+  const averageCount = (data.length / dateIntervals.length).toFixed(2);
 
-  return groupedArr.map((key) => ({
+  return dateIntervals.map((key) => ({
     label: key,
-    count: groupedByActions[key].length,
+    count: actionsGroupedByDate[key].length,
     averageCount,
   }));
 };
 
-export const getTopViewsPerMember = (
+export const getMembersWithMostViews = (
   data: AppAction[],
-  memberLimit: number
+  userLimit: number
 ) => {
   const groupedByMemberId = groupBy(data, 'member.id');
 
@@ -58,5 +61,5 @@ export const getTopViewsPerMember = (
     count: groupedByMemberId[key].length,
   }));
 
-  return sortBy(res, ['count']).reverse().slice(0, memberLimit);
+  return sortBy(res, ['count']).reverse().slice(0, userLimit);
 };

@@ -1,19 +1,20 @@
-import { t } from 'i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 
-import { MemberLimit } from '../../../types/chart';
+import { UserLimitOption } from '../../../types/chart';
 import { topMembersRangeOptions } from '../../../utils/chart';
 
 interface Props {
-  selectedMemberLimit: MemberLimit;
-  setSelectedMemberLimit: (val: MemberLimit) => void;
+  displayedUsersLimit: UserLimitOption;
+  setDisplayedUsersLimit: (val: UserLimitOption) => void;
 }
-const SelectTopMembersRange = ({
-  selectedMemberLimit,
-  setSelectedMemberLimit,
+const SelectDisplayedUsersLimit = ({
+  displayedUsersLimit,
+  setDisplayedUsersLimit,
 }: Props): JSX.Element => {
+  const { t } = useTranslation();
   const handleChange = ({
     target: { value },
   }: {
@@ -23,20 +24,20 @@ const SelectTopMembersRange = ({
       (ele) => ele.value === value
     );
     if (memberRange) {
-      setSelectedMemberLimit(memberRange);
+      setDisplayedUsersLimit(memberRange);
     }
   };
   return (
     <Grid ml={2} xs={8} item margin="0 auto">
       <FormControl sx={{ m: 1, width: '100%' }}>
-        <InputLabel id="viewLabel">{t('Top Member Range')}</InputLabel>
+        <InputLabel id="viewLabel">{t('Top Users Limit')}</InputLabel>
         <Select
-          label={t('Top Member Range')}
-          value={selectedMemberLimit.value}
+          label={t('Top Users Limit')}
+          value={displayedUsersLimit.value}
           onChange={handleChange}
           renderValue={() => (
             <span style={{ textTransform: 'capitalize' }}>
-              {t(selectedMemberLimit.label)}
+              {t(displayedUsersLimit.label)}
             </span>
           )}
         >
@@ -55,4 +56,4 @@ const SelectTopMembersRange = ({
   );
 };
 
-export default SelectTopMembersRange;
+export default SelectDisplayedUsersLimit;

@@ -12,9 +12,10 @@
   "Month": "Month",
   "AVERAGE_COUNT": "Average count",
   "Model Views over Time": "Model Views over Time",
-  "Top Members View Model": "Top Members View Model",
-  "Top ten": "Top ten",
-  "Top five": "Top five",
-  "Top 25": "Top 25",
+  "Top Frequent Users": "Top Frequent Users",
+  "Top Users Limit": "Top Users Limit",
+  "Ten": "Ten",
+  "Five": "Five",
+  "5": "25",
   "GET_ITEM_ERROR": "Sorry, There was an error retrieving this model views."
 }
