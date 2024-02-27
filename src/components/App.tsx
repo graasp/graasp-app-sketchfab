@@ -4,6 +4,7 @@ import { useLocalContext } from '@graasp/apps-query-client';
 import { Context, DEFAULT_LANG, PermissionLevel } from '@graasp/sdk';
 
 import i18n from '../config/i18n';
+import AnalyticView from './views/analytic/AnalyticView';
 import BuilderView from './views/builder/BuilderView';
 import PlayerView from './views/player/PlayerView';
 
@@ -24,6 +25,8 @@ export const App = () => {
         switch (context?.context) {
           case Context.Builder:
             return <BuilderView />;
+          case Context.Analytics:
+            return <AnalyticView />;
           case Context.Player:
           default:
             return <PlayerView />;
