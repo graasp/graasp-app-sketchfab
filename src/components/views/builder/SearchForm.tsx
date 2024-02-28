@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
@@ -57,9 +57,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchForm = ({ search, setSearch }) => {
+interface Props {
+  search: string | null;
+  setSearch: (s: string | null) => void;
+}
+const SearchForm = ({ search, setSearch }: Props): JSX.Element => {
   const { t } = useTranslation();
-  const onKeyUp = (e) => {
+  const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     // Clear the timeout if it has already been set.
     // This will prevent the previous task from executing
     // if it has been less than <MILLISECONDS>
@@ -67,7 +71,7 @@ const SearchForm = ({ search, setSearch }) => {
 
     // Make a new timeout set to go off in 1000ms (1 second)
     setTimeout(() => {
-      setSearch(e.target.value);
+      setSearch((e.target as HTMLInputElement).value);
     }, 1000);
   };
 

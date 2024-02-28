@@ -15,7 +15,7 @@ const StyledDiv = styled('div')(() => ({
   alignItems: 'center',
 }));
 
-const ModelNotConfigured = () => {
+const ModelNotConfigured = (): JSX.Element => {
   const { t } = useTranslation();
   return (
     <StyledDiv data-cy={MODEL_NOT_CONFIGURED_CY}>

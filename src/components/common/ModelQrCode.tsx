@@ -12,7 +12,7 @@ const Wrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
-const ModelQrCode = ({ uid }) => (
+const ModelQrCode = ({ uid }: { uid: string }): JSX.Element => (
   <Wrapper data-cy={QR_CODE_CY}>
     <QrCode
       bgColor="#FFFFFF"

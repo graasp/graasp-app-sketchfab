@@ -28,7 +28,7 @@ const StyledFab = styled(Fab)(({ theme }) => ({
   position: 'fixed',
 }));
 
-const Settings = () => {
+const Settings = (): JSX.Element => {
   const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
   const { showQrCode, showModel, saveShowQrCode, saveShowModel, isLoading } =
@@ -38,19 +38,23 @@ const Settings = () => {
     return <Loader />;
   }
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setOpenModal(false);
   };
 
-  const handleToggleModal = () => {
+  const handleToggleModal = (): void => {
     setOpenModal(!openModal);
   };
 
-  const handleToggleShowQrCode = (e) => {
+  const handleToggleShowQrCode = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
     saveShowQrCode(e.target.checked);
   };
 
-  const handleToggleShowModel = (e) => {
+  const handleToggleShowModel = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
     saveShowModel(e.target.checked);
   };
 

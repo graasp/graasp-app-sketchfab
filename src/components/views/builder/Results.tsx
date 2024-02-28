@@ -3,22 +3,21 @@ import { Loader } from '@graasp/ui';
 import { Grid } from '@mui/material';
 
 import Result from './Result';
-
-type Model = {
-  uid: string;
-  name: string;
-  description: string;
-  thumbnails: { images: { size: number; url: string; width: number }[] };
-};
+import { Model } from '../../../types/models';
 
 type Props = {
-  models: Model[];
+  models?: Model[];
   isLoading: boolean;
   preview: (uid: string) => void;
   selectedModel: string;
 };
 
-const Results = ({ models, isLoading, preview, selectedModel }: Props) => {
+const Results = ({
+  models,
+  isLoading,
+  preview,
+  selectedModel,
+}: Props): JSX.Element => {
   if (isLoading) {
     return <Loader />;
   }

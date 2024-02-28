@@ -17,7 +17,7 @@ import ModelQrCode from '../../common/ModelQrCode';
 import NoContentAvailable from '../../common/NoContentAvailable';
 import Viewer from '../../common/Viewer';
 
-const PlayerView = () => {
+const PlayerView = (): JSX.Element => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const {
     showQrCode,
@@ -31,11 +31,11 @@ const PlayerView = () => {
     return <Loader />;
   }
 
-  const handleChange = (event, value) => {
+  const handleChange = (event: React.SyntheticEvent, value: number): void => {
     setActiveTabIndex(value);
   };
 
-  const renderTabs = () => {
+  const renderTabs = (): JSX.Element[] => {
     const tabs = [];
     if (showModel) {
       tabs.push(
@@ -53,7 +53,7 @@ const PlayerView = () => {
     }
     return tabs;
   };
-  const saveAction = () => {
+  const saveAction = (): void => {
     mutate({ type: Triggers.VIEW_MODEL });
   };
   if (!model) {

@@ -14,10 +14,11 @@ const notifier = ({ type, payload }: NotifierPayload): void => {
     // error messages
     case postAppSettingRoutine.FAILURE:
     case patchAppSettingRoutine.FAILURE: {
-      message = i18n.t(
-        payload?.error?.response?.data?.message ??
-          'An unexpected error occured',
-      );
+      if (payload?.error) {
+        message = i18n.t(payload?.error?.message);
+      } else {
+        message = i18n.t('An unexpected error occured');
+      }
       break;
     }
     // success messages

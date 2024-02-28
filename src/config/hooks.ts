@@ -22,11 +22,22 @@ interface SettingsProps {
   saveModel: (val: any) => void;
   isLoading: boolean;
 }
+interface ModelSetting {
+  id: string;
+  data: any;
+  // data: {
+  //   showQrCode: any;
+  //   showModel: any;
+  //   model: any;
+  // };
+}
 export const useSettings = (): SettingsProps => {
   const [modelSetting, setModelSetting] = useState<any>(null);
   const [showQrCodeSetting, setShowQrSetting] = useState<any>(null);
 
-  const [showModelSetting, setShowModelSetting] = useState(null);
+  const [showModelSetting, setShowModelSetting] = useState<null | ModelSetting>(
+    null,
+  );
 
   const { data: settings, isLoading } = hooks.useAppSettings();
 
@@ -88,6 +99,7 @@ export const useSettings = (): SettingsProps => {
         setModelSetting(newModel);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings]);
 
   return {
@@ -106,7 +118,7 @@ export const useSettings = (): SettingsProps => {
 };
 
 export const useModels = (
-  queryParams: { q?: string } = {},
+  queryParams: { q?: string | null } = {},
 ): UseQueryResult<Model[], Error> =>
   useQuery({
     queryKey: ['models', queryParams.q],

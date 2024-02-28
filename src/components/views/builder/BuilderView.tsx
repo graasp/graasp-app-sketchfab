@@ -33,25 +33,25 @@ const StyledFab = styled(Fab)(({ theme }) => ({
   transform: 'translate(0, -50%)',
 }));
 
-const BuilderView = () => {
+const BuilderView = (): JSX.Element => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState(null);
-  const [selected, setSelected] = useState(null);
-  const { data: models } = useModels({ q: search });
+  const [search, setSearch] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>(null);
+  const { data: models, isLoading } = useModels({ q: search });
   const { saveModel, model } = useSettings();
 
-  const handleOpen = (newSelected) => {
+  const handleOpen = (modelUid: string): void => {
     setOpen(true);
-    setSelected(newSelected);
+    setSelected(modelUid);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
     setSelected(null);
   };
 
-  const onSelectModel = async () => {
+  const onSelectModel = (): void => {
     saveModel({ data: { model: selected } });
     handleClose();
   };
@@ -59,7 +59,12 @@ const BuilderView = () => {
   return (
     <>
       <SearchForm search={search} setSearch={setSearch} />
-      <Results models={models} preview={handleOpen} selectedModel={model} />
+      <Results
+        models={models}
+        preview={handleOpen}
+        selectedModel={model}
+        isLoading={isLoading}
+      />
       <Modal
         aria-labelledby="Preview Model"
         aria-describedby="Preview a Sketchfab model to use in your application."
