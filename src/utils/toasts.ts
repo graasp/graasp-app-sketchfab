@@ -5,18 +5,19 @@ import {
   FAILED_TO_FETCH_MESSAGE_RAW,
   UNEXPECTED_ERROR_MESSAGE,
 } from '../constants/messages';
+import { ToastPayload } from '../types/notifier';
 
-const showToast = ({ type, message }) => {
+const showToast = ({ type, message }: ToastPayload): void => {
   toast(message, {
     type,
     toastId: message,
   });
 };
 
-const showErrorToast = (payload) => {
+const showErrorToast = (payload: string | { message: string }): void => {
   let message = UNEXPECTED_ERROR_MESSAGE;
   if (payload instanceof String || typeof payload === 'string') {
-    message = payload;
+    message = payload as string;
   } else if (payload instanceof Object) {
     if (payload.message) {
       ({ message } = payload);

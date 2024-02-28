@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import qs from 'qs';
 import { useEffect, useState } from 'react';
 
+import { UseQueryResult } from '@tanstack/react-query';
 import { hooks, mutations, useQuery } from './queryClient';
 import {
   APP_SETTING_NAMES,
@@ -9,10 +11,20 @@ import {
   DEFAULT_SHOW_QR_CODE,
   MODELS_ENDPOINT,
 } from './settings';
+import { Model } from '../types/models';
 
-export const useSettings = () => {
-  const [modelSetting, setModelSetting] = useState(null);
-  const [showQrCodeSetting, setShowQrSetting] = useState(null);
+interface SettingsProps {
+  showModel: boolean;
+  saveShowModel: (val: boolean) => void;
+  showQrCode: boolean;
+  saveShowQrCode: (val: boolean) => void;
+  model: any;
+  saveModel: (val: any) => void;
+  isLoading: boolean;
+}
+export const useSettings = (): SettingsProps => {
+  const [modelSetting, setModelSetting] = useState<any>(null);
+  const [showQrCodeSetting, setShowQrSetting] = useState<any>(null);
 
   const [showModelSetting, setShowModelSetting] = useState(null);
 
@@ -21,7 +33,7 @@ export const useSettings = () => {
   const { mutate: postAppSetting } = mutations.usePostAppSetting();
   const { mutate: patchAppSetting } = mutations.usePatchAppSetting();
 
-  const saveModel = (appSetting) => {
+  const saveModel = (appSetting: any): void => {
     if (!modelSetting) {
       postAppSetting({ ...appSetting, name: APP_SETTING_NAMES.MODEL });
     } else {
@@ -29,7 +41,7 @@ export const useSettings = () => {
     }
   };
 
-  const saveShowModel = (value) => {
+  const saveShowModel = (value: boolean): void => {
     if (!showModelSetting) {
       postAppSetting({
         data: { showModel: value },
@@ -40,7 +52,7 @@ export const useSettings = () => {
     }
   };
 
-  const saveShowQrCode = (value) => {
+  const saveShowQrCode = (value: boolean): void => {
     if (!showQrCodeSetting) {
       postAppSetting({
         data: { [APP_SETTING_NAMES.SHOW_QR_CODE]: value },
@@ -93,7 +105,9 @@ export const useSettings = () => {
   };
 };
 
-export const useModels = (queryParams = {}) =>
+export const useModels = (
+  queryParams: { q?: string } = {},
+): UseQueryResult<Model[], Error> =>
   useQuery({
     queryKey: ['models', queryParams.q],
     queryFn: async () => {

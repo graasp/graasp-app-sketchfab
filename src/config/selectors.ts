@@ -1,4 +1,5 @@
-export const dataCyWrapper = (selector) => `[data-cy="${selector}"]`;
+export const dataCyWrapper = (selector: string): string =>
+  `[data-cy="${selector}"]`;
 export const RESULT_CARD_CY = `resultCard`;
 export const SEARCH_INPUT_CY = 'searchInput';
 export const SETTINGS_BUTTON_CY = 'settingsButton';

@@ -4,17 +4,19 @@ import { ROUTINES } from '@graasp/apps-query-client';
 
 import i18n from './i18n';
 import { APP_SETTING_NAMES } from './settings';
+import { NotifierPayload } from '../types/notifier';
 
 const { postAppSettingRoutine, patchAppSettingRoutine } = ROUTINES;
 
-const notifier = ({ type, payload }) => {
+const notifier = ({ type, payload }: NotifierPayload): void => {
   let message = null;
   switch (type) {
     // error messages
     case postAppSettingRoutine.FAILURE:
     case patchAppSettingRoutine.FAILURE: {
       message = i18n.t(
-        payload?.error?.response?.data?.message ?? 'An unexpected error occured'
+        payload?.error?.response?.data?.message ??
+          'An unexpected error occured',
       );
       break;
     }

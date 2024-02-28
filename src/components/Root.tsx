@@ -18,7 +18,7 @@ import { MOCK_CONTEXT } from '../data/db';
 import { showErrorToast } from '../utils/toasts';
 import App from './App';
 
-const Root = () => (
+const Root = (): JSX.Element => (
   <ThemeProvider theme={theme}>
     <I18nextProvider i18n={i18nConfig}>
       <QueryClientProvider client={queryClient}>

@@ -7,7 +7,7 @@ import i18n from '../config/i18n';
 import BuilderView from './views/builder/BuilderView';
 import PlayerView from './views/player/PlayerView';
 
-export const App = () => {
+export const App = (): JSX.Element => {
   const context = useLocalContext();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const App = () => {
     }
   }, [context]);
 
-  const renderContent = () => {
+  const renderContent = (): JSX.Element => {
     switch (context?.permission) {
       case PermissionLevel.Admin:
         switch (context?.context) {
