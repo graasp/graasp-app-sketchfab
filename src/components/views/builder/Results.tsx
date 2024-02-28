@@ -27,7 +27,7 @@ const Results = ({ models, isLoading, preview, selectedModel }: Props) => {
     <Grid spacing={2} p={2} container>
       {models?.map(({ uid, name, description, thumbnails }) => {
         const imagesBySize = thumbnails.images.toSorted(
-          (a, b) => a.size - b.size
+          (a, b) => a.size - b.size,
         );
         const image = imagesBySize[imagesBySize.length - 1].url;
         return (

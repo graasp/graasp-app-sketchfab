@@ -18,36 +18,34 @@ import { MOCK_CONTEXT } from '../data/db';
 import { showErrorToast } from '../utils/toasts';
 import App from './App';
 
-const Root = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <I18nextProvider i18n={i18nConfig}>
-        <QueryClientProvider client={queryClient}>
-          <CssBaseline />
-          <WithLocalContext
+const Root = () => (
+  <ThemeProvider theme={theme}>
+    <I18nextProvider i18n={i18nConfig}>
+      <QueryClientProvider client={queryClient}>
+        <CssBaseline />
+        <WithLocalContext
+          LoadingComponent={<Loader />}
+          useGetLocalContext={hooks.useGetLocalContext}
+          useAutoResize={hooks.useAutoResize}
+          onError={() => {
+            showErrorToast('An error occured while fetching the context.');
+          }}
+          defaultValue={window.Cypress ? window.appContext : MOCK_CONTEXT}
+        >
+          <WithTokenContext
             LoadingComponent={<Loader />}
-            useGetLocalContext={hooks.useGetLocalContext}
-            useAutoResize={hooks.useAutoResize}
+            useAuthToken={hooks.useAuthToken}
             onError={() => {
-              showErrorToast('An error occured while fetching the context.');
+              showErrorToast('An error occured while requesting the token.');
             }}
-            defaultValue={window.Cypress ? window.appContext : MOCK_CONTEXT}
           >
-            <WithTokenContext
-              LoadingComponent={<Loader />}
-              useAuthToken={hooks.useAuthToken}
-              onError={() => {
-                showErrorToast('An error occured while requesting the token.');
-              }}
-            >
-              <App />
-            </WithTokenContext>
-          </WithLocalContext>
-          {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
-        </QueryClientProvider>
-        <ToastContainer />
-      </I18nextProvider>
-    </ThemeProvider>
-  );
-};
+            <App />
+          </WithTokenContext>
+        </WithLocalContext>
+        {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
+      </QueryClientProvider>
+      <ToastContainer />
+    </I18nextProvider>
+  </ThemeProvider>
+);
 export default Root;

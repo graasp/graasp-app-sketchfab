@@ -16,7 +16,7 @@ if (ENABLE_MOCK_API) {
       appContext: window.Cypress ? window.appContext : MOCK_CONTEXT,
       database: window.Cypress ? window.database : buildDatabase(),
     },
-    MockSolution.MirageJS
+    MockSolution.MirageJS,
   );
 }
 

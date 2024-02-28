@@ -36,5 +36,5 @@ Cypress.Commands.add(
         ...appContext,
       };
     });
-  }
+  },
 );

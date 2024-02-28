@@ -66,7 +66,7 @@ const SearchForm = ({ search, setSearch }) => {
     clearTimeout(1000);
 
     // Make a new timeout set to go off in 1000ms (1 second)
-    setTimeout(function () {
+    setTimeout(() => {
       setSearch(e.target.value);
     }, 1000);
   };

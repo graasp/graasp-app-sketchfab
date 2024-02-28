@@ -36,7 +36,7 @@ class Viewer extends Component {
         });
         api.addEventListener('click', (obj) => console.log(obj));
         api.addEventListener('camerastart', () =>
-          console.log('camera is moving')
+          console.log('camera is moving'),
         );
       },
       error: () => {

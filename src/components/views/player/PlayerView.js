@@ -39,7 +39,7 @@ const PlayerView = () => {
     const tabs = [];
     if (showModel) {
       tabs.push(
-        <Tab icon={<FontAwesomeIcon icon={faVrCardboard} />} key="model" />
+        <Tab icon={<FontAwesomeIcon icon={faVrCardboard} />} key="model" />,
       );
     }
     if (showQrCode) {
@@ -48,7 +48,7 @@ const PlayerView = () => {
           data-cy={QR_CODE_TAB_CY}
           icon={<FontAwesomeIcon icon={faQrcode} />}
           key="qrCode"
-        />
+        />,
       );
     }
     return tabs;
@@ -71,7 +71,7 @@ const PlayerView = () => {
         autoStart={false}
         key="model"
         saveAction={saveAction}
-      />
+      />,
     );
   }
   if (showQrCode) {

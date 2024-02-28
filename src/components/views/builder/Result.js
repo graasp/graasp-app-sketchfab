@@ -22,7 +22,7 @@ const StyledCard = styled(Card)(({ theme, isSelected }) =>
         background: theme.palette.primary.main,
         color: theme.palette.common.white,
       }
-    : {}
+    : {},
 );
 
 const ExpandButton = styled(IconButton)(({ theme, expanded }) => ({
@@ -33,7 +33,7 @@ const ExpandButton = styled(IconButton)(({ theme, expanded }) => ({
   transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
 }));
 
-function Result({ name, uid, description, image, preview, isSelected }) {
+const Result = ({ name, uid, description, image, preview, isSelected }) => {
   const { t } = useTranslation();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -77,7 +77,7 @@ function Result({ name, uid, description, image, preview, isSelected }) {
       </Collapse>
     </StyledCard>
   );
-}
+};
 
 Result.propTypes = {
   name: PropTypes.string.isRequired,
