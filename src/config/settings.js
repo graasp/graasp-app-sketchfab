@@ -9,7 +9,8 @@ export const APP_SETTING_NAMES = {
 export const ENABLE_MOCK_API =
   process.env.REACT_APP_ENABLE_MOCK_API === 'true' ?? false;
 
-export const MODELS_ENDPOINT = 'https://api.sketchfab.com/v3/search';
+export const MODEL_SEARCH_ENDPOINT = 'https://api.sketchfab.com/v3/search';
+export const MODEL_INFO_ENDPOINT = 'https://api.sketchfab.com/v3/models/';
 
 export const DEFAULT_SHOW_QR_CODE = true;
 export const DEFAULT_SHOW_MODEL = true;

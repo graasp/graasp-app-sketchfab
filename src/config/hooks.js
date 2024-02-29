@@ -7,7 +7,8 @@ import {
   DEFAULT_QUERY,
   DEFAULT_SHOW_MODEL,
   DEFAULT_SHOW_QR_CODE,
-  MODELS_ENDPOINT,
+  MODEL_SEARCH_ENDPOINT,
+  MODEL_INFO_ENDPOINT,
 } from './settings';
 
 export const useSettings = () => {
@@ -93,7 +94,7 @@ export const useSettings = () => {
   };
 };
 
-export const useModels = (queryParams = {}) =>
+export const useModelsSearch = (queryParams = {}) =>
   useQuery({
     queryKey: ['models', queryParams.q],
     queryFn: async () => {
@@ -108,7 +109,18 @@ export const useModels = (queryParams = {}) =>
         }
       );
       // cannot use axios https://github.com/miragejs/miragejs/issues/1006
-      const response = await fetch(`${MODELS_ENDPOINT}${queryString}`);
+      const response = await fetch(`${MODEL_SEARCH_ENDPOINT}${queryString}`);
       return (await response.json()).results;
     },
   });
+
+export const useModelInfo = (uid) => {
+  return useQuery({
+    queryKey: ['model', uid],
+    queryFn: async () => {
+      const response = await fetch(`${MODEL_INFO_ENDPOINT}${uid}`);
+      const data = await response.json();
+      return data;
+    },
+  });
+};
