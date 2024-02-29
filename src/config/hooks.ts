@@ -80,13 +80,13 @@ export const useSettings = (): SettingsProps => {
   useEffect(() => {
     if (settings) {
       const newShowQr = settings.find(
-        ({ name }) => name === APP_SETTING_NAMES.SHOW_QR_CODE,
+        ({ name }: { name: string }) => name === APP_SETTING_NAMES.SHOW_QR_CODE,
       );
       const newShowModel = settings.find(
-        ({ name }) => name === APP_SETTING_NAMES.SHOW_MODEL,
+        ({ name }: { name: string }) => name === APP_SETTING_NAMES.SHOW_MODEL,
       );
       const newModel = settings.find(
-        ({ name }) => name === APP_SETTING_NAMES.MODEL,
+        ({ name }: { name: string }) => name === APP_SETTING_NAMES.MODEL,
       );
 
       if (newShowQr && showQrCodeSetting !== newShowQr) {

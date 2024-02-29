@@ -35,12 +35,14 @@ describe('Builder View', () => {
     cy.get(dataCyWrapper(RESULT_CARD_CY)).should('not.exist');
 
     const search = 'owl';
-    cy.get(dataCyWrapper(SEARCH_INPUT_CY)).clear().type(search);
+    cy.get(dataCyWrapper(SEARCH_INPUT_CY)).clear();
+    cy.get(dataCyWrapper(SEARCH_INPUT_CY)).type(search);
     cy.get(dataCyWrapper(RESULT_CARD_CY)).should('exist');
 
     // select model
     cy.get(dataCyWrapper(RESULT_CARD_CY)).first().click();
     cy.get(dataCyWrapper(SELECT_BUTTON_CY)).click();
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(1000);
     cy.get(dataCyWrapper(RESULT_CARD_CY))
       .first()
@@ -50,15 +52,13 @@ describe('Builder View', () => {
   it('settings', () => {
     cy.get(dataCyWrapper(SETTINGS_BUTTON_CY)).click();
     // show set defined settings
-    cy.get(dataCyWrapper(SHOW_MODEL_SWITCH_CY))
-      .click()
-      .then(($el) => {
-        expect($el.attr('class')).to.include('checked');
-      });
-    cy.get(dataCyWrapper(SHOW_QR_CODE_SWITCH_CY))
-      .click()
-      .then(($el) => {
-        expect($el.attr('class')).to.include('checked');
-      });
+    cy.get(dataCyWrapper(SHOW_MODEL_SWITCH_CY)).click();
+    cy.get(dataCyWrapper(SHOW_MODEL_SWITCH_CY)).should('have.class', 'checked');
+
+    cy.get(dataCyWrapper(SHOW_QR_CODE_SWITCH_CY)).click();
+    cy.get(dataCyWrapper(SHOW_QR_CODE_SWITCH_CY)).should(
+      'have.class',
+      'checked',
+    );
   });
 });

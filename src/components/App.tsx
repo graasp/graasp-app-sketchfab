@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useLocalContext } from '@graasp/apps-query-client';
-import { Context, DEFAULT_LANG, PermissionLevel } from '@graasp/sdk';
+import { Context, PermissionLevel } from '@graasp/sdk';
 
 import i18n from '../config/i18n';
 import BuilderView from './views/builder/BuilderView';
@@ -12,7 +12,7 @@ export const App = (): JSX.Element => {
 
   useEffect(() => {
     // handle a change of language
-    const lang = context?.lang ?? DEFAULT_LANG;
+    const lang = context?.lang ?? 'en';
     if (i18n.language !== lang) {
       i18n.changeLanguage(lang);
     }

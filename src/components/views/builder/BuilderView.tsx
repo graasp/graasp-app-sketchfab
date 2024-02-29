@@ -72,7 +72,9 @@ const BuilderView = (): JSX.Element => {
         onClose={handleClose}
       >
         <Wrapper>
-          <Viewer uid={selected} autoStart={false} height="100%" />
+          {selected && (
+            <Viewer uid={selected} autoStart={false} height="100%" />
+          )}
           <Tooltip title={t('Select Model')}>
             <StyledFab
               data-cy={SELECT_BUTTON_CY}

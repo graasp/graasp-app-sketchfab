@@ -9,7 +9,7 @@ import { SKETCHFAB_VERSION } from '../../config/settings';
 interface Props {
   uid: string;
   autoStart?: boolean;
-  saveAction: () => void;
+  saveAction?: () => void;
   height?: string;
 }
 const Viewer = ({
@@ -23,6 +23,7 @@ const Viewer = ({
     const client = new Sketchfab(SKETCHFAB_VERSION, iframe);
 
     client.init(uid, {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       success: (api: any) => {
         if (autoStart) {
           api.start();
@@ -50,10 +51,7 @@ const Viewer = ({
       width="100%"
       id={VIEWER_ID}
       allow="autoplay; fullscreen; vr"
-      // allowvr
-      // allowfullscreen
-      // mozallowfullscreen
-      // webkitallowfullscreen
+      allowFullScreen
     />
   );
 };

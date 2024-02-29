@@ -56,6 +56,7 @@ const mockItem: AppItemType = {
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   type: ItemType.APP,
+  lang: 'en',
 };
 
 export const buildDatabase = (members?: CompleteMember[]): Database => ({
