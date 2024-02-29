@@ -5,8 +5,8 @@ import { MockSolution, mockApi } from '@graasp/apps-query-client';
 import Root from './components/Root';
 import {
   ENABLE_MOCK_API,
-  MODELS_ENDPOINT,
-  MODEL_MOCK_ENDPOINT,
+  MODEL_SEARCH_ENDPOINT,
+  MODEL_INFO_ENDPOINT,
 } from './config/settings';
 import { MOCK_CONTEXT, buildDatabase } from './data/db';
 import './index.css';
@@ -15,7 +15,7 @@ import './index.css';
 if (ENABLE_MOCK_API) {
   mockApi(
     {
-      externalUrls: [MODELS_ENDPOINT, MODEL_MOCK_ENDPOINT],
+      externalUrls: [MODEL_SEARCH_ENDPOINT, `${MODEL_INFO_ENDPOINT}*`],
       dbName: window.Cypress ? 'graasp-app-cypress' : undefined,
       appContext: window.Cypress ? window.appContext : MOCK_CONTEXT,
       database: window.Cypress ? window.database : buildDatabase(),
