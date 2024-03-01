@@ -9,7 +9,7 @@ type Props = {
   models?: Model[];
   isLoading: boolean;
   preview: (uid: string) => void;
-  selectedModel: string;
+  selectedModel?: string;
 };
 
 const Results = ({

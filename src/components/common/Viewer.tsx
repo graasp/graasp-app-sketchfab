@@ -23,8 +23,7 @@ const Viewer = ({
     const client = new Sketchfab(SKETCHFAB_VERSION, iframe);
 
     client.init(uid, {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      success: (api: any) => {
+      success: (api) => {
         if (autoStart) {
           api.start();
         }
@@ -32,7 +31,7 @@ const Viewer = ({
           console.log('viewer is ready');
           saveAction?.();
         });
-        api.addEventListener('click', (obj: object) => console.log(obj));
+        api.addEventListener('click', (obj) => console.log(obj));
         api.addEventListener('camerastart', () =>
           console.log('camera is moving'),
         );

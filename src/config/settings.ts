@@ -4,7 +4,7 @@ export const APP_SETTING_NAMES = {
   SHOW_QR_CODE: 'showQrCode',
   SHOW_MODEL: 'showModel',
   MODEL: 'model',
-};
+} as const;
 
 export const ENABLE_MOCK_API =
   process.env.REACT_APP_ENABLE_MOCK_API === 'true' ?? false;

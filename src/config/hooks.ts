@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import qs from 'qs';
 import { useEffect, useState } from 'react';
 
@@ -18,22 +17,27 @@ interface SettingsProps {
   saveShowModel: (val: boolean) => void;
   showQrCode: boolean;
   saveShowQrCode: (val: boolean) => void;
-  model: any;
-  saveModel: (val: any) => void;
+  model?: string;
+  saveModel: (val: ModelToSave) => void;
   isLoading: boolean;
+}
+interface ModelToSave {
+  data: { model: string };
 }
 interface ModelSetting {
   id: string;
-  data: any;
-  // data: {
-  //   showQrCode: any;
-  //   showModel: any;
-  //   model: any;
-  // };
+  data: {
+    showQrCode: boolean;
+    showModel: boolean;
+    model: string;
+  };
 }
+
 export const useSettings = (): SettingsProps => {
-  const [modelSetting, setModelSetting] = useState<any>(null);
-  const [showQrCodeSetting, setShowQrSetting] = useState<any>(null);
+  const [modelSetting, setModelSetting] = useState<null | ModelSetting>(null);
+  const [showQrCodeSetting, setShowQrSetting] = useState<null | ModelSetting>(
+    null,
+  );
 
   const [showModelSetting, setShowModelSetting] = useState<null | ModelSetting>(
     null,
@@ -44,7 +48,7 @@ export const useSettings = (): SettingsProps => {
   const { mutate: postAppSetting } = mutations.usePostAppSetting();
   const { mutate: patchAppSetting } = mutations.usePatchAppSetting();
 
-  const saveModel = (appSetting: any): void => {
+  const saveModel = (appSetting: ModelToSave): void => {
     if (!modelSetting) {
       postAppSetting({ ...appSetting, name: APP_SETTING_NAMES.MODEL });
     } else {

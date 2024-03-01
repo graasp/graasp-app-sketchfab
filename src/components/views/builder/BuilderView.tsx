@@ -52,8 +52,10 @@ const BuilderView = (): JSX.Element => {
   };
 
   const onSelectModel = (): void => {
-    saveModel({ data: { model: selected } });
-    handleClose();
+    if (selected) {
+      saveModel({ data: { model: selected } });
+      handleClose();
+    }
   };
 
   return (
