@@ -63,7 +63,7 @@ const Settings = (): JSX.Element => {
       data-cy={SHOW_QR_CODE_SWITCH_CY}
       onChange={handleToggleShowQrCode}
       checked={showQrCode}
-      id="showQrCode"
+      id={SHOW_QR_CODE_SWITCH_CY}
     />
   );
   const modelSwitch = (
@@ -71,7 +71,7 @@ const Settings = (): JSX.Element => {
       data-cy={SHOW_MODEL_SWITCH_CY}
       onChange={handleToggleShowModel}
       checked={showModel}
-      id="showModel"
+      id={SHOW_MODEL_SWITCH_CY}
     />
   );
   return (

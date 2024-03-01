@@ -53,12 +53,9 @@ describe('Builder View', () => {
     cy.get(dataCyWrapper(SETTINGS_BUTTON_CY)).click();
     // show set defined settings
     cy.get(dataCyWrapper(SHOW_MODEL_SWITCH_CY)).click();
-    cy.get(dataCyWrapper(SHOW_MODEL_SWITCH_CY)).should('have.class', 'checked');
+    cy.get(`#${SHOW_MODEL_SWITCH_CY}`).should('be.checked');
 
     cy.get(dataCyWrapper(SHOW_QR_CODE_SWITCH_CY)).click();
-    cy.get(dataCyWrapper(SHOW_QR_CODE_SWITCH_CY)).should(
-      'have.class',
-      'checked',
-    );
+    cy.get(`#${SHOW_QR_CODE_SWITCH_CY}`).should('be.checked');
   });
 });
