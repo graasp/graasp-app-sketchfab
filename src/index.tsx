@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 
 import { MockSolution, mockApi } from '@graasp/apps-query-client';
 
@@ -20,6 +20,6 @@ if (ENABLE_MOCK_API) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const root = createRoot(document.getElementById('root')!);
-root.render(<Root />);
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <Root />,
+);
