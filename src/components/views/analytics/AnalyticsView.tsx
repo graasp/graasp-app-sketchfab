@@ -16,7 +16,7 @@ import SelectDisplayedUsersLimit from './SelectDisplayedUsersLimit';
 import SelectInterval from './SelectInterval';
 import ViewsOverTimeChart from './ViewsOverTimeChart';
 
-const AnalyticView = (): JSX.Element => {
+const AnalyticsView = (): JSX.Element => {
   const [interval, setInterval] = useState(intervals[0]);
   const [displayedUsersLimit, setDisplayedUsersLimit] = useState(
     topMembersRangeOptions[0]
@@ -36,8 +36,7 @@ const AnalyticView = (): JSX.Element => {
     [data, displayedUsersLimit.value]
   );
 
-  console.log(data)
-  if (data) {
+    if (data) {
     return (
       <Grid container>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -72,4 +71,4 @@ const AnalyticView = (): JSX.Element => {
   );
 };
 
-export default AnalyticView;
+export default AnalyticsView;
