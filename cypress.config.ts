@@ -11,7 +11,7 @@ module.exports = defineConfig({
       // with any changed environment variables
       return config;
     },
-    baseUrl: 'http://localhost:3333',
+    baseUrl: 'http://localhost:3017',
   },
   env: {
     VITE_GRAASP_API_HOST: 'http://localhost:3000',
