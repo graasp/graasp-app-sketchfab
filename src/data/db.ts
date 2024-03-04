@@ -8,12 +8,12 @@ import {
   PermissionLevel,
 } from '@graasp/sdk';
 
-import { REACT_APP_API_HOST } from '../config/env';
+import { API_HOST } from '../config/env';
 
 export const MOCK_ITEM_ID = '1234-1234-123456-8123-123456';
 
 export const MOCK_CONTEXT: LocalContext = {
-  apiHost: REACT_APP_API_HOST,
+  apiHost: API_HOST,
   permission: PermissionLevel.Admin,
   context: Context.Builder,
   itemId: MOCK_ITEM_ID,

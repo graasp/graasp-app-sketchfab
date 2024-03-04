@@ -14,25 +14,28 @@ jobs:
         # avoid checksum errors with github packages
         run: YARN_CHECKSUM_BEHAVIOR=update yarn
 
-      - name: cypress run
-        uses: cypress-io/github-action@v5
+      - name: Build App
+        run: yarn build:test
+        shell: bash
         env:
-          REACT_APP_API_HOST: http://localhost:3000
-          REACT_APP_GRAASP_DOMAIN: localhost
-          REACT_APP_GRAASP_APP_ID: id-1234567890
-          REACT_APP_GRAASP_APP_KEY: key-1234567890
-          REACT_APP_ENABLE_MOCK_API: true
-          NODE_ENV: test
-          PORT: 3333
+          VITE_PORT: 3333
+          VITE_GRAASP_API_HOST: http://localhost:3636
+          VITE_GRAASP_APP_KEY: id-1234567890
+          VITE_ENABLE_MOCK_API: true
+          VITE_VERSION: cypress-tests
+
+      - name: cypress run
+        uses: cypress-io/github-action@v6
+        env:
+          VITE_GRAASP_APP_KEY: id-1234567890
+          VITE_ENABLE_MOCK_API: true
+          VITE_GRAASP_API_HOST: http://localhost:3636
         with:
           install: false
-          config: baseUrl=http://localhost:3333
-          start: yarn start:ci
-          wait-on: 'http://localhost:3333'
-          wait-on-timeout: 180
+          start: yarn preview:test
           browser: chrome
-          headless: true
           quiet: true
+          # point to new cypress@10 config file
           config-file: cypress.config.ts
 
       # after the test run completes
