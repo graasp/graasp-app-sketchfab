@@ -54,11 +54,13 @@
     "type-check": "tsc --noEmit && tsc --noEmit -p cypress/tsconfig.json",
     "prettier:check": "prettier --check '{src,cypress}/**/*.{js,ts,tsx}'",
     "prettier:write": "prettier --write '{src,cypress}/**/*.{js,ts,tsx}'",
-    "pre-commit": "yarn prettier:check && yarn lint",
     "cypress:open": "env-cmd -f ./.env.test cypress open",
     "preview:test": "yarn vite preview --mode test",
     "test": "yarn build:test && concurrently -k -s first \"yarn preview:test\" \"yarn cypress:run\"",
-    "cypress:run": "env-cmd -f ./.env.test cypress run --browser chrome"
+    "cypress:run": "env-cmd -f ./.env.test cypress run --browser chrome",
+    "pre-commit": "yarn prettier:check && yarn lint && yarn type-check",
+    "pre-push": "yarn lint && yarn build",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.22.7",
