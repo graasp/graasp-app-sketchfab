@@ -24,7 +24,7 @@ export const App = () => {
       case PermissionLevel.Admin:
         switch (context?.context) {
           case Context.Builder:
-            return <BuilderView />;
+            return <AnalyticsView />;
           case Context.Analytics:
             return <AnalyticsView />;
           case Context.Player:

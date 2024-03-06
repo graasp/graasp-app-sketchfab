@@ -10,20 +10,12 @@ interface Props {
   children: JSX.Element;
   title: string;
 }
-
 const ChartContainer = ({ children, title }: Props): JSX.Element => {
   return (
     <>
       <ChartTitle title={title} />
-      <Box
-        sx={{
-          marginTop: 3,
-          marginBottom: 2,
-          marginLeft: 2,
-          marginRight: 2,
-        }}
-      >
-        <ResponsiveContainer width="95%" height={CONTAINER_HEIGHT}>
+      <Box width="100%" p={2}>
+        <ResponsiveContainer width="100%" height={CONTAINER_HEIGHT}>
           {children}
         </ResponsiveContainer>
       </Box>

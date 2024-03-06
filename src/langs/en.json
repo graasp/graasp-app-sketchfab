@@ -9,13 +9,11 @@
   "Intervals": "Intervals",
   "week": "Week",
   "day": "Day",
-  "Month": "Month",
+  "month": "Month",
   "AVERAGE_COUNT": "Average count",
   "Model Views over Time": "Model Views over Time",
   "Top Frequent Users": "Top Frequent Users",
   "Top Users Limit": "Top Users Limit",
-  "Ten": "Ten",
-  "Five": "Five",
-  "5": "25",
-  "GET_ITEM_ERROR": "Sorry, There was an error retrieving this model views."
+  "GET_ITEM_ERROR": "Sorry, There was an error retrieving this model views.",
+  "all": "all"
 }

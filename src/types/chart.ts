@@ -1,13 +1,12 @@
 export type Interval = {
-  id: string;
-  labelKey: string;
+  label: string;
   value: IntervalValue;
   groupBy: IntervalGroupBy;
 };
 export type IntervalValue = 'week' | 'day' | 'month';
-export type IntervalGroupBy = 'YYYY-ww' | 'YYYY-MM-DD' | 'YYYY-MM';
+export type IntervalGroupBy = 'yyyy-ww' | 'yyyy-MM-dd' | 'yyyy-MM';
 
 export interface UserLimitOption {
   value: string;
-  label: string;
+  label: number;
 }

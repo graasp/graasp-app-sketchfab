@@ -1,36 +1,10 @@
+import { format } from 'date-fns';
 import groupBy from 'lodash.groupby';
 import sortBy from 'lodash.sortby';
-import moment from 'moment';
 
 import { AppAction } from '@graasp/sdk';
 
-import { Interval, IntervalGroupBy } from '../types/chart';
-
-export const intervals: Interval[] = [
-  { id: 'day', labelKey: 'day', value: 'day', groupBy: 'YYYY-MM-DD' },
-  {
-    id: 'week',
-    labelKey: 'week',
-    value: 'week',
-    groupBy: 'YYYY-ww',
-  },
-  { id: 'month', labelKey: 'month', value: 'month', groupBy: 'YYYY-MM' },
-];
-
-export const topMembersRangeOptions = [
-  {
-    value: '5',
-    label: 'Five',
-  },
-  {
-    value: '10',
-    label: 'Ten',
-  },
-  {
-    value: '25',
-    label: '25',
-  },
-];
+import { IntervalGroupBy } from '../types/chart';
 
 // Helper function to group by date format
 export const groupActionByTimeInterval = (
@@ -38,7 +12,7 @@ export const groupActionByTimeInterval = (
   dateFormat: IntervalGroupBy
 ) => {
   const actionsGroupedByDate = groupBy(data, (item) =>
-    moment(item.createdAt).format(dateFormat)
+    format(item.createdAt, dateFormat)
   );
   const dateIntervals = Object.keys(actionsGroupedByDate);
   const averageCount = (data.length / dateIntervals.length).toFixed(2);
@@ -52,7 +26,7 @@ export const groupActionByTimeInterval = (
 
 export const getMembersWithMostViews = (
   data: AppAction[],
-  userLimit: number
+  userLimit: number | 'all'
 ) => {
   const groupedByMemberId = groupBy(data, 'member.id');
 
@@ -61,5 +35,8 @@ export const getMembersWithMostViews = (
     count: groupedByMemberId[key].length,
   }));
 
+  if (userLimit === 'all') {
+    return sortBy(res, ['count']).reverse();
+  }
   return sortBy(res, ['count']).reverse().slice(0, userLimit);
 };

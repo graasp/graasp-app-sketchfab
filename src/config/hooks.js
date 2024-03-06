@@ -7,8 +7,8 @@ import {
   DEFAULT_QUERY,
   DEFAULT_SHOW_MODEL,
   DEFAULT_SHOW_QR_CODE,
-  MODEL_SEARCH_ENDPOINT,
   MODEL_INFO_ENDPOINT,
+  MODEL_SEARCH_ENDPOINT,
 } from './settings';
 
 export const useSettings = () => {

@@ -5,8 +5,8 @@ import { MockSolution, mockApi } from '@graasp/apps-query-client';
 import Root from './components/Root';
 import {
   ENABLE_MOCK_API,
-  MODEL_SEARCH_ENDPOINT,
   MODEL_INFO_ENDPOINT,
+  MODEL_SEARCH_ENDPOINT,
 } from './config/settings';
 import { MOCK_CONTEXT, buildDatabase } from './data/db';
 import './index.css';

@@ -5,24 +5,51 @@ import { Alert, Box, Grid, Skeleton } from '@mui/material';
 
 import { hooks } from '../../../config/queryClient';
 import { CONTAINER_HEIGHT } from '../../../constants/style';
+import { Interval } from '../../../types/chart';
 import {
   getMembersWithMostViews,
   groupActionByTimeInterval,
-  intervals,
-  topMembersRangeOptions,
 } from '../../../utils/chart';
+import Select from '../../common/Select';
 import MostFrequentUsersChart from './MostFrequentUsersChart';
-import SelectDisplayedUsersLimit from './SelectDisplayedUsersLimit';
-import SelectInterval from './SelectInterval';
 import ViewsOverTimeChart from './ViewsOverTimeChart';
 
 const AnalyticsView = (): JSX.Element => {
+  const { t } = useTranslation();
+
+  const topMembersRangeOptions = [
+    {
+      value: '5',
+      label: 5,
+    },
+    {
+      value: '10',
+      label: 10,
+    },
+    {
+      value: '25',
+      label: 25,
+    },
+    {
+      value: 'all',
+      label: t('all'),
+    },
+  ];
+  const intervals: Interval[] = [
+    { label: t('day'), value: 'day', groupBy: 'yyyy-MM-dd' },
+    {
+      label: t('week'),
+      value: 'week',
+      groupBy: 'yyyy-ww',
+    },
+    { label: t('month'), value: 'month', groupBy: 'yyyy-MM' },
+  ];
+
   const [interval, setInterval] = useState(intervals[0]);
   const [displayedUsersLimit, setDisplayedUsersLimit] = useState(
     topMembersRangeOptions[0]
   );
 
-  const { t } = useTranslation();
   const { data, isLoading } = hooks.useAppActions();
 
   const actionsGroupedByInterval = useMemo(
@@ -32,21 +59,58 @@ const AnalyticsView = (): JSX.Element => {
 
   const topFrequentUsers = useMemo(
     () =>
-      getMembersWithMostViews(data || [], Number(displayedUsersLimit.value)),
+      getMembersWithMostViews(
+        data || [],
+        displayedUsersLimit.value === 'all'
+          ? 'all'
+          : Number(displayedUsersLimit.value)
+      ),
     [data, displayedUsersLimit.value]
   );
 
-    if (data) {
+  const handleIntervalChange = ({
+    target: { value },
+  }: {
+    target: { value: string };
+  }) => {
+    const selectedInterval = intervals.find((ele) => ele.value === value);
+    if (selectedInterval) {
+      setInterval(selectedInterval);
+    }
+  };
+
+  const handleUserRangeOnChange = ({
+    target: { value },
+  }: {
+    target: { value: string };
+  }) => {
+    const memberRange = topMembersRangeOptions.find(
+      (ele) => ele.value === value
+    );
+
+    if (memberRange) {
+      setDisplayedUsersLimit(memberRange);
+    }
+  };
+
+  if (data) {
     return (
       <Grid container>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-          <SelectInterval interval={interval} setInterval={setInterval} />
+        <Grid item xs={12} md={6}>
+          <Select
+            selectedOption={interval}
+            options={intervals}
+            onChange={handleIntervalChange}
+            label={t('Intervals')}
+          />
           <ViewsOverTimeChart data={actionsGroupedByInterval} />
         </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-          <SelectDisplayedUsersLimit
-            displayedUsersLimit={displayedUsersLimit}
-            setDisplayedUsersLimit={setDisplayedUsersLimit}
+        <Grid item xs={12} md={6}>
+          <Select
+            selectedOption={displayedUsersLimit}
+            options={topMembersRangeOptions}
+            onChange={handleUserRangeOnChange}
+            label={t('Top Users Limit')}
           />
           <MostFrequentUsersChart data={topFrequentUsers} />
         </Grid>
