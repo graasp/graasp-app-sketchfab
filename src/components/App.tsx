@@ -20,7 +20,6 @@ export const App = () => {
   }, [context]);
 
   const renderContent = () => {
-    console.log(context?.permission, context?.context);
     switch (context?.permission) {
       case PermissionLevel.Admin:
         switch (context?.context) {
