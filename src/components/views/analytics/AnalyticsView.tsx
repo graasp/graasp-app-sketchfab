@@ -14,36 +14,37 @@ import Select from '../../common/Select';
 import MostFrequentUsersChart from './MostFrequentUsersChart';
 import ViewsOverTimeChart from './ViewsOverTimeChart';
 
+const topMembersRangeOptions = [
+  {
+    value: '5',
+    label: 5,
+  },
+  {
+    value: '10',
+    label: 10,
+  },
+  {
+    value: '25',
+    label: 25,
+  },
+  {
+    value: 'all',
+    label: 'all',
+  },
+];
+
+const intervals: Interval[] = [
+  { label: 'day', value: 'day', groupBy: 'yyyy-MM-dd' },
+  {
+    label: 'week',
+    value: 'week',
+    groupBy: 'yyyy-ww',
+  },
+  { label: 'month', value: 'month', groupBy: 'yyyy-MM' },
+];
+
 const AnalyticsView = (): JSX.Element => {
   const { t } = useTranslation();
-
-  const topMembersRangeOptions = [
-    {
-      value: '5',
-      label: 5,
-    },
-    {
-      value: '10',
-      label: 10,
-    },
-    {
-      value: '25',
-      label: 25,
-    },
-    {
-      value: 'all',
-      label: t('all'),
-    },
-  ];
-  const intervals: Interval[] = [
-    { label: t('day'), value: 'day', groupBy: 'yyyy-MM-dd' },
-    {
-      label: t('week'),
-      value: 'week',
-      groupBy: 'yyyy-ww',
-    },
-    { label: t('month'), value: 'month', groupBy: 'yyyy-MM' },
-  ];
 
   const [interval, setInterval] = useState(intervals[0]);
   const [displayedUsersLimit, setDisplayedUsersLimit] = useState(

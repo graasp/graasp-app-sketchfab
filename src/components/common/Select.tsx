@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import {
   FormControl,
   Grid,
@@ -23,32 +25,38 @@ const Select = ({
   onChange,
   selectedOption,
   label,
-}: Props): JSX.Element => (
-  <Grid ml={2} xs={8} item margin="0 auto">
-    <FormControl sx={{ m: 1, width: '100%' }}>
-      <InputLabel>{label}</InputLabel>
-      <MuiSelect
-        label={label}
-        value={selectedOption.value}
-        onChange={onChange}
-        renderValue={() => (
-          <span style={{ textTransform: 'capitalize' }}>
-            {selectedOption.label}
-          </span>
-        )}
-      >
-        {options.map((c) => (
-          <MenuItem
-            key={c.value}
-            sx={{ textTransform: 'capitalize' }}
-            value={c.value}
-          >
-            {c.label}
-          </MenuItem>
-        ))}
-      </MuiSelect>
-    </FormControl>
-  </Grid>
-);
+}: Props): JSX.Element => {
+  const { t } = useTranslation();
+
+  return (
+    <Grid ml={2} xs={8} item margin="0 auto">
+      <FormControl sx={{ m: 1, width: '100%' }}>
+        <InputLabel>{label}</InputLabel>
+        <MuiSelect
+          label={label}
+          value={selectedOption.value}
+          onChange={onChange}
+          renderValue={() => (
+            <span style={{ textTransform: 'capitalize' }}>
+              {typeof selectedOption.label === 'string'
+                ? t(selectedOption.label)
+                : selectedOption.label}
+            </span>
+          )}
+        >
+          {options.map((c) => (
+            <MenuItem
+              key={c.value}
+              sx={{ textTransform: 'capitalize' }}
+              value={c.value}
+            >
+              {typeof c.label === 'string' ? t(c.label) : c.label}
+            </MenuItem>
+          ))}
+        </MuiSelect>
+      </FormControl>
+    </Grid>
+  );
+};
 
 export default Select;
