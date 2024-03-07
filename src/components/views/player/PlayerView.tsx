@@ -8,7 +8,7 @@ import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
-import { useSettings } from '../../../config/hooks';
+import { useModelInfo, useSettings } from '../../../config/hooks';
 import { mutations } from '../../../config/queryClient';
 import { QR_CODE_TAB_CY } from '../../../config/selectors';
 import { Triggers } from '../../../config/triggers';
@@ -26,6 +26,7 @@ const PlayerView = (): JSX.Element => {
     isLoading: isSettingsLoading,
   } = useSettings();
   const { mutate } = mutations.usePostAppAction();
+  const { data } = useModelInfo(model);
 
   if (isSettingsLoading) {
     return <Loader />;
@@ -54,7 +55,13 @@ const PlayerView = (): JSX.Element => {
     return tabs;
   };
   const saveAction = (): void => {
-    mutate({ type: Triggers.VIEW_MODEL });
+    mutate({
+      type: Triggers.VIEW_MODEL,
+      data: {
+        modelId: model,
+        modelName: data?.name,
+      },
+    });
   };
   if (!model) {
     return <ModelNotConfigured />;

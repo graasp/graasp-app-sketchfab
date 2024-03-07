@@ -4,5 +4,16 @@
   "Settings": "Settings",
   "Search for models…": "Search for models…",
   "Preview": "Preview",
-  "Select Model": "Select Model"
+  "Select Model": "Select Model",
+  "Number of actions over time": "Number of actions over time",
+  "Intervals": "Intervals",
+  "week": "Week",
+  "day": "Day",
+  "month": "Month",
+  "AVERAGE_COUNT": "Average count",
+  "Model Views over Time": "Model Views over Time",
+  "Top Frequent Users": "Top Frequent Users",
+  "Top Users Limit": "Top Users Limit",
+  "GET_ITEM_ERROR": "Sorry, There was an error retrieving this model views.",
+  "all": "all"
 }

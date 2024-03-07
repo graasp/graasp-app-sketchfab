@@ -6,7 +6,7 @@ import { Modal, Tooltip } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import { styled } from '@mui/material/styles';
 
-import { useModels, useSettings } from '../../../config/hooks';
+import { useModelsSearch, useSettings } from '../../../config/hooks';
 import { SELECT_BUTTON_CY } from '../../../config/selectors';
 import Settings from '../../common/Settings';
 import Viewer from '../../common/Viewer';
@@ -38,7 +38,7 @@ const BuilderView = (): JSX.Element => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
-  const { data: models, isLoading } = useModels({ q: search });
+  const { data: models, isLoading } = useModelsSearch({ q: search || '' });
   const { saveModel, model } = useSettings();
 
   const handleOpen = (modelUid: string): void => {
