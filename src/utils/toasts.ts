@@ -16,8 +16,8 @@ const showToast = ({ type, message }: ToastPayload): void => {
 
 const showErrorToast = (payload: string | { message: string }): void => {
   let message = UNEXPECTED_ERROR_MESSAGE;
-  if (payload instanceof String || typeof payload === 'string') {
-    message = payload as string;
+  if (typeof payload === 'string') {
+    message = payload;
   } else if (payload instanceof Object) {
     if (payload.message) {
       ({ message } = payload);

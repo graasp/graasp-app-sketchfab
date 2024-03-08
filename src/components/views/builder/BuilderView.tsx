@@ -38,7 +38,7 @@ const BuilderView = (): JSX.Element => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
-  const { data: models, isLoading } = useModelsSearch({ q: search || '' });
+  const { data: models, isLoading } = useModelsSearch({ q: search });
   const { saveModel, model } = useSettings();
 
   const handleOpen = (modelUid: string): void => {

@@ -9,7 +9,7 @@ import { IntervalGroupBy } from '../types/chart';
 interface ActionGroupedByTimeInterval {
   label: string;
   count: number;
-  averageCount: string; // basically to fixed convert number to string
+  averageCount: string; // formatted value of average count is a string
 }
 // Helper function to group by date format
 export const groupActionByTimeInterval = (

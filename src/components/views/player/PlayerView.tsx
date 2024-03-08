@@ -73,12 +73,7 @@ const PlayerView = (): JSX.Element => {
   const panels = [];
   if (showModel) {
     panels.push(
-      <Viewer
-        uid={model}
-        autoStart={false}
-        key="model"
-        saveAction={saveAction}
-      />,
+      <Viewer uid={model} autoStart={false} key="model" onReady={saveAction} />,
     );
   }
   if (showQrCode) {

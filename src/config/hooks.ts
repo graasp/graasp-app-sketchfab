@@ -123,23 +123,19 @@ export const useSettings = (): SettingsProps => {
 };
 
 export const useModelsSearch = (
-  queryParams: { q?: string } = {},
+  queryParams: { q?: string | null } = {},
 ): UseQueryResult<Model[], Error> =>
   useQuery({
     queryKey: ['models', queryParams.q],
     queryFn: async () => {
-      const queryString = qs.stringify(
-        {
-          type: 'models',
-          ...queryParams,
-          q: queryParams.q || DEFAULT_QUERY,
-        },
-        {
-          addQueryPrefix: true,
-        },
-      );
       // cannot use axios https://github.com/miragejs/miragejs/issues/1006
-      const response = await fetch(`${MODEL_SEARCH_ENDPOINT}${queryString}`);
+      const url = new URL(MODEL_SEARCH_ENDPOINT);
+      const query = new URLSearchParams({
+        type: 'models',
+        q: queryParams.q ?? DEFAULT_QUERY,
+      });
+      url.search = query.toString();
+      const response = await fetch(url.toString());
       return (await response.json()).results;
     },
   });

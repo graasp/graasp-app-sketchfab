@@ -42,9 +42,8 @@ describe('Builder View', () => {
     // select model
     cy.get(dataCyWrapper(RESULT_CARD_CY)).first().click();
     cy.get(dataCyWrapper(SELECT_BUTTON_CY)).click();
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(1000);
-    cy.get(dataCyWrapper(RESULT_CARD_CY))
+
+    cy.get(dataCyWrapper(RESULT_CARD_CY), { timeout: 10000 })
       .first()
       .should('have.css', 'color', 'rgb(255, 255, 255)');
   });
