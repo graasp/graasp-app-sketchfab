@@ -1,4 +1,3 @@
-import qs from 'qs';
 import { useEffect, useState } from 'react';
 
 import { UseQueryResult } from '@tanstack/react-query';
@@ -123,7 +122,7 @@ export const useSettings = (): SettingsProps => {
 };
 
 export const useModelsSearch = (
-  queryParams: { q?: string | null } = {},
+  queryParams: { q?: string } = {},
 ): UseQueryResult<Model[], Error> =>
   useQuery({
     queryKey: ['models', queryParams.q],

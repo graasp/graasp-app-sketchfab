@@ -9515,7 +9515,6 @@ __metadata:
     nyc: "npm:15.1.0"
     prettier: "npm:3.2.4"
     prop-types: "npm:15.8.1"
-    qs: "npm:6.11.2"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
     react-ga: "npm:3.3.1"
