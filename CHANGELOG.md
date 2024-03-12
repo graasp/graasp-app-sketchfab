@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/graasp/graasp-app-sketchfab/compare/v1.1.0...v1.2.0) (2024-03-12)
+
+
+### Features
+
+* add spanish translations ([#88](https://github.com/graasp/graasp-app-sketchfab/issues/88)) ([f0f93ca](https://github.com/graasp/graasp-app-sketchfab/commit/f0f93cabda440b7e0773739901a8bf0ce33bd3a8))
+* analytic view for sketchfab ([#94](https://github.com/graasp/graasp-app-sketchfab/issues/94)) ([fbac47b](https://github.com/graasp/graasp-app-sketchfab/commit/fbac47b7133e6eab4af3159d043999d073d899f8))
+* move to ts ([#95](https://github.com/graasp/graasp-app-sketchfab/issues/95)) ([8404f10](https://github.com/graasp/graasp-app-sketchfab/commit/8404f10ca2a8d36d0c70c91744df400e4810e8a2))
+* save action on player view model ([#92](https://github.com/graasp/graasp-app-sketchfab/issues/92)) ([8bae2ff](https://github.com/graasp/graasp-app-sketchfab/commit/8bae2ffd6a5f132d7471616c95b08c89949bdf80))
+
 ## [1.1.0](https://github.com/graasp/graasp-app-sketchfab/compare/v1.0.1...v1.1.0) (2024-01-22)
 
 
