@@ -6,13 +6,18 @@ import { AppAction } from '@graasp/sdk';
 
 import { IntervalGroupBy } from '../types/chart';
 
+interface ActionGroupedByTimeInterval {
+  label: string;
+  count: number;
+  averageCount: string; // formatted value of average count is a string
+}
 // Helper function to group by date format
 export const groupActionByTimeInterval = (
   data: AppAction[],
-  dateFormat: IntervalGroupBy
-) => {
+  dateFormat: IntervalGroupBy,
+): ActionGroupedByTimeInterval[] => {
   const actionsGroupedByDate = groupBy(data, (item) =>
-    format(item.createdAt, dateFormat)
+    format(item.createdAt, dateFormat),
   );
   const dateIntervals = Object.keys(actionsGroupedByDate);
   const averageCount = (data.length / dateIntervals.length).toFixed(2);
@@ -24,10 +29,15 @@ export const groupActionByTimeInterval = (
   }));
 };
 
+interface MemberWithMostViews {
+  memberName: string;
+  count: number;
+}
+
 export const getMembersWithMostViews = (
   data: AppAction[],
-  userLimit: number | 'all'
-) => {
+  userLimit: number | 'all',
+): MemberWithMostViews[] => {
   const groupedByMemberId = groupBy(data, 'member.id');
 
   const res = Object.keys(groupedByMemberId).map((key) => ({

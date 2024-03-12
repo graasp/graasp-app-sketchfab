@@ -3,22 +3,21 @@ import { Loader } from '@graasp/ui';
 import { Grid } from '@mui/material';
 
 import Result from './Result';
-
-type Model = {
-  uid: string;
-  name: string;
-  description: string;
-  thumbnails: { images: { size: number; url: string; width: number }[] };
-};
+import { Model } from '../../../types/models';
 
 type Props = {
-  models: Model[];
+  models?: Model[];
   isLoading: boolean;
   preview: (uid: string) => void;
-  selectedModel: string;
+  selectedModel?: string;
 };
 
-const Results = ({ models, isLoading, preview, selectedModel }: Props) => {
+const Results = ({
+  models,
+  isLoading,
+  preview,
+  selectedModel,
+}: Props): JSX.Element => {
   if (isLoading) {
     return <Loader />;
   }
@@ -27,7 +26,7 @@ const Results = ({ models, isLoading, preview, selectedModel }: Props) => {
     <Grid spacing={2} p={2} container>
       {models?.map(({ uid, name, description, thumbnails }) => {
         const imagesBySize = thumbnails.images.toSorted(
-          (a, b) => a.size - b.size
+          (a, b) => a.size - b.size,
         );
         const image = imagesBySize[imagesBySize.length - 1].url;
         return (

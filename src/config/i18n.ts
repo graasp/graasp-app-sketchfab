@@ -1,11 +1,13 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import en from '../langs/en';
-import fr from '../langs/fr';
+import en from '../langs/en.json';
+import fr from '../langs/fr.json';
+
+export const DEFAULT_LANG = 'en';
 
 i18n.use(initReactI18next).init({
-  fallbackLng: 'en',
+  fallbackLng: DEFAULT_LANG,
   // debug only when not in production
   debug: process.env.NODE_ENV !== 'production',
   keySeparator: false,
@@ -13,7 +15,6 @@ i18n.use(initReactI18next).init({
     escapeValue: false,
     formatSeparator: ',',
   },
-  useSuspense: true,
 });
 
 i18n.addResourceBundle('en', 'translation', en);

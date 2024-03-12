@@ -12,13 +12,12 @@ Cypress.Commands.add(
     appContext,
   }: {
     currentMember?: Member;
-    database?: Database;
-    appContext?: LocalContext;
+    database?: Partial<Database>;
+    appContext?: Partial<LocalContext>;
   } = {}) => {
     // mock api and database
     Cypress.on('window:before:load', (win) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // eslint-disable-next-line no-param-reassign
       win.database = {
         appData: [],
         appActions: [],
@@ -27,8 +26,7 @@ Cypress.Commands.add(
         items: [MOCK_SERVER_ITEM],
         ...(database ?? {}),
       };
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // eslint-disable-next-line no-param-reassign
       win.appContext = {
         memberId: currentMember.id,
         itemId: MOCK_SERVER_ITEM.id,
@@ -36,5 +34,5 @@ Cypress.Commands.add(
         ...appContext,
       };
     });
-  }
+  },
 );

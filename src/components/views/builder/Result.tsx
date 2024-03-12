@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -15,29 +14,46 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
 import { RESULT_CARD_CY } from '../../../config/selectors';
+import { Model } from '../../../types/models';
 
-const StyledCard = styled(Card)(({ theme, isSelected }) =>
-  isSelected
-    ? {
-        background: theme.palette.primary.main,
-        color: theme.palette.common.white,
-      }
-    : {}
+const StyledCard = styled(Card)<{ isSelected: boolean }>(
+  ({ theme, isSelected }) =>
+    isSelected
+      ? {
+          background: theme.palette.primary.main,
+          color: theme.palette.common.white,
+        }
+      : {},
 );
 
-const ExpandButton = styled(IconButton)(({ theme, expanded }) => ({
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
+const ExpandButton = styled(IconButton)<{ expanded: boolean }>(
+  ({ theme, expanded }) => ({
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+    transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
   }),
-  transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
-}));
+);
 
-function Result({ name, uid, description, image, preview, isSelected }) {
+interface Props extends Omit<Model, 'thumbnails'> {
+  image: string;
+  preview: (uid: string) => void;
+  isSelected: boolean;
+}
+
+const Result = ({
+  name,
+  uid,
+  description,
+  image,
+  preview,
+  isSelected,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
+  const handleExpandClick = (): void => {
     setExpanded(!expanded);
   };
 
@@ -77,15 +93,6 @@ function Result({ name, uid, description, image, preview, isSelected }) {
       </Collapse>
     </StyledCard>
   );
-}
-
-Result.propTypes = {
-  name: PropTypes.string.isRequired,
-  uid: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  preview: PropTypes.func.isRequired,
-  isSelected: PropTypes.bool.isRequired,
 };
 
 export default Result;

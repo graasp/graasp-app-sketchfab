@@ -5,6 +5,7 @@ import {
   REACT_APP_API_HOST,
   REACT_APP_GRAASP_APP_KEY,
 } from './env';
+import notifier from './notifier';
 
 if (!REACT_APP_GRAASP_APP_KEY) {
   throw new Error('GRAASP_APP_KEY should be defined');
@@ -22,10 +23,7 @@ const {
 } = configureQueryClient({
   API_HOST: REACT_APP_API_HOST,
   GRAASP_APP_KEY: REACT_APP_GRAASP_APP_KEY,
-  notifier: (data) => {
-    // todo: use toasts
-    console.log('notifier: ', data);
-  },
+  notifier,
   keepPreviousData: true,
   // avoid refetching when same data are closely fetched
   staleTime: 1000, // ms

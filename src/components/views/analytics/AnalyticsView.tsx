@@ -48,14 +48,14 @@ const AnalyticsView = (): JSX.Element => {
 
   const [interval, setInterval] = useState(intervals[0]);
   const [displayedUsersLimit, setDisplayedUsersLimit] = useState(
-    topMembersRangeOptions[0]
+    topMembersRangeOptions[0],
   );
 
   const { data, isLoading } = hooks.useAppActions();
 
   const actionsGroupedByInterval = useMemo(
     () => groupActionByTimeInterval(data || [], interval.groupBy),
-    [data, interval.groupBy]
+    [data, interval.groupBy],
   );
 
   const topFrequentUsers = useMemo(
@@ -64,16 +64,16 @@ const AnalyticsView = (): JSX.Element => {
         data || [],
         displayedUsersLimit.value === 'all'
           ? 'all'
-          : Number(displayedUsersLimit.value)
+          : Number(displayedUsersLimit.value),
       ),
-    [data, displayedUsersLimit.value]
+    [data, displayedUsersLimit.value],
   );
 
   const handleIntervalChange = ({
     target: { value },
   }: {
     target: { value: string };
-  }) => {
+  }): void => {
     const selectedInterval = intervals.find((ele) => ele.value === value);
     if (selectedInterval) {
       setInterval(selectedInterval);
@@ -84,9 +84,9 @@ const AnalyticsView = (): JSX.Element => {
     target: { value },
   }: {
     target: { value: string };
-  }) => {
+  }): void => {
     const memberRange = topMembersRangeOptions.find(
-      (ele) => ele.value === value
+      (ele) => ele.value === value,
     );
 
     if (memberRange) {

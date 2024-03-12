@@ -12,6 +12,7 @@ import Settings from '../../common/Settings';
 import Viewer from '../../common/Viewer';
 import Results from './Results';
 import SearchForm from './SearchForm';
+import { DEFAULT_QUERY } from '../../../config/settings';
 
 const Wrapper = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -33,33 +34,40 @@ const StyledFab = styled(Fab)(({ theme }) => ({
   transform: 'translate(0, -50%)',
 }));
 
-const BuilderView = () => {
+const BuilderView = (): JSX.Element => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState(null);
-  const [selected, setSelected] = useState(null);
-  const { data: models } = useModelsSearch({ q: search });
+  const [search, setSearch] = useState<string>(DEFAULT_QUERY);
+  const [selected, setSelected] = useState<string | null>(null);
+  const { data: models, isLoading } = useModelsSearch({ q: search });
   const { saveModel, model } = useSettings();
 
-  const handleOpen = (newSelected) => {
+  const handleOpen = (modelUid: string): void => {
     setOpen(true);
-    setSelected(newSelected);
+    setSelected(modelUid);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
     setSelected(null);
   };
 
-  const onSelectModel = async () => {
-    saveModel({ data: { model: selected } });
-    handleClose();
+  const onSelectModel = (): void => {
+    if (selected) {
+      saveModel({ data: { model: selected } });
+      handleClose();
+    }
   };
 
   return (
     <>
       <SearchForm search={search} setSearch={setSearch} />
-      <Results models={models} preview={handleOpen} selectedModel={model} />
+      <Results
+        models={models}
+        preview={handleOpen}
+        selectedModel={model}
+        isLoading={isLoading}
+      />
       <Modal
         aria-labelledby="Preview Model"
         aria-describedby="Preview a Sketchfab model to use in your application."
@@ -67,7 +75,9 @@ const BuilderView = () => {
         onClose={handleClose}
       >
         <Wrapper>
-          <Viewer uid={selected} autoStart={false} height="100%" />
+          {selected && (
+            <Viewer uid={selected} autoStart={false} height="100%" />
+          )}
           <Tooltip title={t('Select Model')}>
             <StyledFab
               data-cy={SELECT_BUTTON_CY}

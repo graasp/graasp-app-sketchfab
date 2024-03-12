@@ -17,7 +17,7 @@ import ModelQrCode from '../../common/ModelQrCode';
 import NoContentAvailable from '../../common/NoContentAvailable';
 import Viewer from '../../common/Viewer';
 
-const PlayerView = () => {
+const PlayerView = (): JSX.Element => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const {
     showQrCode,
@@ -32,15 +32,15 @@ const PlayerView = () => {
     return <Loader />;
   }
 
-  const handleChange = (event, value) => {
+  const handleChange = (event: React.SyntheticEvent, value: number): void => {
     setActiveTabIndex(value);
   };
 
-  const renderTabs = () => {
+  const renderTabs = (): JSX.Element[] => {
     const tabs = [];
     if (showModel) {
       tabs.push(
-        <Tab icon={<FontAwesomeIcon icon={faVrCardboard} />} key="model" />
+        <Tab icon={<FontAwesomeIcon icon={faVrCardboard} />} key="model" />,
       );
     }
     if (showQrCode) {
@@ -49,17 +49,17 @@ const PlayerView = () => {
           data-cy={QR_CODE_TAB_CY}
           icon={<FontAwesomeIcon icon={faQrcode} />}
           key="qrCode"
-        />
+        />,
       );
     }
     return tabs;
   };
-  const saveAction = () => {
+  const saveAction = (): void => {
     mutate({
       type: Triggers.VIEW_MODEL,
       data: {
         modelId: model,
-        modelName: data.name,
+        modelName: data?.name,
       },
     });
   };
@@ -73,12 +73,7 @@ const PlayerView = () => {
   const panels = [];
   if (showModel) {
     panels.push(
-      <Viewer
-        uid={model}
-        autoStart={false}
-        key="model"
-        saveAction={saveAction}
-      />
+      <Viewer uid={model} autoStart={false} key="model" onReady={saveAction} />,
     );
   }
   if (showQrCode) {

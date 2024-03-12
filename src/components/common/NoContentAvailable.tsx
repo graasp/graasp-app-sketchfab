@@ -15,7 +15,7 @@ const Wrapper = styled(Box)({
   alignItems: 'center',
 });
 
-const NoContentAvailable = () => {
+const NoContentAvailable = (): JSX.Element => {
   const { t } = useTranslation();
   return (
     <Wrapper data-cy={NO_CONTENT_CY}>
