@@ -13,7 +13,7 @@ export const App = (): JSX.Element => {
 
   useEffect(() => {
     // handle a change of language
-    const lang = context?.lang ?? 'en';
+    const lang = context?.lang ?? DEFAULT_LANG;
     if (i18n.language !== lang) {
       i18n.changeLanguage(lang);
     }
