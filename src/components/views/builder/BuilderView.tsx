@@ -6,12 +6,13 @@ import { Modal, Tooltip } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import { styled } from '@mui/material/styles';
 
-import { useModels, useSettings } from '../../../config/hooks';
+import { useModelsSearch, useSettings } from '../../../config/hooks';
 import { SELECT_BUTTON_CY } from '../../../config/selectors';
 import Settings from '../../common/Settings';
 import Viewer from '../../common/Viewer';
 import Results from './Results';
 import SearchForm from './SearchForm';
+import { DEFAULT_QUERY } from '../../../config/settings';
 
 const Wrapper = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -36,9 +37,9 @@ const StyledFab = styled(Fab)(({ theme }) => ({
 const BuilderView = (): JSX.Element => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState<string | null>(null);
+  const [search, setSearch] = useState<string>(DEFAULT_QUERY);
   const [selected, setSelected] = useState<string | null>(null);
-  const { data: models, isLoading } = useModels({ q: search });
+  const { data: models, isLoading } = useModelsSearch({ q: search });
   const { saveModel, model } = useSettings();
 
   const handleOpen = (modelUid: string): void => {

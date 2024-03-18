@@ -58,8 +58,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface Props {
-  search: string | null;
-  setSearch: (s: string | null) => void;
+  search: string;
+  setSearch: (s: string) => void;
 }
 const SearchForm = ({ search, setSearch }: Props): JSX.Element => {
   const { t } = useTranslation();

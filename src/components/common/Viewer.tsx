@@ -9,13 +9,13 @@ import { SKETCHFAB_VERSION } from '../../config/settings';
 interface Props {
   uid: string;
   autoStart?: boolean;
-  saveAction?: () => void;
+  onReady?: () => void;
   height?: string;
 }
 const Viewer = ({
   uid,
   autoStart = true,
-  saveAction,
+  onReady,
   height = '600px',
 }: Props): JSX.Element => {
   useEffect(() => {
@@ -29,7 +29,7 @@ const Viewer = ({
         }
         api.addEventListener('viewerready', () => {
           console.log('viewer is ready');
-          saveAction?.();
+          onReady?.();
         });
         api.addEventListener('click', (obj) => console.log(obj));
         api.addEventListener('camerastart', () =>

@@ -4,8 +4,10 @@ import { initReactI18next } from 'react-i18next';
 import en from '../langs/en.json';
 import fr from '../langs/fr.json';
 
+export const DEFAULT_LANG = 'en';
+
 i18n.use(initReactI18next).init({
-  fallbackLng: 'en',
+  fallbackLng: DEFAULT_LANG,
   // debug only when not in production
   debug: process.env.NODE_ENV !== 'production',
   keySeparator: false,

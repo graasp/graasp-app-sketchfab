@@ -35,7 +35,6 @@ jobs:
           start: yarn preview:test
           browser: chrome
           quiet: true
-          # point to new cypress@10 config file
           config-file: cypress.config.ts
 
       # after the test run completes

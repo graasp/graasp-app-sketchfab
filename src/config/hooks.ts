@@ -1,4 +1,3 @@
-import qs from 'qs';
 import { useEffect, useState } from 'react';
 
 import { UseQueryResult } from '@tanstack/react-query';
@@ -8,7 +7,8 @@ import {
   DEFAULT_QUERY,
   DEFAULT_SHOW_MODEL,
   DEFAULT_SHOW_QR_CODE,
-  MODELS_ENDPOINT,
+  MODEL_INFO_ENDPOINT,
+  MODEL_SEARCH_ENDPOINT,
 } from './settings';
 import { Model } from '../types/models';
 
@@ -121,24 +121,30 @@ export const useSettings = (): SettingsProps => {
   };
 };
 
-export const useModels = (
-  queryParams: { q?: string | null } = {},
+export const useModelsSearch = (
+  queryParams: { q?: string } = {},
 ): UseQueryResult<Model[], Error> =>
   useQuery({
     queryKey: ['models', queryParams.q],
     queryFn: async () => {
-      const queryString = qs.stringify(
-        {
-          type: 'models',
-          ...queryParams,
-          q: queryParams.q || DEFAULT_QUERY,
-        },
-        {
-          addQueryPrefix: true,
-        },
-      );
       // cannot use axios https://github.com/miragejs/miragejs/issues/1006
-      const response = await fetch(`${MODELS_ENDPOINT}${queryString}`);
+      const url = new URL(MODEL_SEARCH_ENDPOINT);
+      const query = new URLSearchParams({
+        type: 'models',
+        q: queryParams.q ?? DEFAULT_QUERY,
+      });
+      url.search = query.toString();
+      const response = await fetch(url.toString());
       return (await response.json()).results;
+    },
+  });
+
+export const useModelInfo = (uid?: string): UseQueryResult<Model, Error> =>
+  useQuery({
+    queryKey: ['model', uid],
+    queryFn: async () => {
+      const response = await fetch(`${MODEL_INFO_ENDPOINT}${uid}`);
+      const data = await response.json();
+      return data;
     },
   });

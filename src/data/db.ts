@@ -9,6 +9,7 @@ import {
 } from '@graasp/sdk';
 
 import { API_HOST } from '../config/env';
+import { DEFAULT_LANG } from '../config/i18n';
 
 export const MOCK_ITEM_ID = '1234-1234-123456-8123-123456';
 
@@ -56,7 +57,7 @@ const mockItem: AppItemType = {
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   type: ItemType.APP,
-  lang: 'en',
+  lang: DEFAULT_LANG,
 };
 
 export const buildDatabase = (members?: CompleteMember[]): Database => ({
