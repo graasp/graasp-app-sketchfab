@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/graasp/graasp-app-sketchfab/compare/v1.2.0...v1.3.0) (2024-03-21)
+
+
+### Features
+
+* setup vite ([#96](https://github.com/graasp/graasp-app-sketchfab/issues/96)) ([0737884](https://github.com/graasp/graasp-app-sketchfab/commit/0737884f77fb01cff04eccb4352f9709575d75e6))
+* translate it.json via GitLocalize ([#97](https://github.com/graasp/graasp-app-sketchfab/issues/97)) ([8e42c59](https://github.com/graasp/graasp-app-sketchfab/commit/8e42c59034ee3963b481eaac25dd440db6addd7d))
+
 ## [1.2.0](https://github.com/graasp/graasp-app-sketchfab/compare/v1.1.0...v1.2.0) (2024-03-12)
 
 
