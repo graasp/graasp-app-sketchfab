@@ -6,9 +6,6 @@ export const APP_SETTING_NAMES = {
   MODEL: 'model',
 } as const;
 
-export const ENABLE_MOCK_API =
-  process.env.REACT_APP_ENABLE_MOCK_API === 'true' ?? false;
-
 export const MODEL_SEARCH_ENDPOINT = 'https://api.sketchfab.com/v3/search';
 export const MODEL_INFO_ENDPOINT = 'https://api.sketchfab.com/v3/models/';
 

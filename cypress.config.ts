@@ -11,12 +11,12 @@ module.exports = defineConfig({
       // with any changed environment variables
       return config;
     },
-    baseUrl: 'http://localhost:3333',
+    baseUrl: 'http://localhost:3017',
   },
   env: {
-    REACT_APP_API_HOST: 'http://localhost:3000',
-    REACT_APP_ENABLE_MOCK_API: 'true',
-    REACT_APP_GRAASP_APP_KEY: 'my-key',
-    REACT_APP_VERSION: process.env.REACT_APP_VERSION,
+    VITE_GRAASP_API_HOST: 'http://localhost:3000',
+    VITE_ENABLE_MOCK_API: 'true',
+    VITE_GRAASP_APP_KEY: 'my-key',
+    VITE_VERSION: process.env.VITE_VERSION,
   },
 });

@@ -15,9 +15,9 @@ To start developing locally, you should create a `.env.local` file in your root 
 following content:
 
 ```dotenv
-REACT_APP_API_HOST=http://localhost:3000
-REACT_APP_ENABLE_MOCK_API=true
-REACT_APP_GRAASP_APP_KEY=<key>
+VITE_GRAASP_API_HOST=http://localhost:3000
+VITE_ENABLE_MOCK_API=true
+VITE_GRAASP_APP_KEY=<key>
 ```
 
 ## Installing Dependencies

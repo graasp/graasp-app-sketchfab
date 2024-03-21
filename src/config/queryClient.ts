@@ -1,13 +1,9 @@
 import { configureQueryClient } from '@graasp/apps-query-client';
 
-import {
-  REACT_APP_ENABLE_MOCK_API as MOCK_API,
-  REACT_APP_API_HOST,
-  REACT_APP_GRAASP_APP_KEY,
-} from './env';
+import { MOCK_API, API_HOST, GRAASP_APP_KEY } from './env';
 import notifier from './notifier';
 
-if (!REACT_APP_GRAASP_APP_KEY) {
+if (!GRAASP_APP_KEY) {
   throw new Error('GRAASP_APP_KEY should be defined');
 }
 
@@ -21,8 +17,8 @@ const {
   mutations,
   useQuery,
 } = configureQueryClient({
-  API_HOST: REACT_APP_API_HOST,
-  GRAASP_APP_KEY: REACT_APP_GRAASP_APP_KEY,
+  API_HOST,
+  GRAASP_APP_KEY,
   notifier,
   keepPreviousData: true,
   // avoid refetching when same data are closely fetched
