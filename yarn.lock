@@ -7056,7 +7056,7 @@ __metadata:
     eslint-plugin-react: "npm:7.33.2"
     eslint-plugin-react-hooks: "npm:4.6.0"
     husky: "npm:8.0.3"
-    i18next: "npm:23.2.0"
+    i18next: "npm:26.3.4"
     lodash.groupby: "npm:4.6.0"
     lodash.sortby: "npm:4.7.0"
     nyc: "npm:15.1.0"
@@ -7309,12 +7309,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:23.2.0":
-  version: 23.2.0
-  resolution: "i18next@npm:23.2.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.22.5"
-  checksum: b22a29af64130639d1ad2de914153fdfcd1d3a6a22e6012474d71e4624fcdaafb79eec5bb97377ca3d74646a9cdcb3ccd1b8b1b435c08718c340f077e46cd0b2
+"i18next@npm:26.3.4":
+  version: 26.3.4
+  resolution: "i18next@npm:26.3.4"
+  peerDependencies:
+    typescript: ^5 || ^6
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 133ba9a5f76c1d57337f0dcc1b0ab0ff987714a1863813dcc95024531074c6d92603a19b0bac9c16a6b04c734742d8d098da0c222bef5a9562bdde231ea4b221
   languageName: node
   linkType: hard
 
